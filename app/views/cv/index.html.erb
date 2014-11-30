@@ -1,0 +1,16 @@
+<h1>Cv#index</h1>
+<p>Find me in app/views/cv/index.html.erb</p>
+
+<%= form_for @cv, url: {action: 'create'}, html: {class: 'form'} do |f| %>
+  <%= f.fields_for :personal_detail, @cv.personal_detail do |fpdetail| %>
+    <%= fpdetail.label(:name) %>
+    <%= fpdetail.text_field(:name) %>
+    <%= fpdetail.date_select(:dob) %>
+    <%= fpdetail.text_field(:phone, name: 'personal_detail[phone][]') %>
+    <%= fpdetail.text_field(:phone, name: 'personal_detail[phone][]') %>
+    <%= fpdetail.file_field(:picture) %>
+  <% end %>
+  <%= select_tag(:language, options_for_select([['Tieng Viet','vn'],['Deutsch','de'],['English','en']], 'en')) %>
+  <br />
+    
+<% end %>
