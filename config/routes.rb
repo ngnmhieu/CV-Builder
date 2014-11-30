@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  root 'cv#index'
-  resources :cv
+  root 'resumes#index'
+  resources :resumes do
+    resources :educations
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

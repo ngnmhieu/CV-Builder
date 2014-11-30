@@ -1,0 +1,20 @@
+<div style="width: 800px; margin: 0 auto">
+  <table width="100%">
+    <tr>
+      <td align=center>
+        <h1><%= @pdetail.name %></h1>
+        <h4>
+          <%= @pdetail.address  %>
+          <%= ' | ' + @pdetail.phone if @pdetail.phone != '' %> 
+          <%= ' | ' + @pdetail.fax if @pdetail.fax != ''  %> 
+        </h4>
+        <h4>
+          <%= @pdetail.email %>
+          <%= ' | ' + @pdetail.website if @pdetail.website != '' %> 
+        </h4>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+  </table>
+</div>

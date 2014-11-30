@@ -1,0 +1,7 @@
+<%= form_for @resume do |f| %>
+  <%= f.label :name, 'CV name: ' %>
+  <%= f.text_field :name %>
+  <br />
+  <%= f.submit "Create!" %>
+<% end %>
+<%= link_to 'Back', resumes_path %>

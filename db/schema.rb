@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129230055) do
+ActiveRecord::Schema.define(version: 20141130175550) do
 
-  create_table "cvs", force: true do |t|
-    t.string   "name"
+  create_table "educations", force: true do |t|
+    t.string   "institution"
+    t.string   "degree"
+    t.text     "desc"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "resume_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "educations", ["resume_id"], name: "index_educations_on_resume_id"
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -32,9 +39,15 @@ ActiveRecord::Schema.define(version: 20141129230055) do
     t.date     "dob"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "cv_id"
+    t.integer  "resume_id"
   end
 
-  add_index "personal_details", ["cv_id"], name: "index_personal_details_on_cv_id"
+  add_index "personal_details", ["resume_id"], name: "index_personal_details_on_resume_id"
+
+  create_table "resumes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
