@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130201827) do
+ActiveRecord::Schema.define(version: 20141130211525) do
 
   create_table "educations", force: true do |t|
     t.string   "institution"
@@ -49,6 +49,33 @@ ActiveRecord::Schema.define(version: 20141130201827) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "simplelist_items", force: true do |t|
+    t.text     "content"
+    t.integer  "simplelist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simplelist_items", ["simplelist_id"], name: "index_simplelist_items_on_simplelist_id"
+
+  create_table "simplelistitems", force: true do |t|
+    t.string   "content"
+    t.integer  "simplelist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simplelistitems", ["simplelist_id"], name: "index_simplelistitems_on_simplelist_id"
+
+  create_table "simplelists", force: true do |t|
+    t.string   "name"
+    t.integer  "resume_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id"
 
   create_table "works", force: true do |t|
     t.string   "company"

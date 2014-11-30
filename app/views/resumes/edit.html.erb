@@ -30,8 +30,8 @@
       <tr>
         <td><%= pd.label :sex, 'Sex' %></td>
         <td>
-          <%= pd.radio_button :sex, '1' %> <%= pd.label :sex_1, 'Male' %>
-          <%= pd.radio_button :sex, '0' %> <%= pd.label :sex_0, 'Female' %>
+          <%= pd.radio_button :sex, true %> <%= pd.label :sex_true, 'Male' %>
+          <%= pd.radio_button :sex, false %> <%= pd.label :sex_false, 'Female' %>
         </td>
       </tr>
       <tr>
@@ -97,6 +97,37 @@
       </table>
     <% end %>
     <%= link_to "Remove", resume_work_path(@resume.id, work.id), method: :delete %>
+  <% end %>
+  <hr />
+
+
+  <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
+  <% @resume.simplelists.each do |list| %>
+    <table border=1>
+      <%= r.fields_for :simplelists, list do |lf| %>
+        <tr>
+          <td><%= lf.label :name, "List Name" %></td>
+          <td><%= lf.text_field :name %></td>
+        </tr>
+
+        <tr>
+          <td>Items (<%=link_to 'Add', resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post %>)</td>
+          <td>
+            <ul>
+              <% list.simplelistitems.each do |item| %>
+                <%= lf.fields_for :simplelistitems, item do |itemf| %>
+                  <li>
+                    <%= itemf.text_field :content %> 
+                    <%= link_to 'X', resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
   <% end %>
   <br />
   <br />

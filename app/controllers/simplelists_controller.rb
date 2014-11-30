@@ -1,8 +1,8 @@
-class WorksController < ApplicationController
+class SimplelistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      @resume.works << Work.new
+      @resume.simplelists << Simplelist.new
       if @resume.save
         redirect_to edit_resume_path(@resume)
       end
@@ -10,8 +10,8 @@ class WorksController < ApplicationController
   end
 
   def destroy
-    @work = Work.find(params[:id])
-    if @work.destroy
+    @list = Simplelist.find(params[:id])
+    if @list.destroy
       redirect_to edit_resume_path(params[:resume_id])
     end
   end

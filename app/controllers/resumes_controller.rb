@@ -28,7 +28,6 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
 
     if @resume.update(resume_params)
-      @debug = params
       redirect_to edit_resume_path(@resume)
     end
   end
@@ -45,12 +44,8 @@ class ResumesController < ApplicationController
         :name, 
         personal_detail_attributes: [:name, :phone, :fax, :address, :email, :website, :sex, :dob, :id],
         educations_attributes: [:institution, :degree, :desc, :start, :end, :id],
-        works_attributes: [:company, :position, :desc, :start, :end, :id]
+        works_attributes: [:company, :position, :desc, :start, :end, :id],
+        simplelists_attributes: [:name, :id, simplelistitems_attributes: [:id, :content]]
       )
     end
-
-    def personal_detail_params
-      params.require(:personal_detail).permit()
-    end
-  
 end

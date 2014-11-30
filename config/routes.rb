@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :resumes do
     resources :educations
     resources :works
+    resources :simplelists do
+      resources :simplelistitems
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

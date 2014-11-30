@@ -53,4 +53,15 @@
       </table>
     <% end %>
   <% end %>
+
+  <% if @resume.simplelists.any? %>
+     <% @resume.simplelists.each do |list| %>
+       <h2><%= list.name %></h2>
+       <ul>
+         <% list.simplelistitems.each do |item| %>
+             <li><%= item.content %></li>
+         <% end %>
+       </ul>
+     <% end %>
+  <% end %>
 </div>
