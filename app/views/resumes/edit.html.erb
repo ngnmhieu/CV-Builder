@@ -40,11 +40,11 @@
       </tr>
     </table>
   <% end %>
-
+  <hr />
   <%= link_to 'Add Education', resume_educations_path(@resume), method: :post %>
   <% @resume.educations.each do |edu| %>
-    <table border=1>
-      <%= r.fields_for :educations, edu, index: edu.id do |ef| %>
+    <%= r.fields_for :educations, edu do |ef| %>
+      <table border=1>
         <tr>
           <td><%= ef.label :institution, 'Institution' %></td>
           <td><%= ef.text_field :institution %></td>
@@ -65,9 +65,38 @@
           <td><%= ef.label :end, 'End' %></td>
           <td><%= ef.date_select :end, discard_day: true, discard_month: true %></td>
         </tr>
-      <% end %>
-    </table>
+      </table>
+    <% end %>
     <%= link_to "Remove", resume_education_path(@resume.id, edu.id), method: :delete %>
+  <% end %>
+  <hr />
+  <%= link_to 'Add Work', resume_works_path(@resume), method: :post %>
+  <% @resume.works.each do |work| %>
+    <%= r.fields_for :works, work do |ef| %>
+      <table border=1>
+        <tr>
+          <td><%= ef.label :company, 'Company' %></td>
+          <td><%= ef.text_field :company %></td>
+        </tr>
+        <tr>
+          <td><%= ef.label :position, 'Position' %></td>
+          <td><%= ef.text_field :position %></td>
+        </tr>
+        <tr>
+          <td><%= ef.label :desc, 'Description' %></td>
+          <td><%= ef.text_area :desc, size: '30x3' %></td>
+        </tr>
+        <tr>
+          <td><%= ef.label :start, 'Start' %></td>
+          <td><%= ef.date_select :start, discard_day: true, order: [:month, :year] %></td>
+        </tr>
+        <tr>
+          <td><%= ef.label :end, 'End' %></td>
+          <td><%= ef.date_select :end, discard_day: true, order: [:month, :year] %></td>
+        </tr>
+      </table>
+    <% end %>
+    <%= link_to "Remove", resume_work_path(@resume.id, work.id), method: :delete %>
   <% end %>
   <br />
   <br />

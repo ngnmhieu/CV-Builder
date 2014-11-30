@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'resumes#index'
   resources :resumes do
     resources :educations
+    resources :works
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

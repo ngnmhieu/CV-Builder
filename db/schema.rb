@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130175550) do
+ActiveRecord::Schema.define(version: 20141130201827) do
 
   create_table "educations", force: true do |t|
     t.string   "institution"
@@ -49,5 +49,18 @@ ActiveRecord::Schema.define(version: 20141130175550) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "works", force: true do |t|
+    t.string   "company"
+    t.string   "position"
+    t.text     "desc"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "resume_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "works", ["resume_id"], name: "index_works_on_resume_id"
 
 end
