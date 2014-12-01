@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  line1: MyString
+  line2: MyString
+  desc: MyText
+  start: 2014-12-01
+  end: 2014-12-01
+  multiline_list_id: 
+
+two:
+  line1: MyString
+  line2: MyString
+  desc: MyText
+  start: 2014-12-01
+  end: 2014-12-01
+  multiline_list_id: 

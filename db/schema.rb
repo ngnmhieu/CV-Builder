@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130211525) do
+ActiveRecord::Schema.define(version: 20141201004743) do
 
   create_table "educations", force: true do |t|
     t.string   "institution"
@@ -25,6 +25,52 @@ ActiveRecord::Schema.define(version: 20141130211525) do
   end
 
   add_index "educations", ["resume_id"], name: "index_educations_on_resume_id"
+
+  create_table "multi_line_list_items", force: true do |t|
+    t.string   "line1"
+    t.string   "line2"
+    t.text     "desc"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "multi_line_line_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "multi_line_list_items", ["multi_line_line_id"], name: "index_multi_line_list_items_on_multi_line_line_id"
+
+  create_table "multi_line_lists", force: true do |t|
+    t.string   "name"
+    t.integer  "order"
+    t.integer  "resume_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "multi_line_lists", ["resume_id"], name: "index_multi_line_lists_on_resume_id"
+
+  create_table "multiline_list_items", force: true do |t|
+    t.string   "line1"
+    t.string   "line2"
+    t.text     "desc"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "multiline_list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "multiline_list_items", ["multiline_list_id"], name: "index_multiline_list_items_on_multiline_list_id"
+
+  create_table "multiline_lists", force: true do |t|
+    t.string   "name"
+    t.integer  "order"
+    t.integer  "resume_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "multiline_lists", ["resume_id"], name: "index_multiline_lists_on_resume_id"
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -49,15 +95,6 @@ ActiveRecord::Schema.define(version: 20141130211525) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "simplelist_items", force: true do |t|
-    t.text     "content"
-    t.integer  "simplelist_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "simplelist_items", ["simplelist_id"], name: "index_simplelist_items_on_simplelist_id"
 
   create_table "simplelistitems", force: true do |t|
     t.string   "content"

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :simplelists do
       resources :simplelistitems
     end
+    resources :multiline_lists do
+      resources :multiline_list_items
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

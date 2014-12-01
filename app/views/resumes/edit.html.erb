@@ -129,6 +129,55 @@
     </table>
     <%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
   <% end %>
+
+
+  <hr />
+
+
+  <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
+  <br />
+  <br />
+  <% @resume.multiline_lists.each do |list| %>
+      <%= r.fields_for :multiline_lists, list do |lf| %>
+
+          <%= lf.label :name, "List Name" %>
+          <%= lf.text_field :name %>
+          <br />
+          Items (<%=link_to 'Add', resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post %>)
+          <% list.multiline_list_items.each do |item| %>
+            <%= lf.fields_for :multiline_list_items, item do |itemf| %>
+              <table border=1>
+                <tr>
+                  <td><%= itemf.label :line1, 'Line 1' %></td>
+                  <td><%= itemf.text_field :line1 %></td>
+                </tr>
+                <tr>
+                  <td><%= itemf.label :line2, 'Line 2' %></td>
+                  <td><%= itemf.text_field :line2 %></td>
+                </tr>
+                <tr>
+                  <td><%= itemf.label :desc, 'Description' %></td>
+                  <td><%= itemf.text_area :desc, size: '30x3' %></td>
+                </tr>
+                <tr>
+                  <td><%= itemf.label :start, 'Start' %></td>
+                  <td><%= itemf.date_select :start, discard_day: true, order: [:month, :year] %></td>
+                </tr>
+                <tr>
+                  <td><%= itemf.label :end, 'End' %></td>
+                  <td><%= itemf.date_select :end, discard_day: true, order: [:month, :year] %></td>
+                </tr>
+              </table>
+            <% end %>
+          <% end %>
+          <br />
+          <%= link_to 'Remove List', resume_multiline_list_path(@resume.id, list.id), method: :delete %>
+
+      <% end %>
+  <% end %>
+
+
+
   <br />
   <br />
   <%= r.submit 'Save' %>
