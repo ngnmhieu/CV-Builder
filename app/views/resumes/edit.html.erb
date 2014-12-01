@@ -1,184 +1,24 @@
 <%= form_for @resume do |r| %>
   <%= r.label :name, 'Resume Name: '%>
   <%= r.text_field :name %>
-  <%= r.fields_for :personal_detail, @resume.personal_detail do |pd| %>
-    <table border=1>
-      <tr>
-        <td><%= pd.label :name, 'Name' %></td>
-        <td><%= pd.text_field :name %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :phone, 'Phone' %></td>
-        <td><%= pd.text_field :phone %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :fax, 'Fax' %></td>
-        <td><%= pd.text_field :fax %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :address, 'Address' %></td>
-        <td><%= pd.text_field :address %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :email, 'Email' %></td>
-        <td><%= pd.text_field :email %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :website, 'Website' %></td>
-        <td><%= pd.text_field :website %></td>
-      </tr>
-      <tr>
-        <td><%= pd.label :sex, 'Sex' %></td>
-        <td>
-          <%= pd.radio_button :sex, true %> <%= pd.label :sex_true, 'Male' %>
-          <%= pd.radio_button :sex, false %> <%= pd.label :sex_false, 'Female' %>
-        </td>
-      </tr>
-      <tr>
-        <td><%= pd.label :dob, 'Date of Birth' %></td>
-        <td><%= pd.date_select :dob, {order: [:day, :month, :year]} %></td>
-      </tr>
-    </table>
-  <% end %>
   <hr />
-  <%= link_to 'Add Education', resume_educations_path(@resume), method: :post %>
-  <% @resume.educations.each do |edu| %>
-    <%= r.fields_for :educations, edu do |ef| %>
-      <table border=1>
-        <tr>
-          <td><%= ef.label :institution, 'Institution' %></td>
-          <td><%= ef.text_field :institution %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :degree, 'Course / Degree' %></td>
-          <td><%= ef.text_field :degree %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :desc, 'Description' %></td>
-          <td><%= ef.text_area :desc, size: '30x3' %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :start, 'Start' %></td>
-          <td><%= ef.date_select :start, discard_day: true, discard_month: true %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :end, 'End' %></td>
-          <td><%= ef.date_select :end, discard_day: true, discard_month: true %></td>
-        </tr>
-      </table>
-    <% end %>
-    <%= link_to "Remove", resume_education_path(@resume.id, edu.id), method: :delete %>
-  <% end %>
-  <hr />
-  <%= link_to 'Add Work', resume_works_path(@resume), method: :post %>
-  <% @resume.works.each do |work| %>
-    <%= r.fields_for :works, work do |ef| %>
-      <table border=1>
-        <tr>
-          <td><%= ef.label :company, 'Company' %></td>
-          <td><%= ef.text_field :company %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :position, 'Position' %></td>
-          <td><%= ef.text_field :position %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :desc, 'Description' %></td>
-          <td><%= ef.text_area :desc, size: '30x3' %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :start, 'Start' %></td>
-          <td><%= ef.date_select :start, discard_day: true, order: [:month, :year] %></td>
-        </tr>
-        <tr>
-          <td><%= ef.label :end, 'End' %></td>
-          <td><%= ef.date_select :end, discard_day: true, order: [:month, :year] %></td>
-        </tr>
-      </table>
-    <% end %>
-    <%= link_to "Remove", resume_work_path(@resume.id, work.id), method: :delete %>
-  <% end %>
+   
+  <%= render(partial: 'personal_detail_form', locals: {rform: r}) %>
   <hr />
 
-
-  <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
-  <% @resume.simplelists.each do |list| %>
-    <table border=1>
-      <%= r.fields_for :simplelists, list do |lf| %>
-        <tr>
-          <td><%= lf.label :name, "List Name" %></td>
-          <td><%= lf.text_field :name %></td>
-        </tr>
-
-        <tr>
-          <td>Items (<%=link_to 'Add', resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post %>)</td>
-          <td>
-            <ul>
-              <% list.simplelistitems.each do |item| %>
-                <%= lf.fields_for :simplelistitems, item do |itemf| %>
-                  <li>
-                    <%= itemf.text_field :content %> 
-                    <%= link_to 'X', resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete %>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-    <%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
-  <% end %>
-
-
+  <%= render(partial: 'education_form', locals: {rform: r}) %>
   <hr />
 
+  <%= render(partial: 'work_form', locals: {rform: r}) %>
+  <hr />
 
-  <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
+  <%= render(partial: 'simplelist_form', locals: {rform: r}) %>
+  <hr />
+
+  <%= render(partial: 'multiline_list_form', locals: {rform: r}) %>
   <br />
-  <br />
-  <% @resume.multiline_lists.each do |list| %>
-      <%= r.fields_for :multiline_lists, list do |lf| %>
-
-          <%= lf.label :name, "List Name" %>
-          <%= lf.text_field :name %>
-          <br />
-          Items (<%=link_to 'Add', resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post %>)
-          <% list.multiline_list_items.each do |item| %>
-            <%= lf.fields_for :multiline_list_items, item do |itemf| %>
-              <table border=1>
-                <tr>
-                  <td><%= itemf.label :line1, 'Line 1' %></td>
-                  <td><%= itemf.text_field :line1 %></td>
-                </tr>
-                <tr>
-                  <td><%= itemf.label :line2, 'Line 2' %></td>
-                  <td><%= itemf.text_field :line2 %></td>
-                </tr>
-                <tr>
-                  <td><%= itemf.label :desc, 'Description' %></td>
-                  <td><%= itemf.text_area :desc, size: '30x3' %></td>
-                </tr>
-                <tr>
-                  <td><%= itemf.label :start, 'Start' %></td>
-                  <td><%= itemf.date_select :start, discard_day: true, order: [:month, :year] %></td>
-                </tr>
-                <tr>
-                  <td><%= itemf.label :end, 'End' %></td>
-                  <td><%= itemf.date_select :end, discard_day: true, order: [:month, :year] %></td>
-                </tr>
-              </table>
-            <% end %>
-          <% end %>
-          <br />
-          <%= link_to 'Remove List', resume_multiline_list_path(@resume.id, list.id), method: :delete %>
-
-      <% end %>
-  <% end %>
 
 
-
-  <br />
   <br />
   <%= r.submit 'Save' %>
 <% end %>

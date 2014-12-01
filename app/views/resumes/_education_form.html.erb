@@ -1,0 +1,28 @@
+<%= link_to 'Add Education', resume_educations_path(@resume), method: :post %>
+<% @resume.educations.each do |edu| %>
+  <%= rform.fields_for :educations, edu do |ef| %>
+    <table border=1>
+      <tr>
+        <td><%= ef.label :institution, 'Institution' %></td>
+        <td><%= ef.text_field :institution %></td>
+      </tr>
+      <tr>
+        <td><%= ef.label :degree, 'Course / Degree' %></td>
+        <td><%= ef.text_field :degree %></td>
+      </tr>
+      <tr>
+        <td><%= ef.label :desc, 'Description' %></td>
+        <td><%= ef.text_area :desc, size: '30x3' %></td>
+      </tr>
+      <tr>
+        <td><%= ef.label :start, 'Start' %></td>
+        <td><%= ef.date_select :start, discard_day: true, discard_month: true %></td>
+      </tr>
+      <tr>
+        <td><%= ef.label :end, 'End' %></td>
+        <td><%= ef.date_select :end, discard_day: true, discard_month: true %></td>
+      </tr>
+    </table>
+  <% end %>
+  <%= link_to "Remove", resume_education_path(@resume.id, edu.id), method: :delete %>
+<% end %>

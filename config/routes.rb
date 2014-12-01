@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'resumes/:resume_id/multiline_lists/:multiline_list_id/multiline_list_items/:id/increase_order' => 'multiline_list_items#increase_order', as: 'mll_item_incr_order'
+
+  post 'resumes/:resume_id/multiline_lists/:multiline_list_id/multiline_list_items/:id/decrease_order' => 'multiline_list_items#decrease_order', as: 'mll_item_decr_order'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

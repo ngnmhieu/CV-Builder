@@ -1,0 +1,40 @@
+
+<%= rform.fields_for :personal_detail, @resume.personal_detail do |pd| %>
+  <table border=1>
+    <tr>
+      <td><%= pd.label :name, 'Name' %></td>
+      <td><%= pd.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :phone, 'Phone' %></td>
+      <td><%= pd.text_field :phone %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :fax, 'Fax' %></td>
+      <td><%= pd.text_field :fax %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :address, 'Address' %></td>
+      <td><%= pd.text_field :address %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :email, 'Email' %></td>
+      <td><%= pd.text_field :email %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :website, 'Website' %></td>
+      <td><%= pd.text_field :website %></td>
+    </tr>
+    <tr>
+      <td><%= pd.label :sex, 'Sex' %></td>
+      <td>
+        <%= pd.radio_button :sex, true %> <%= pd.label :sex_true, 'Male' %>
+        <%= pd.radio_button :sex, false %> <%= pd.label :sex_false, 'Female' %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= pd.label :dob, 'Date of Birth' %></td>
+      <td><%= pd.date_select :dob, {order: [:day, :month, :year]} %></td>
+    </tr>
+  </table>
+<% end %>
