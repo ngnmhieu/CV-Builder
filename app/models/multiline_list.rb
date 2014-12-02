@@ -18,4 +18,11 @@ class MultilineList < ActiveRecord::Base
   def data
     return self.multiline_list_items
   end
+
+  def incr_order
+  end  
+
+  def decr_order
+  end  
+
 end

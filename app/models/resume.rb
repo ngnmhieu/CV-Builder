@@ -16,4 +16,8 @@ class Resume < ActiveRecord::Base
     return self.simplelists.size + self.multiline_lists.size
   end
 
+  def items
+    return self.simplelists + self.multiline_lists
+  end
+
 end

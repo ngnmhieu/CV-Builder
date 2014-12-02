@@ -36,16 +36,19 @@ class MultilineListItemsController < ApplicationController
   end
 
   def increase_order
-    @item = MultilineListItem.find(params[:id])
+    item = MultilineListItem.find(params[:id])
     list = MultilineList.find(params[:multiline_list_id])
-    @prev_item = MultilineListItem.find_by(
-      multiline_list_id: params[:multiline_list_id],
-      order: @item.order-1)
 
-    if @item.order != 1
-      @item.order -= 1;
-      @prev_item.order += 1;
-      if @item.save && @prev_item.save
+    if item.order != 1
+      prev_item = MultilineListItem.find_by(
+        multiline_list_id: params[:multiline_list_id],
+        order: item.order-1
+      )
+
+      item.order -= 1
+      prev_item.order += 1
+
+      if item.save && prev_item.save
         redirect_to edit_resume_path(params[:resume_id])
       end
     else

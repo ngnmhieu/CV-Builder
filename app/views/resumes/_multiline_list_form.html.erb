@@ -48,6 +48,12 @@
       <% end %>
     <% end %>
     <%= link_to 'Remove List', resume_multiline_list_path(@resume.id, list.id), method: :delete %>
+    <% if list.order != 1 %>
+      | <%= link_to 'Up', mll_incr_order_path(@resume.id, list.id), method: :post %>
+    <% end %>
+    <% if list.order != @resume.items.size %>
+      | <%= link_to 'Down', mll_decr_order_path(@resume.id, list.id), method: :post %>
+    <% end %>
     <br />
 
   <% end %>
