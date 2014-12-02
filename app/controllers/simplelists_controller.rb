@@ -1,4 +1,6 @@
 class SimplelistsController < ApplicationController
+  include OrderingMethods
+
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
@@ -16,6 +18,4 @@ class SimplelistsController < ApplicationController
       redirect_to edit_resume_path(params[:resume_id])
     end
   end
-
-
 end

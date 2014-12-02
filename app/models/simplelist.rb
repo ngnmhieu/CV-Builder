@@ -4,6 +4,8 @@ class Simplelist < ActiveRecord::Base
 
   accepts_nested_attributes_for :simplelistitems, update_only: true
 
+  include Orderable
+
   # short hand for simplelist_items
   def items
     return  self.simplelistitems

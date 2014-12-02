@@ -1,8 +1,10 @@
 class MultilineList < ActiveRecord::Base
   belongs_to :resume
   has_many :multiline_list_items, dependent: :destroy
-
   accepts_nested_attributes_for :multiline_list_items, update_only: true
+
+  include Orderable
+
 
   # short hand for multiline_list_items
   def items
@@ -18,11 +20,5 @@ class MultilineList < ActiveRecord::Base
   def data
     return self.multiline_list_items
   end
-
-  def incr_order
-  end  
-
-  def decr_order
-  end  
 
 end

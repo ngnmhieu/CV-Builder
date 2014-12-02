@@ -26,4 +26,10 @@
     <% end %>
   </table>
   <%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
+  <% if list.order != 1 %>
+    | <%= link_to 'Up', simplelist_incr_order_path(@resume.id, list.id), method: :post %>
+<% end %>
+<% if list.order != @resume.items.size %>
+  | <%= link_to 'Down', simplelist_decr_order_path(@resume.id, list.id), method: :post %>
+    <% end %>
 <% end %>
