@@ -54,7 +54,8 @@ class MultilineListItemsController < ApplicationController
   end
 
   
+  # maybe generalize increase_order and decrease_order
   def change_order(direction)
-
   end
+
 end

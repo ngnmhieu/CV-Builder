@@ -18,6 +18,8 @@ class ResumesController < ApplicationController
   def show
     @resume = Resume.find(params[:id])
     @pdetail = @resume.personal_detail
+    @sections = @resume.simplelists + @resume.multiline_lists
+    @sections.sort_by! {|item| item.order }
   end
 
   def edit

@@ -1,0 +1,36 @@
+
+  <% if @resume.educations.any? %>
+    <h2>Education</h2>
+    <% @resume.educations.each do |edu| %>
+      <table width="100%">
+        <tr>
+          <td><b><%= edu.institution %></b></td>
+          <td align="right"><b><%= edu.start.strftime("%Y") %> - <%= edu.end.strftime("%Y") %></b></td>
+        </tr>
+        <tr>
+          <td colspan=2><i><%= edu.degree %></i></td>
+        </tr>
+        <tr>
+          <td colspan=2><%= edu.desc %></td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% if @resume.works.any? %>
+    <h2>Work Experience</h2>
+    <% @resume.works.each do |work| %>
+      <table width="100%">
+        <tr>
+          <td><b><%= work.company %></b></td>
+          <td align="right"><b><%= work.start.strftime("%b %Y") %> - <%= work.end.strftime("%b %Y") %></b></td>
+        </tr>
+        <tr>
+          <td colspan=2><i><%= work.position %></i></td>
+        </tr>
+        <tr>
+          <td colspan=2><%= work.desc %></td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>

@@ -10,4 +10,10 @@ class Resume < ActiveRecord::Base
   accepts_nested_attributes_for :works
   accepts_nested_attributes_for :simplelists
   accepts_nested_attributes_for :multiline_lists
+
+
+  def num_items
+    return self.simplelists.size + self.multiline_lists.size
+  end
+
 end

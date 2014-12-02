@@ -2,7 +2,8 @@ class MultilineListsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      @resume.multiline_lists << MultilineList.new
+      order = @resume.num_items + 1
+      @resume.multiline_lists << MultilineList.new(order: order)
       if @resume.save
         redirect_to edit_resume_path(@resume)
       end
@@ -14,5 +15,11 @@ class MultilineListsController < ApplicationController
     if @list.destroy
       redirect_to edit_resume_path(params[:resume_id])
     end
+  end
+
+  def increase_order
+  end
+
+  def decrease_order
   end
 end

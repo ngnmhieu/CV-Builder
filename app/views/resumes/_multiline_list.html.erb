@@ -1,0 +1,18 @@
+<% list = data %>
+
+<h2><%= list.name %></h2>
+<% ordered_items = list.multiline_list_items.sort_by {|item| item.order } %>
+<% ordered_items.each do |item| %>
+  <table width="100%">
+    <tr>
+      <td><b><%= item.line1 %></b></td>
+      <td align="right"><b><%= item.start.strftime("%b %Y") %> - <%= item.end.strftime("%b %Y") %></b></td>
+    </tr>
+    <tr>
+      <td colspan=2><i><%= item.line2 %></i></td>
+    </tr>
+    <tr>
+      <td colspan=2><%= item.desc %></td>
+    </tr>
+  </table>
+<% end %>

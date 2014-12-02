@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201214010) do
+ActiveRecord::Schema.define(version: 20141201231419) do
 
   create_table "educations", force: true do |t|
     t.string   "institution"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20141201214010) do
     t.integer  "resume_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order"
   end
 
   add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id"

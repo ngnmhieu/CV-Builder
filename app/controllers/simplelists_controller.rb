@@ -2,7 +2,8 @@ class SimplelistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      @resume.simplelists << Simplelist.new
+      order = @resume.num_items + 1
+      @resume.simplelists << Simplelist.new(order: order)
       if @resume.save
         redirect_to edit_resume_path(@resume)
       end
@@ -15,4 +16,6 @@ class SimplelistsController < ApplicationController
       redirect_to edit_resume_path(params[:resume_id])
     end
   end
+
+
 end

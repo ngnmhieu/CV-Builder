@@ -18,73 +18,8 @@
     </tr>
   </table>
 
-  <% if @resume.educations.any? %>
-    <h2>Education</h2>
-    <% @resume.educations.each do |edu| %>
-      <table width="100%">
-        <tr>
-          <td><b><%= edu.institution %></b></td>
-          <td align="right"><b><%= edu.start.strftime("%Y") %> - <%= edu.end.strftime("%Y") %></b></td>
-        </tr>
-        <tr>
-          <td colspan=2><i><%= edu.degree %></i></td>
-        </tr>
-        <tr>
-          <td colspan=2><%= edu.desc %></td>
-        </tr>
-      </table>
-    <% end %>
-  <% end %>
-
-  <% if @resume.works.any? %>
-    <h2>Work Experience</h2>
-    <% @resume.works.each do |work| %>
-      <table width="100%">
-        <tr>
-          <td><b><%= work.company %></b></td>
-          <td align="right"><b><%= work.start.strftime("%b %Y") %> - <%= work.end.strftime("%b %Y") %></b></td>
-        </tr>
-        <tr>
-          <td colspan=2><i><%= work.position %></i></td>
-        </tr>
-        <tr>
-          <td colspan=2><%= work.desc %></td>
-        </tr>
-      </table>
-    <% end %>
-  <% end %>
-
-  <% if @resume.simplelists.any? %>
-     <% @resume.simplelists.each do |list| %>
-       <h2><%= list.name %></h2>
-       <ul>
-         <% list.simplelistitems.each do |item| %>
-             <li><%= item.content %></li>
-         <% end %>
-       </ul>
-     <% end %>
-  <% end %>
-
-
-  <% if @resume.multiline_lists.any? %>
-    <% @resume.multiline_lists.each do |list| %>
-       <h2><%= list.name %></h2>
-       <% ordered_items = list.multiline_list_items.sort_by {|item| item.order } %>
-       <% ordered_items.each do |item| %>
-         <table width="100%">
-           <tr>
-             <td><b><%= item.line1 %></b></td>
-             <td align="right"><b><%= item.start.strftime("%b %Y") %> - <%= item.end.strftime("%b %Y") %></b></td>
-           </tr>
-           <tr>
-             <td colspan=2><i><%= item.line2 %></i></td>
-           </tr>
-           <tr>
-             <td colspan=2><%= item.desc %></td>
-           </tr>
-         </table>
-       <% end %>
-    <% end %>
+  <% @sections.each do |sec| %>
+    <%= render partial: sec.tpl_name, locals: {data: sec}  %>
   <% end %>
 
 </div>
