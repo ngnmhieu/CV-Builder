@@ -1,9 +1,9 @@
 class Resume < ActiveRecord::Base
-  has_one :personal_detail
-  has_many :educations
-  has_many :works
-  has_many :simplelists
-  has_many :multiline_lists
+  has_one :personal_detail, dependent: :destroy
+  has_many :educations, dependent: :destroy
+  has_many :works, dependent: :destroy
+  has_many :simplelists, dependent: :destroy
+  has_many :multiline_lists, dependent: :destroy
 
   accepts_nested_attributes_for :personal_detail, update_only: true
   accepts_nested_attributes_for :educations
