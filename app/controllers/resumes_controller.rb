@@ -18,8 +18,7 @@ class ResumesController < ApplicationController
   def show
     @resume = Resume.find(params[:id])
     @pdetail = @resume.personal_detail
-    @sections = @resume.simplelists + @resume.multiline_lists
-    @sections.sort_by! {|item| item.order }
+    @sections = @resume.items.sort_by {|item| item.order }
   end
 
   def edit
@@ -48,7 +47,8 @@ class ResumesController < ApplicationController
         educations_attributes: [:institution, :degree, :desc, :start, :end, :id],
         works_attributes: [:company, :position, :desc, :start, :end, :id],
         simplelists_attributes: [:name, :id, simplelistitems_attributes: [:id, :content]],
-        multiline_lists_attributes: [:name, :id, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]]
+        multiline_lists_attributes: [:name, :id, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
+        textsections_attributes: [:name, :id, :content]
       )
     end
 end
