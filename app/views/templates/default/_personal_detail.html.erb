@@ -1,0 +1,19 @@
+<% person = data %>
+  <table width="100%">
+    <tr>
+      <td align=center>
+        <h1><%= person.name %></h1>
+        <h4>
+          <%= person.address  %>
+          <%= ' | ' + person.phone if person.phone != '' %> 
+          <%= ' | ' + person.fax if person.fax != ''  %> 
+        </h4>
+        <h4>
+          <%= person.email %>
+          <%= ' | ' + person.website if person.website != '' %> 
+        </h4>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+  </table>
