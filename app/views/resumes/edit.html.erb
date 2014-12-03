@@ -1,30 +1,24 @@
 <%= form_for @resume do |r| %>
   <%= r.label :name, 'Resume Name: '%>
   <%= r.text_field :name %>
-  |<%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
-  |<%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
-  |<%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
+  | <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
+  | <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
+  | <%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
   <hr />
 
-  <% @sections.each do |sec| %>
-    <%= render partial: sec.tpl_name+'_form', locals: {data: sec, rform: r}  %>
-    <br />
-    <hr />
-    <br />
-  <% end %>
+  <ul class="nav nav-tabs">
+      <% @sections.each do |sec| %>
+          <li class="sec-tab" data-order='<%= sec.order %>'><a href="#"><%= sec.name %></a></li>
+      <% end %>
+  </ul>
+  <div id="sections">
+      <% @sections.each do |sec| %>
+          <div class="sec" data-order='<%= sec.order %>'>
+              <%= render partial: sec.tpl_name+'_form', locals: {data: sec, rform: r}  %>
+          </div>
+      <% end %>
+  </div>
    
-  <%# <%= render(partial: 'personal_detail_form', locals: {rform: r}) %>
-  <!-- <hr /> -->
-
-  <%# <%= render(partial: 'simplelist_form', locals: {rform: r}) %>
-  <!-- <hr /> -->
-
-  <%# <%= render(partial: 'multiline_list_form', locals: {rform: r}) %>
-  <!-- <br /> -->
-
-  <%# <%= render(partial: 'textsection_form', locals: {rform: r}) %>
-  <!-- <br /> -->
-
   <br />
   <%= r.submit 'Save' %>
 <% end %>
