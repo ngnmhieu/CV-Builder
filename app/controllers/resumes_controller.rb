@@ -22,6 +22,7 @@ class ResumesController < ApplicationController
 
   def edit
     @resume = Resume.find(params[:id])
+    @sections = @resume.items.sort_by {|item| item.order }
   end
 
   def update

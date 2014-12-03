@@ -1,0 +1,35 @@
+<%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
+
+<% @resume.simplelists.each do |list| %>
+  <table border=1>
+    <%= rform.fields_for :simplelists, list do |lf| %>
+      <tr>
+        <td><%= lf.label :name, "List Name" %></td>
+        <td><%= lf.text_field :name %></td>
+      </tr>
+
+      <tr>
+        <td>Items (<%=link_to 'Add', resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post %>)</td>
+        <td>
+          <ul>
+            <% list.simplelistitems.each do |item| %>
+              <%= lf.fields_for :simplelistitems, item do |itemf| %>
+                <li>
+                <%= itemf.text_field :content %> 
+                <%= link_to 'X', resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
+  <% if list.order != 1 %>
+    | <%= link_to 'Up', simplelist_incr_order_path(@resume.id, list.id), method: :post %>
+<% end %>
+<% if list.order != @resume.items.size %>
+  | <%= link_to 'Down', simplelist_decr_order_path(@resume.id, list.id), method: :post %>
+    <% end %>
+<% end %>

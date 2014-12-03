@@ -1,7 +1,6 @@
-<%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
+<% list = data %>
 <br />
 <br />
-<% @resume.multiline_lists.each do |list| %>
   <%= rform.fields_for :multiline_lists, list do |lf| %>
 
     <%= lf.label :name, "List Name" %>
@@ -57,4 +56,3 @@
     <br />
 
   <% end %>
-<% end %>
