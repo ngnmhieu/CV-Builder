@@ -12,13 +12,13 @@
       <%=link_to resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
-      <% ordered_list = list.multiline_list_items.sort_by {|item| item.order } %>
       <%= link_to '', resume_multiline_list_path(@resume.id, list.id), 
         method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>
     </div>
   </div>
 
 
+  <% ordered_list = list.multiline_list_items.sort_by {|item| item.order } %>
   <div class="multilinelist">
     <% ordered_list.each do |item| %>
 

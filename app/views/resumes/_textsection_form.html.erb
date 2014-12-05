@@ -1,24 +1,28 @@
 <% sec = data %>
+<%= rform.fields_for :textsections, sec do |lf| %>
 
-<table border=1>
-  <%= rform.fields_for :textsections, sec do |lf| %>
-    <tr>
-      <td>
-        <%= lf.label :name, "Section Name" %>
-        <%= lf.text_field :name %>
-      </td>    
-    </tr>
-    <tr>
-      <td>
-        <%= lf.text_area :content, size: '60x10' %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<%= link_to 'Remove', resume_textsection_path(@resume.id, sec.id), method: :delete %>
-<% if sec.order != 1 %>
-  | <%= link_to 'Up', textsection_incr_order_path(@resume.id, sec.id), method: :post %>
+  <div id="ListControls" class="row">
+    <%= lf.label :name, sec.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
+    <!-- <div class="edit"> -->
+      <!--   <%= lf.text_field :name, class: 'form-control' %> -->
+      <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
+      <!-- </div> -->
+
+    <div class="controls">
+      <%= link_to '', resume_textsection_path(@resume.id, sec.id), 
+        method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>
+    </div>
+  </div>
+
+  <div class="textsection">
+    <%= lf.text_area :content, size: '60x10', class: 'form-control' %>
+  </div>  
+
 <% end %>
-<% if sec.order != @resume.items.size %>
-  | <%= link_to 'Down', textsection_decr_order_path(@resume.id, sec.id), method: :post %>
-<% end %>
+
+<%# <% if sec.order != 1 %>
+<%#   | <%= link_to 'Up', textsection_incr_order_path(@resume.id, sec.id), method: :post %>
+<%# <% end %>
+<%# <% if sec.order != @resume.items.size %>
+<%#   | <%= link_to 'Down', textsection_decr_order_path(@resume.id, sec.id), method: :post %>
+<%# <% end %>

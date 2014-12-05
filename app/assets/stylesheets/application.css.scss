@@ -26,6 +26,10 @@
   text-decoration: none;
 }
 
+#ResumeTitle {
+  margin: 7px 20px;
+}
+
 #TopControls {
   position: relative;
   padding: 10px 20px;
@@ -131,6 +135,17 @@
     .up:hover, .down:hover {
       color: black;
     }
+  }
+}
+
+
+.simplelist {
+  margin: 20px 5px;
+  border: 1px solid #ccc;
+  padding: 15px;
+
+  table td {
+    padding: 10px;
   }
 }
 

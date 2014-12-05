@@ -1,33 +1,45 @@
 <% list = data %>
+<%= rform.fields_for :simplelists, list do |lf| %>
 
-<table border=1>
-  <%= rform.fields_for :simplelists, list do |lf| %>
-    <tr>
-      <td><%= lf.label :name, "List Name" %></td>
-      <td><%= lf.text_field :name %></td>
-    </tr>
+  <div id="ListControls" class="row">
+    <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
+    <!-- <div class="edit"> -->
+      <!--   <%= lf.text_field :name, class: 'form-control' %> -->
+      <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
+      <!-- </div> -->
 
-    <tr>
-      <td>Items (<%=link_to 'Add', resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post %>)</td>
-      <td>
-        <ul>
-          <% list.simplelistitems.each do |item| %>
-            <%= lf.fields_for :simplelistitems, item do |itemf| %>
-              <li>
-              <%= itemf.text_field :content %> 
-              <%= link_to 'X', resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete %>
-              </li>
+    <div class="controls">
+      <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post do %>
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
+      <% end %>
+      <%= link_to '', resume_simplelist_path(@resume.id, list.id), 
+        method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>
+    </div>
+  </div>
+
+  <div class="simplelist">
+    <table>
+      <% list.simplelistitems.each do |item| %>
+        <%= lf.fields_for :simplelistitems, item do |itemf| %>
+        <tr>
+          <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
+          <td style="">
+            <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
+              <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             <% end %>
-          <% end %>
-        </ul>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<%= link_to 'Remove List', resume_simplelist_path(@resume.id, list.id), method: :delete %>
-<% if list.order != 1 %>
-  | <%= link_to 'Up', simplelist_incr_order_path(@resume.id, list.id), method: :post %>
-  <% end %>
-  <% if list.order != @resume.items.size %>
-    | <%= link_to 'Down', simplelist_decr_order_path(@resume.id, list.id), method: :post %>
+          </td>
+        </tr>
+
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+
 <% end %>
+
+<%# <% if list.order != 1 %>
+<%#   | <%= link_to 'Up', simplelist_incr_order_path(@resume.id, list.id), method: :post %>
+<%#   <% end %>
+<%#   <% if list.order != @resume.items.size %>
+<%#     | <%= link_to 'Down', simplelist_decr_order_path(@resume.id, list.id), method: :post %>
+<%# <% end %>
