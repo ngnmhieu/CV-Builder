@@ -6,19 +6,37 @@
   | <%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
   <hr />
 
-  <ul class="nav nav-tabs">
-      <% @sections.each do |sec| %>
-          <li class="sec-tab" data-order='<%= sec.order %>'><a href="#"><%= sec.name %></a></li>
+  <div id="TopControls" class="row">
+    <div id="LeftControls" class="col-xs-8">
+      <%= link_to '#', class: 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-plus"></span> Add Section
       <% end %>
-  </ul>
-  <div id="sections">
-      <% @sections.each do |sec| %>
-          <div class="sec" data-order='<%= sec.order %>'>
-              <%= render partial: sec.tpl_name+'_form', locals: {data: sec, rform: r}  %>
-          </div>
-      <% end %>
+    </div>
+
+    <div id="RightControls" class="col-xs-4">
+    <%= link_to resume_path(@resume), class: 'btn btn-primary', target: '_blank' do %>
+      <span class="glyphicon glyphicon-th-list"></span> Preview
+    <% end %>
+    <%= r.submit 'Save', class: 'btn btn-success' %>
+    </div>
   </div>
-   
-  <br />
-  <%= r.submit 'Save' %>
+
+  <div id="Left" class="col-xs-3">
+    <ul class="nav nav-tabs tabs-left">
+      <% @sections.each do |sec| %>
+        <li class="sec-tab" data-order='<%= sec.order %>'><a href="#"><%= sec.name %></a></li>
+      <% end %>
+    </ul>
+    <div class="clear"></div>
+  </div>
+
+  <div id="Right" class="col-xs-9">
+    <div id="sections">
+        <% @sections.each do |sec| %>
+            <div class="sec" data-order='<%= sec.order %>'>
+                <%= render partial: sec.tpl_name+'_form', locals: {data: sec, rform: r}  %>
+            </div>
+        <% end %>
+    </div>
+  </div>
 <% end %>

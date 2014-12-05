@@ -1,58 +1,86 @@
 <% list = data %>
-<br />
-<br />
-  <%= rform.fields_for :multiline_lists, list do |lf| %>
+<%= rform.fields_for :multiline_lists, list do |lf| %>
 
-    <%= lf.label :name, "List Name" %>
-    <%= lf.text_field :name %>
-    <br />
-    Items (<%=link_to 'Add', resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post %>)
-    <% ordered_list = list.multiline_list_items.sort_by {|item| item.order } %>
-    <% ordered_list.each do |item| %>
-      <%= lf.fields_for :multiline_list_items, item do |itemf| %>
-        <table border=1>
-          <tr>
-            <td><%= itemf.label :line1, 'Line 1' %></td>
-            <td><%= itemf.text_field :line1 %></td>
-          </tr>
-          <tr>
-            <td><%= itemf.label :line2, 'Line 2' %></td>
-            <td><%= itemf.text_field :line2 %></td>
-          </tr>
-          <tr>
-            <td><%= itemf.label :desc, 'Description' %></td>
-            <td><%= itemf.text_area :desc, size: '30x3' %></td>
-          </tr>
-          <tr>
-            <td><%= itemf.label :start, 'Start' %></td>
-            <td><%= itemf.date_select :start, discard_day: true, order: [:month, :year] %></td>
-          </tr>
-          <tr>
-            <td><%= itemf.label :end, 'End' %></td>
-            <td><%= itemf.date_select :end, discard_day: true, order: [:month, :year] %></td>
-          </tr>
-          <tr>
-            <td><%= link_to 'X', resume_multiline_list_multiline_list_item_path(@resume.id, list.id, item.id), method: :delete%></td>
-            <td>
-              <% if item.order != 1 %>
-                <%= link_to "up", mll_item_incr_order_path(@resume.id, list.id, item.id), method: :post %>
-              <% end %>
+  <div id="ListControls" class="row">
+      <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
+      <!-- <div class="edit"> -->
+      <!--   <%= lf.text_field :name, class: 'form-control' %> -->
+      <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
+      <!-- </div> -->
 
-              <% if item.order != ordered_list.size %>
-                <%= link_to "down", mll_item_decr_order_path(@resume.id, list.id, item.id), method: :post %>
-              <% end %>
-            </td>
-          </tr>
-        </table>
+    <div class="controls">
+      <%=link_to resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post do %>
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
-    <% end %>
-    <%= link_to 'Remove List', resume_multiline_list_path(@resume.id, list.id), method: :delete %>
-    <% if list.order != 1 %>
-      | <%= link_to 'Up', mll_incr_order_path(@resume.id, list.id), method: :post %>
-    <% end %>
-    <% if list.order != @resume.items.size %>
-      | <%= link_to 'Down', mll_decr_order_path(@resume.id, list.id), method: :post %>
-    <% end %>
-    <br />
+      <% ordered_list = list.multiline_list_items.sort_by {|item| item.order } %>
+      <%= link_to '', resume_multiline_list_path(@resume.id, list.id), 
+        method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>
+    </div>
+  </div>
 
-  <% end %>
+
+  <div class="multilinelist">
+    <% ordered_list.each do |item| %>
+
+      <div class="row mll_item">
+        <%= lf.fields_for :multiline_list_items, item do |itemf| %>
+
+          <div class="row" style="position: relative">
+            <div class="col-xs-5">
+              <div class="line">
+                <%= itemf.label :line1, 'Line 1' %>
+                <%= itemf.text_field :line1, class: 'form-control' %>
+              </div>
+              <div class="line">
+                <%= itemf.label :line2, 'Line 2' %>
+                <%= itemf.text_field :line2, class: 'form-control' %>
+              </div>
+            </div>
+
+              <div class="controls">
+                <% if item.order != 1 %>
+                  <%= link_to '', mll_item_incr_order_path(@resume.id, list.id, item.id),
+                    method: :post, class: 'glyphicon glyphicon-chevron-up clickable up' %>
+                <% end %>
+
+                <% if item.order != ordered_list.size %>
+                  <%= link_to '', mll_item_decr_order_path(@resume.id, list.id, item.id), 
+                    method: :post, class: 'glyphicon glyphicon-chevron-down clickable down' %>
+                <% end %>
+                <span class="space"></span>
+                <%= link_to '', resume_multiline_list_multiline_list_item_path(@resume.id, list.id, item.id),
+                  method: :delete, class: 'glyphicon glyphicon-trash clickable remove'%>
+              </div>
+              <div class="dates">
+                <%= itemf.label :start, 'Start: ' %>
+                <%= itemf.date_select :start, discard_day: true, order: [:month, :year] %>
+                <%= itemf.label :end, 'End: ' %>
+                <%= itemf.date_select :end, discard_day: true, order: [:month, :year] %>
+              </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12">
+              <%= itemf.label :desc, 'Description' %>
+              <%= itemf.text_area :desc, size: '30x3', class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <%# <% if list.order != 1 %>
+  <%#   | <%= link_to 'Up', mll_incr_order_path(@resume.id, list.id), method: :post %>
+  <%# <% end %>
+
+  <%# <% if list.order != @resume.items.size %>
+  <%#   | <%= link_to 'Down', mll_decr_order_path(@resume.id, list.id), method: :post %>
+  <%# <% end %>
+
+<% end %>
+
