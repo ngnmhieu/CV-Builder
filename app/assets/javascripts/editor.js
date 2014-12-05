@@ -2,8 +2,15 @@ ResumeEditor = (function() {
     return {
 
         init: function() {
+            this.initRichEditors();
             this.initEvents();
             this.openTab(1); // open the first tab by default
+        },
+
+        initRichEditors: function() {
+            $('.textsection textarea').wysihtml5();
+            $('.multilinelist textarea').wysihtml5();
+            $('.simplelist textarea').wysihtml5();
         },
 
         initEvents: function() {

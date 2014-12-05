@@ -3,6 +3,6 @@
 <h2><%= list.name %></h2>
 <ul>
   <% list.simplelistitems.each do |item| %>
-    <li><%= item.content %></li>
+    <li><%= item.content.html_safe %></li>
   <% end %>
 </ul>
