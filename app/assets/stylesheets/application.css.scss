@@ -31,6 +31,24 @@
   margin: 7px 20px;
 }
 
+#SystemMessage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  span {
+    padding: 7px 30px;
+  }
+
+  span.success {
+    background: green;
+  }
+}
+
+
 #TopControls {
   position: relative;
   padding: 10px 20px;
@@ -45,6 +63,9 @@
 }
 
 #Left {
+  li {
+    cursor: pointer;
+  }
 }
 
 #Right {

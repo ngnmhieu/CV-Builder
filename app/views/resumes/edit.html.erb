@@ -1,4 +1,6 @@
-<%= form_for @resume do |r| %>
+<div id="SystemMessage"></div>
+
+<%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
   <h2 id="ResumeTitle"><%= @resume.name %></h2>
   <%# <%= r.text_field :name %>
   <%# | <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
@@ -23,7 +25,7 @@
   <div id="Left" class="col-xs-3">
     <ul class="nav nav-tabs tabs-left">
       <% @sections.each do |sec| %>
-        <li class="sec-tab" data-order='<%= sec.order %>'><a href="#"><%= sec.name %></a></li>
+        <li class="sec-tab" data-order='<%= sec.order %>'><a><%= sec.name %></a></li>
       <% end %>
     </ul>
     <div class="clear"></div>

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root 'resumes#index'
   resources :resumes do
-    resources :educations
-    resources :works
     resources :simplelists do
       resources :simplelistitems
     end

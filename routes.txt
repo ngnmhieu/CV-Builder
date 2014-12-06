@@ -1,0 +1,10 @@
+     Prefix Verb   URI Pattern                 Controller#Action
+       root GET    /                           resumes#index
+    resumes GET    /resumes(.:format)          resumes#index
+            POST   /resumes(.:format)          resumes#create
+ new_resume GET    /resumes/new(.:format)      resumes#new
+edit_resume GET    /resumes/:id/edit(.:format) resumes#edit
+     resume GET    /resumes/:id(.:format)      resumes#show
+            PATCH  /resumes/:id(.:format)      resumes#update
+            PUT    /resumes/:id(.:format)      resumes#update
+            DELETE /resumes/:id(.:format)      resumes#destroy
