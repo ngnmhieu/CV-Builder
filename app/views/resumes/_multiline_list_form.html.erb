@@ -2,11 +2,13 @@
 <%= rform.fields_for :multiline_lists, list do |lf| %>
 
   <div id="ListControls" class="row">
-      <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
-      <!-- <div class="edit"> -->
+    <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
+    <!-- <div class="edit"> -->
       <!--   <%= lf.text_field :name, class: 'form-control' %> -->
       <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
       <!-- </div> -->
+
+    <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
       <%=link_to resume_multiline_list_multiline_list_items_path(@resume.id, list.id), method: :post do %>

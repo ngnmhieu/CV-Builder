@@ -7,6 +7,7 @@
       <!--   <%= lf.text_field :name, class: 'form-control' %> -->
       <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
       <!-- </div> -->
+    <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
       <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post do %>

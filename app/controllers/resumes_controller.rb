@@ -47,11 +47,9 @@ class ResumesController < ApplicationController
       params.require(:resume).permit(
         :name, 
         personal_detail_attributes: [:name, :phone, :fax, :address, :email, :website, :sex, :dob, :id],
-        educations_attributes: [:institution, :degree, :desc, :start, :end, :id],
-        works_attributes: [:company, :position, :desc, :start, :end, :id],
-        simplelists_attributes: [:name, :id, simplelistitems_attributes: [:id, :content]],
-        multiline_lists_attributes: [:name, :id, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
-        textsections_attributes: [:name, :id, :content]
+        simplelists_attributes: [:name, :id, :order, simplelistitems_attributes: [:id, :content]],
+        multiline_lists_attributes: [:name, :id, :order, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
+        textsections_attributes: [:name, :id, :content, :order]
       )
     end
 end

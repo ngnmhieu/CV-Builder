@@ -8,6 +8,8 @@
       <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
       <!-- </div> -->
 
+    <%= lf.hidden_field :order, class: 'section_order' %>
+
     <div class="controls">
       <%= link_to '', resume_textsection_path(@resume.id, sec.id), 
         method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>

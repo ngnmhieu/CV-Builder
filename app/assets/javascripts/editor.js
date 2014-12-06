@@ -3,10 +3,26 @@ ResumeEditor = (function() {
         init: function() {
           this.timetosave = 3; // seconds to wait before executing save operation
           this.mainForm = $('#ResumeEditorForm');
+          this.tabSections = $("#TabSections");
 
+          this.initTabs();
           this.initRichEditors();
           this.initEvents();
           this.openTab(1); // open the first tab by default
+        },
+
+        initTabs: function() {
+          var editor_obj = this; 
+
+          this.tabSections.sortable({
+            placeholder: "ui-state-highlight",
+            update: function() {
+              editor_obj.refreshSectionPos.call(editor_obj);
+              editor_obj.autoSave.call(editor_obj);
+            }
+          });
+
+          this.tabSections.disableSelection();
         },
 
         initRichEditors: function() {
@@ -69,8 +85,8 @@ ResumeEditor = (function() {
             success: function(response) {
               editor_obj.flashMessage(response.msg, response.status);
             },
-
-            error: function() {
+            error: function(response) {
+              editor_obj.flashMessage("Cannot save", "error");
             }
           });
         },
@@ -107,6 +123,32 @@ ResumeEditor = (function() {
 
           tab.addClass('active');
           section.show();
+        },
+
+        /**
+         * reassign the correct order of tabs and sections
+         */
+        refreshSectionPos: function() {
+          var tabs = this.tabSections;
+
+          // make and array of pairs [section, new_order]
+          sections = $.map(tabs.find('li'), function(tab, index) {
+            var order = $(tab).attr('data-order'); // old tab order
+            var section = $('.sec[data-order='+order+']'); // find the corresponding section
+            return [[$(tab),section,index+1]];
+          });
+
+          // set new order for sections and tabs
+          $.each(sections, function(i,data) {
+            var tab = data[0]
+            var sec = data[1];
+            var new_order = data[2];
+            
+            tab.attr('data-order', new_order);
+            sec.attr('data-order', new_order);
+            sec.find('input.section_order').val(new_order);
+          })
+
         }
 
     }

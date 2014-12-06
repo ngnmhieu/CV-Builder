@@ -23,7 +23,7 @@
   </div>
 
   <div id="Left" class="col-xs-3">
-    <ul class="nav nav-tabs tabs-left">
+    <ul id="TabSections" class="nav nav-tabs tabs-left">
       <% @sections.each do |sec| %>
         <li class="sec-tab" data-order='<%= sec.order %>'><a><%= sec.name %></a></li>
       <% end %>
