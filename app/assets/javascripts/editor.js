@@ -15,7 +15,12 @@ ResumeEditor = (function() {
           var editor_obj = this; 
 
           this.tabSections.sortable({
-            placeholder: "ui-state-highlight",
+            placeholder: {
+              element: function(clone, ui) {
+                return $('<li class="ui-state-highlight">'+clone[0].innerHTML+'</li>');
+              },
+              update: function() { return; }
+            },
             update: function() {
               editor_obj.refreshSectionPos.call(editor_obj);
               editor_obj.autoSave.call(editor_obj);
