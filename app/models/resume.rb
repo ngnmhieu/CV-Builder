@@ -22,4 +22,10 @@ class Resume < ActiveRecord::Base
     return self.simplelists + self.multiline_lists + self.textsections
   end
 
+  def refresh_ordering
+    items.sort_by {|item| item.order }.each_with_index do |item, i|
+      item.order = i + 1
+      item.save
+    end
+  end
 end

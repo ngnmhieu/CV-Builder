@@ -6,6 +6,14 @@ class Simplelist < ActiveRecord::Base
 
   include Orderable
 
+  after_initialize :default_values
+
+  def default_values
+    self.name ||= 'New Simple List'
+    # may cause bug
+    # self.simplelistitems << Simplelistitem.new() if self.simplelistitems.empty?
+  end
+
   # short hand for simplelist_items
   def items
     return  self.simplelistitems

@@ -14,15 +14,14 @@ Rails.application.routes.draw do
 
   post 'resumes/:resume_id/multiline_lists/:multiline_list_id/multiline_list_items/:id/decrease_order' => 'multiline_list_items#decrease_order', as: 'mll_item_decr_order'
 
-  post 'resumes/:resume_id/multiline_lists/:id/increase_order' => 'multiline_lists#increase_order', as: 'mll_incr_order'
-  post 'resumes/:resume_id/multiline_lists/:id/decrease_order' => 'multiline_lists#decrease_order', as: 'mll_decr_order'
+  # post 'resumes/:resume_id/multiline_lists/:id/increase_order' => 'multiline_lists#increase_order', as: 'mll_incr_order'
+  # post 'resumes/:resume_id/multiline_lists/:id/decrease_order' => 'multiline_lists#decrease_order', as: 'mll_decr_order'
 
+  # post 'resumes/:resume_id/simplelists/:id/increase_order' => 'simplelists#increase_order', as: 'simplelist_incr_order'
+  # post 'resumes/:resume_id/simplelists/:id/decrease_order' => 'simplelists#decrease_order', as: 'simplelist_decr_order'
 
-  post 'resumes/:resume_id/simplelists/:id/increase_order' => 'simplelists#increase_order', as: 'simplelist_incr_order'
-  post 'resumes/:resume_id/simplelists/:id/decrease_order' => 'simplelists#decrease_order', as: 'simplelist_decr_order'
-
-  post 'resumes/:resume_id/textsections/:id/increase_order' => 'textsections#increase_order', as: 'textsection_incr_order'
-  post 'resumes/:resume_id/textsections/:id/decrease_order' => 'textsections#decrease_order', as: 'textsection_decr_order'
+  # post 'resumes/:resume_id/textsections/:id/increase_order' => 'textsections#increase_order', as: 'textsection_incr_order'
+  # post 'resumes/:resume_id/textsections/:id/decrease_order' => 'textsections#decrease_order', as: 'textsection_decr_order'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

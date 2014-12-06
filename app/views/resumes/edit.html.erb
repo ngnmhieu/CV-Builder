@@ -1,3 +1,4 @@
+<%= render partial: 'add_section_modal' %>
 <div id="SystemMessage"></div>
 
 <%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
@@ -7,11 +8,12 @@
   <%# | <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
   <%# | <%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
 
+  <!-- Overall controls: save, preview, export, add ... -->
   <div id="TopControls" class="row">
     <div id="LeftControls" class="col-xs-8">
-      <%= link_to '#', class: 'btn btn-primary' do %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSectionModal">
         <span class="glyphicon glyphicon-plus"></span> Add Section
-      <% end %>
+      </button>
     </div>
 
     <div id="RightControls" class="col-xs-4">
@@ -22,6 +24,7 @@
     </div>
   </div>
 
+  <!-- Tab for choosing Sections -->
   <div id="Left" class="col-xs-3">
     <ul id="TabSections" class="nav nav-tabs tabs-left">
       <% @sections.each do |sec| %>
@@ -31,6 +34,7 @@
     <div class="clear"></div>
   </div>
 
+  <!-- Textfields, Textareas forms section -->
   <div id="Right" class="col-xs-9">
     <div id="sections">
         <% @sections.each do |sec| %>
@@ -40,4 +44,6 @@
         <% end %>
     </div>
   </div>
+
+
 <% end %>

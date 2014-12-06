@@ -1,27 +1,27 @@
 <% list = data %>
 <%= rform.fields_for :simplelists, list do |lf| %>
-
-  <div id="ListControls" class="row">
-    <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable modify"></span>
-    <!-- <div class="edit"> -->
-      <!--   <%= lf.text_field :name, class: 'form-control' %> -->
-      <!--   <span class="glyphicon glyphicon-ok clickable save"></span> -->
-      <!-- </div> -->
+  <div class="section_controls row">
+    <div class="section_name">
+      <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable name_edit"></span>
+    </div>
+    <div class="section_name_edit">
+        <%= lf.text_field :name, class: 'form-control' %>
+        <span class="glyphicon glyphicon-ok clickable name_save"></span>
+      </div>
     <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
       <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
-      <%= link_to '', resume_simplelist_path(@resume.id, list.id), 
-        method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger' %>
+      <%= link_to '', resume_simplelist_path(@resume.id, list.id), method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger delete_section' %>
     </div>
   </div>
 
   <div class="simplelist">
     <table>
-      <% list.simplelistitems.each do |item| %>
-        <%= lf.fields_for :simplelistitems, item do |itemf| %>
+        <%= lf.fields_for :simplelistitems do |itemf| %>
+          <% item = itemf.object %>
         <tr>
           <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
           <td style="">
@@ -30,17 +30,8 @@
             <% end %>
           </td>
         </tr>
-
-      <% end %>
       <% end %>
     </table>
+
   </div>
-
 <% end %>
-
-<%# <% if list.order != 1 %>
-<%#   | <%= link_to 'Up', simplelist_incr_order_path(@resume.id, list.id), method: :post %>
-<%#   <% end %>
-<%#   <% if list.order != @resume.items.size %>
-<%#     | <%= link_to 'Down', simplelist_decr_order_path(@resume.id, list.id), method: :post %>
-<%# <% end %>

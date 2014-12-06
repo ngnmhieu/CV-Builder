@@ -3,7 +3,14 @@ class MultilineList < ActiveRecord::Base
   has_many :multiline_list_items, dependent: :destroy
   accepts_nested_attributes_for :multiline_list_items, update_only: true
 
+  # TODO: not used any more (because we have javascript)
   include Orderable
+
+  after_initialize :default_values
+
+  def default_values
+    self.name ||= 'New Occupation List'
+  end
 
 
   # short hand for multiline_list_items

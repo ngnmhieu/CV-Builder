@@ -77,7 +77,7 @@
   border: 1px solid green;
 }
 
-#ListControls { 
+.section_controls { 
   padding: 0 20px;
   position: relative;
 
@@ -92,13 +92,17 @@
     font-size: 1.5em;
   }
 
-  .modify {
+  .section_name_edit {
+    display: none;
+  }
+
+  .name_edit {
     color: #337ab7;
   }
 
-  // .save {
-  //   color: #5cb85c;
-  // }
+  .name_save {
+    color: #5cb85c;
+  }
 
   .controls {
     position: absolute;
@@ -170,6 +174,10 @@
   table td {
     padding: 10px;
   }
+}
+
+.textsection {
+  margin: 20px 5px;
 }
 
 

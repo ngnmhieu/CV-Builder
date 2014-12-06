@@ -1,0 +1,39 @@
+<div id="AddSectionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddSecModalTitel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="AddSecModalTitel">Choose Type of Section</h4>
+      </div>
+      <div class="modal-body">
+          <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
+          | <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
+          | <%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
+
+        <div class="list-group">
+          <a href="<%= resume_simplelists_path(@resume) %>" class="add_section list-group-item" data-section-type="simplelist" data-dismiss="modal">
+            <h4>Simple List <span class="glyphicon glyphicon-th-list"></span></h4>
+            <p class="list-group-item-text">
+            Plain-old list of whatever you want (list of awards, list of hobbies, list of books, list of cats, ...).
+            </p>
+          </a>
+
+          <a href="<%= resume_textsections_path(@resume) %>" class="add_section list-group-item" data-section-type="textsection" data-dismiss="modal">
+            <h4>Text Section <span class="glyphicon glyphicon-align-left"></span></h4>
+            <p class="list-group-item-text">
+            A Single Text Paragraph.
+            </p>
+          </a>
+
+          <a href="<%= resume_multiline_lists_path(@resume) %>" class="add_section list-group-item" data-section-type="multiline_list" data-dismiss="modal">
+            <h4>Occupation List <span class="glyphicon glyphicon-list-alt"></span></h4>
+            <p class="list-group-item-text">
+            Lists like Educations, Activities, Work Experiences ...
+            </p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
