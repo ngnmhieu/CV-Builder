@@ -1,5 +1,5 @@
 <% list = data %>
-<%= rform.fields_for :multiline_lists, list do |lf| %>
+<%= rform.fields_for :multiline_lists, list, child_index: list.id do |lf| %>
 
   <div class="section_controls row">
     <div class="section_name">
@@ -27,7 +27,7 @@
     <% ordered_list.each do |item| %>
 
       <div class="row mll_item">
-        <%= lf.fields_for :multiline_list_items, item do |itemf| %>
+        <%= lf.fields_for :multiline_list_items, item, child_index: item.id do |itemf| %>
 
           <div class="row" style="position: relative">
             <div class="col-xs-5">
@@ -77,14 +77,6 @@
 
     <% end %>
   </div>
-
-  <%# <% if list.order != 1 %>
-  <%#   | <%= link_to 'Up', mll_incr_order_path(@resume.id, list.id), method: :post %>
-  <%# <% end %>
-
-  <%# <% if list.order != @resume.items.size %>
-  <%#   | <%= link_to 'Down', mll_decr_order_path(@resume.id, list.id), method: :post %>
-  <%# <% end %>
 
 <% end %>
 

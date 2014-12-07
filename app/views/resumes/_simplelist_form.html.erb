@@ -1,5 +1,6 @@
 <% list = data %>
-<%= rform.fields_for :simplelists, list do |lf| %>
+<%# <%= fields_for 'resume[simplelists_attributes]', list, index: list.id do |lf| %>
+<%= rform.fields_for :simplelists, list, child_index: list.id do |lf| %>
   <div class="section_controls row">
     <div class="section_name">
       <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable name_edit"></span>
@@ -20,16 +21,17 @@
 
   <div class="simplelist">
     <table>
-        <%= lf.fields_for :simplelistitems do |itemf| %>
-          <% item = itemf.object %>
-        <tr>
-          <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
-          <td style="">
-            <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
-              <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
-            <% end %>
-          </td>
-        </tr>
+      <% list.items.each do |item| %>
+        <%= lf.fields_for :simplelistitems, item, child_index: item.id do |itemf| %>
+          <tr>
+            <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
+            <td style="">
+              <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
+                <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
 

@@ -114,9 +114,9 @@ ResumeEditor = (function() {
             $('#AddSectionModal .add_section').on('click', function(e) {
               var url = $(this).attr('href');
 
-              // editor_obj.addSection.call(editor_obj, url);
+              editor_obj.addSection.call(editor_obj, url);
 
-              // e.preventDefault();
+              e.preventDefault();
             });
         },
 
