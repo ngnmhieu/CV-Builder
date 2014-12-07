@@ -19,12 +19,9 @@
     </div>
   </div>
 
-  <div class="simplelist">
-    <table>
-      <% list.items.each do |item| %>
-        <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
-      <% end %>
-    </table>
-
+  <div class="simplelist list">
+    <% list.items.each do |item| %>
+      <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
+    <% end %>
   </div>
 <% end %>

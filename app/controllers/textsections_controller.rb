@@ -12,16 +12,11 @@ class TextsectionsController < ApplicationController
         respond_to do |format|
           format.html { redirect_to edit_resume_path(@resume) }
           format.json do
-            form = nil
-            view_context.form_for @resume do |r| 
-              form = r 
-            end
-
             render json: {
               'status' => 'success',
               'section_name' => textsec.name,
               'section_order' => textsec.order,
-              'html'   => render_to_string(partial: 'resumes/textsection_form.html.erb', locals: {data: textsec, rform: form})
+              'html'   => render_to_string(partial: 'resumes/textsection_form.html.erb', locals: {data: textsec})
             }
           end
         end

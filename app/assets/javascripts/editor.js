@@ -143,9 +143,11 @@ ResumeEditor = (function() {
             });
 
             // Add Item
-            $('.sec').on('click', '.item_add', function(e) {
-              var url = $(this).attr('href');
-              editor_obj.addItem.call(editor_obj, url);
+            $('#sections').on('click', '.item_add', function(e) {
+              var url = $(this).attr('href'),
+                  list = $(this).parents('.sec').find('.list');
+
+              editor_obj.addItem.call(editor_obj, url, list);
 
               e.preventDefault();
             });
@@ -263,6 +265,7 @@ ResumeEditor = (function() {
               // add new section to DOM
               sec =  $('<div class="sec" data-order="'+response.section_order+'"></div>').html(response.html)
                      .appendTo(editor_obj.sections);
+
               sec.find('textarea').each(function() {
                 editor_obj.attachRichEditor($(this));
               });
@@ -285,20 +288,33 @@ ResumeEditor = (function() {
           });
         },
 
-        addItem: function(url) {
+        addItem: function(url, list) {
 
           $.ajax({
             type: "POST",
             url: url,
             dataType: 'json',
             success: function(response) {
+              list.append(response.html);
 
+              new_item = list.children(':last-child');
+              // attach rich editors
+              new_item.find('textarea').each(function() {
+                editor_obj.attachRichEditor($(this));
+              });
+              // register change event for next text fields
+              new_item.find('input[type=text]').on('change', function() {
+                editor_obj.autoSave.call(editor_obj);
+              });
             },
             error: function(response) {
               editor_obj.flashMessage("Cannot add new item", "error");
             }
           });
 
+        },
+
+        deleteItem: function (url) {
         },
 
         deleteSection: function(url) {

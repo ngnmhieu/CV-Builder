@@ -1,11 +1,22 @@
 class MultilineListItemsController < ApplicationController
   def create
-    @list = MultilineList.find(params[:multiline_list_id])
-    if @list != nil
-      order = @list.multiline_list_items.size + 1
-      @list.multiline_list_items << MultilineListItem.new(order: order)
-      if @list.save
-        redirect_to edit_resume_path(params[:resume_id])
+    @resume = Resume.find(params[:resume_id])
+    list = MultilineList.find(params[:multiline_list_id])
+    if list != nil
+      order = list.items.size + 1
+      item = MultilineListItem.new(order: order)
+      list.multiline_list_items << item
+
+      if list.save
+        respond_to do |format|
+          format.html { redirect_to edit_resume_path(params[:resume_id]) }
+          format.json do 
+            render json: { 
+              'status' => 'success',
+              'html'   => render_to_string(partial: 'resumes/multiline_list_item_form.html.erb', layout: false, locals: {list: list, item: item})
+            } 
+          end
+        end
       end
     end
   end

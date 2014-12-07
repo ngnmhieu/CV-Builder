@@ -1,16 +1,17 @@
 <% sec = data %>
-<%= rform.fields_for :textsections, sec, child_index: sec.id do |lf| %>
+<%= fields_for "resume[textsections_attributes][#{sec.id}]", sec do |sf| %>
+  <%= sf.hidden_field :id %>
 
   <div class="section_controls row">
     <div class="section_name">
-      <%= lf.label :name, sec.name %> <span class="glyphicon glyphicon-pencil clickable name_edit"></span>
+      <%= sf.label :name, sec.name %> <span class="glyphicon glyphicon-pencil clickable name_edit"></span>
     </div>
     <div class="section_name_edit">
-      <%= lf.text_field :name, class: 'form-control' %>
+      <%= sf.text_field :name, class: 'form-control' %>
       <span class="glyphicon glyphicon-ok clickable name_save"></span>
     </div>
 
-    <%= lf.hidden_field :order, class: 'section_order' %>
+    <%= sf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
       <%= link_to '', resume_textsection_path(@resume.id, sec.id), 
@@ -19,7 +20,7 @@
   </div>
 
   <div class="textsection">
-    <%= lf.text_area :content, size: '60x10', class: 'form-control' %>
+    <%= sf.text_area :content, size: '60x10', class: 'form-control' %>
   </div>  
 
 <% end %>

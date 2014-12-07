@@ -1,5 +1,6 @@
 <div class="row mll_item">
-  <%= form.fields_for :multiline_list_items, item, child_index: item.id do |itemf| %>
+  <%= fields_for "resume[multiline_lists_attributes][#{list.id}][multiline_list_items_attributes][#{item.id}]", item do |itemf| %>
+  <%= itemf.hidden_field :id %>
 
     <div class="row" style="position: relative">
       <div class="col-xs-5">
