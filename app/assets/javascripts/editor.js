@@ -7,6 +7,7 @@ ResumeEditor = (function() {
           this.sections = $("#sections");
 
           this.initTabs();
+          this.initSections();
           this.initRichEditors();
           this.initEvents();
           this.openTab(1); // open the first tab by default
@@ -30,8 +31,19 @@ ResumeEditor = (function() {
               editor_obj.autoSave.call(editor_obj);
             }
           });
+        },
 
-          this.tabSections.disableSelection();
+        /**
+         * initialize Drag-and-Drop behavior for list items
+         */
+        initSections: function() {
+          $('.multilinelist').sortable({
+            start: function() {
+              alert('starting');
+            }
+          });
+
+
         },
 
         initRichEditors: function() {
@@ -89,6 +101,11 @@ ResumeEditor = (function() {
 
             // bind tab-name and section-name with the edit textbox
             $('#sections').on('keyup', '.section_name_edit input[type=text]', function(e) {
+              if (e.keyCode == 13) { // Enter key, hide the textbox
+                $(this).siblings('.name_save').trigger('click');
+                return false;
+              }
+
               var value = $(this).val(),
                   section_order = $(this).parents('.sec').attr('data-order'),
                   tab = $('.sec-tab[data-order='+section_order+'] a');
@@ -183,6 +200,7 @@ ResumeEditor = (function() {
           $('.sec-tab').removeClass('active');
           $('.sec').hide();
 
+          // make the tab active
           tab.addClass('active');
           section.show();
         },
@@ -273,7 +291,6 @@ ResumeEditor = (function() {
             }
           });
         }
-
     }
 })();
 
