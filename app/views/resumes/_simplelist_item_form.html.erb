@@ -1,0 +1,11 @@
+<%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
+  <%= itemf.hidden_field :id %>
+  <tr>
+    <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
+    <td style="">
+      <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
+        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,48 @@
+<div class="row mll_item">
+  <%= form.fields_for :multiline_list_items, item, child_index: item.id do |itemf| %>
+
+    <div class="row" style="position: relative">
+      <div class="col-xs-5">
+        <div class="line">
+          <%= itemf.label :line1, 'Line 1' %>
+          <%= itemf.text_field :line1, class: 'form-control' %>
+        </div>
+        <div class="line">
+          <%= itemf.label :line2, 'Line 2' %>
+          <%= itemf.text_field :line2, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="controls">
+        <% if item.order != 1 %>
+          <%= link_to '', mll_item_incr_order_path(@resume.id, list.id, item.id),
+            method: :post, class: 'glyphicon glyphicon-chevron-up clickable up' %>
+        <% end %>
+
+        <% if item.order != list.items.size %>
+          <%= link_to '', mll_item_decr_order_path(@resume.id, list.id, item.id), 
+            method: :post, class: 'glyphicon glyphicon-chevron-down clickable down' %>
+        <% end %>
+        <span class="space"></span>
+        <%= link_to '', resume_multiline_list_multiline_list_item_path(@resume.id, list.id, item.id),
+          method: :delete, class: 'glyphicon glyphicon-trash clickable remove'%>
+      </div>
+      <div class="dates">
+        <%= itemf.label :start, 'Start: ' %>
+        <%= itemf.date_select :start, discard_day: true, order: [:month, :year] %>
+        <%= itemf.label :end, 'End: ' %>
+        <%= itemf.date_select :end, discard_day: true, order: [:month, :year] %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= itemf.label :desc, 'Description' %>
+        <%= itemf.text_area :desc, size: '30x3', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  <% end %>
+</div>

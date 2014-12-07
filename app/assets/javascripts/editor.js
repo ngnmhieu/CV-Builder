@@ -34,16 +34,21 @@ ResumeEditor = (function() {
         },
 
         /**
-         * initialize Drag-and-Drop behavior for list items
+         * TODO: initialize Drag-and-Drop behavior for list items
          */
         initSections: function() {
+          editor_obj = this;
+
           $('.multilinelist').sortable({
-            start: function() {
-              alert('starting');
+            activate: function(event, ui) {
+              // $(this).find('.collapse').collapse('hide');
+            },
+            stop: function(event, ui) {
+              // $('.wysihtml5-sandbox').remove();
+              // $('textarea').css('display','block');
+              // $('textarea').wysihtml5();
             }
           });
-
-
         },
 
         initRichEditors: function() {
@@ -118,7 +123,8 @@ ResumeEditor = (function() {
             // section name edit toggle
             $('#sections').on('click', '.name_edit', function(e) {
               var section_name = $(this).parent('.section_name').hide();
-              section_name.siblings('.section_name_edit').show();
+              var edit_section = section_name.siblings('.section_name_edit').show();
+              edit_section.find('input[type=text]').focus();
             });
 
             $('#sections').on('click', '.name_save', function(e) {
@@ -127,7 +133,7 @@ ResumeEditor = (function() {
             });
             // end section name edit
 
-            // TODO: add section ajax
+            // Add Section 
             $('#AddSectionModal .add_section').on('click', function(e) {
               var url = $(this).attr('href');
 
@@ -135,6 +141,15 @@ ResumeEditor = (function() {
 
               e.preventDefault();
             });
+
+            // Add Item
+            $('.sec').on('click', '.item_add', function(e) {
+              var url = $(this).attr('href');
+              editor_obj.addItem.call(editor_obj, url);
+
+              e.preventDefault();
+            });
+
         },
 
         /**
@@ -142,8 +157,8 @@ ResumeEditor = (function() {
          */
         autoSave: function() {
           editor_obj = this;
-          clearTimeout(this.timer);
-          this.timer = setTimeout( function() {
+          clearTimeout(this.autosave_timer);
+          this.autosave_timer = setTimeout( function() {
             editor_obj.save.call(editor_obj); 
           }, this.timetosave*1000 );
         },
@@ -152,6 +167,8 @@ ResumeEditor = (function() {
          * main save operation
          */
         save: function() {
+          clearTimeout(this.autosave_timer); // clear autosave
+
           editor_obj = this;
           var form = this.mainForm;
 
@@ -266,6 +283,22 @@ ResumeEditor = (function() {
               editor_obj.flashMessage("Cannot add new section", "error");
             }
           });
+        },
+
+        addItem: function(url) {
+
+          $.ajax({
+            type: "POST",
+            url: url,
+            dataType: 'json',
+            success: function(response) {
+
+            },
+            error: function(response) {
+              editor_obj.flashMessage("Cannot add new item", "error");
+            }
+          });
+
         },
 
         deleteSection: function(url) {

@@ -1,6 +1,6 @@
 <% list = data %>
-<%# <%= fields_for 'resume[simplelists_attributes]', list, index: list.id do |lf| %>
-<%= rform.fields_for :simplelists, list, child_index: list.id do |lf| %>
+<%= fields_for "resume[simplelists_attributes][#{list.id}]", list do |lf| %>
+  <%= lf.hidden_field :id %>
   <div class="section_controls row">
     <div class="section_name">
       <%= lf.label :name, list.name %> <span class="glyphicon glyphicon-pencil clickable name_edit"></span>
@@ -12,7 +12,7 @@
     <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
-      <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), method: :post do %>
+      <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), class: 'item_add' do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
       <%= link_to '', resume_simplelist_path(@resume.id, list.id), method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger delete_section' %>
@@ -22,16 +22,7 @@
   <div class="simplelist">
     <table>
       <% list.items.each do |item| %>
-        <%= lf.fields_for :simplelistitems, item, child_index: item.id do |itemf| %>
-          <tr>
-            <td style="width: 97%"><%= itemf.text_area :content, class: 'form-control' %></td>
-            <td style="">
-              <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
-                <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
+        <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
       <% end %>
     </table>
 

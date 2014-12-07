@@ -108,6 +108,9 @@
     position: absolute;
     top: 0;
     right: 20px;
+    a, a:hover {
+      text-decoration: none;
+    }
   }
 
 }
@@ -115,6 +118,7 @@
 .multilinelist {
 
   .mll_item {
+    position: relative;
     margin: 20px 5px;
     border: 1px solid #ccc;
     padding: 15px;

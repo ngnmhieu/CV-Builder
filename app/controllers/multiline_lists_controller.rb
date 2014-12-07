@@ -12,15 +12,11 @@ class MultilineListsController < ApplicationController
         respond_to do |format|
           format.html { redirect_to edit_resume_path(@resume) }
           format.json do
-            form = nil
-            view_context.form_for @resume do |r| 
-              form = r 
-            end
             render json: {
               'status' => 'success',
               'section_name' => list.name,
               'section_order' => list.order,
-              'html'   => render_to_string(partial: 'resumes/multiline_list_form.html.erb', locals: {data: list, rform: form})
+              'html'   => render_to_string(partial: 'resumes/multiline_list_form.html.erb', locals: {data: list})
             }
           end
         end
