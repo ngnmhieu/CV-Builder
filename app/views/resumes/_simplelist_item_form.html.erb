@@ -1,9 +1,9 @@
-<%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
-  <%= itemf.hidden_field :id %>
-  <div class="simplistitem">
+<div class="simplistitem item">
+  <%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
+    <%= itemf.hidden_field :id %>
     <%= itemf.text_area :content, class: 'form-control' %></td>
-    <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), method: :delete do %>
+    <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), class: 'item_delete' do %>
       <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
     <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

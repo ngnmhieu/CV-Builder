@@ -25,8 +25,16 @@ class Simplelist < ActiveRecord::Base
   end
 
   # return the data to be rendered (items of this lists)
+  # TODO: check if this method is used
   def data
-    return self.simplelist_items
+    return self.items
+  end
+
+  def refresh_ordering
+    items.sort_by {|item| item.order }.each_with_index do |item, i|
+      item.order = i + 1
+      item.save
+    end
   end
 
 end

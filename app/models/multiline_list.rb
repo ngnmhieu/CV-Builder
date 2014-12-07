@@ -24,8 +24,17 @@ class MultilineList < ActiveRecord::Base
   end
 
   # return the data to be rendered (items of this lists)
+  # TODO: check if this is used
   def data
-    return self.multiline_list_items
+    return self.items
+  end
+
+  # require `items` method and order for its item
+  def refresh_ordering
+    items.sort_by {|item| item.order }.each_with_index do |item, i|
+      item.order = i + 1
+      item.save
+    end
   end
 
 end

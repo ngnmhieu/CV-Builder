@@ -152,6 +152,15 @@ ResumeEditor = (function() {
               e.preventDefault();
             });
 
+            $('#sections').on('click', '.item_delete', function(e) {
+              var url = $(this).attr('href');
+                  item = $(this).parents('.item');
+
+              editor_obj.deleteItem.call(editor_obj, url, item);
+
+              e.preventDefault();
+            });
+
         },
 
         /**
@@ -314,7 +323,22 @@ ResumeEditor = (function() {
 
         },
 
-        deleteItem: function (url) {
+        deleteItem: function (url, item) {
+          var editor_obj = this;
+
+          $.ajax({
+            type: "POST",
+            url: url,
+            dataType: 'json',
+            data: {"_method":"delete"},
+            success: function(response) {
+              item.remove();
+              editor_obj.flashMessage(response.msg, "success");
+            },
+            error: function(response) {
+            }
+          });
+
         },
 
         deleteSection: function(url) {

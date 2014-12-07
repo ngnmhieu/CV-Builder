@@ -22,9 +22,14 @@ class MultilineListItemsController < ApplicationController
   end
 
   def destroy
-    @item = MultilineListItem.find(params[:id])
-    if @item.destroy
-      redirect_to edit_resume_path(params[:resume_id])
+    list = MultilineList.find(params[:multiline_list_id])
+    item = MultilineListItem.find(params[:id])
+    if item.destroy
+      list.refresh_ordering
+      respond_to do |format|
+        format.html { redirect_to edit_resume_path(params[:resume_id]) }
+        format.json { render json: {status: 'success', msg: 'Item deleted'} }
+      end
     end
   end
 
@@ -66,10 +71,4 @@ class MultilineListItemsController < ApplicationController
       redirect_to edit_resume_path(params[:resume_id])
     end
   end
-
-  
-  # maybe generalize increase_order and decrease_order
-  def change_order(direction)
-  end
-
 end

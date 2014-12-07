@@ -14,9 +14,9 @@ Rails.application.routes.draw do
 
   post 'resumes/:resume_id/multiline_lists/:multiline_list_id/multiline_list_items/:id/decrease_order' => 'multiline_list_items#decrease_order', as: 'mll_item_decr_order'
 
-  post 'resumes/:resume_id/simplelists/:simplelist_id/simplelistitems/:id/increase_order' => 'simplelistitems#increase_order', as: 'sl_item_incr_order'
+  # post 'resumes/:resume_id/simplelists/:simplelist_id/simplelistitems/:id/increase_order' => 'simplelistitems#increase_order', as: 'sl_item_incr_order'
 
-  post 'resumes/:resume_id/simplelists/:simplelist_id/simplelistitems/:id/decrease_order' => 'simplelistitems#decrease_order', as: 'sl_item_decr_order'
+  # post 'resumes/:resume_id/simplelists/:simplelist_id/simplelistitems/:id/decrease_order' => 'simplelistitems#decrease_order', as: 'sl_item_decr_order'
 
   ##### NOT USED ANYMORE #####
   # post 'resumes/:resume_id/multiline_lists/:id/increase_order' => 'multiline_lists#increase_order', as: 'mll_incr_order'
