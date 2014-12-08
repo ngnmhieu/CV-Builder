@@ -10,7 +10,21 @@ ResumeEditor = (function() {
           this.initSections();
           this.initRichEditors();
           this.initEvents();
-          this.openTab(0); // open the first tab by default
+
+          if ((last_tab = this.lastTab()) != null) {
+            this.openTab(last_tab);
+          } else {
+            this.openTab(0); // open the first tab by default
+          }
+        },
+
+        /**
+         * check last tab saved in url hash 
+         */
+        lastTab: function() {
+          var order = parseInt(window.location.hash.substr(1));
+
+          return isNaN(order) ? null : order;
         },
 
         /*
@@ -231,6 +245,8 @@ ResumeEditor = (function() {
           $('.sec-tab').removeClass('active');
           $('.sec').hide();
 
+          // save the tab order in url hash  
+          window.location.hash = num;
           // make the tab active
           tab.addClass('active');
           section.show();
