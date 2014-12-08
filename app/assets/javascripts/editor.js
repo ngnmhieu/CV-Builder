@@ -68,7 +68,7 @@ ResumeEditor = (function() {
 
             var options = {
               toolbar: { 
-                "font-styles": false, "image": false 
+                "font-styles": false, "image": false, "link": false
               },
               events : {
                 'change': function() { editor_obj.autoSave.call(editor_obj); }

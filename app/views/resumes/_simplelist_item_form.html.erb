@@ -3,7 +3,7 @@
     <%= itemf.hidden_field :id %>
     <%= itemf.text_area :content, class: 'form-control' %></td>
     <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), class: 'item_delete' do %>
-      <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+      <span class="glyphicon glyphicon-trash"></span>
     <% end %>
   <% end %>
 </div>
