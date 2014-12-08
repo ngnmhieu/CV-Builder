@@ -4,9 +4,6 @@
 <%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
   <h2 id="ResumeTitle"><%= @resume.name %></h2>
   <%# <%= r.text_field :name %>
-  <%# | <%= link_to 'Add Simple List', resume_simplelists_path(@resume), method: 'post' %>
-  <%# | <%= link_to 'Add Multiline List', resume_multiline_lists_path(@resume), method: 'post' %>
-  <%# | <%= link_to 'Add Text Section', resume_textsections_path(@resume), method: 'post' %>
 
   <!-- Overall controls: save, preview, export, add ... -->
   <div id="TopControls" class="row">
@@ -27,6 +24,7 @@
   <!-- Tab for choosing Sections -->
   <div id="Left" class="col-xs-3">
     <ul id="TabSections" class="nav nav-tabs tabs-left">
+        <li class="sec-tab ui-sort-disabled" data-order='0'><a>Personal Detail</a></li>
       <% @sections.each do |sec| %>
         <li class="sec-tab" data-order='<%= sec.order %>'><a><%= sec.name %></a></li>
       <% end %>
@@ -36,10 +34,13 @@
 
   <!-- Textfields, Textareas forms section -->
   <div id="Right" class="col-xs-9">
-    <div id="sections">
+    <div id="Sections">
+            <div class="sec" data-order='0'>
+                <%= render partial: 'personal_detail_form', locals: {data: @resume.personal_detail} %>
+            </div>
         <% @sections.each do |sec| %>
             <div class="sec" data-order='<%= sec.order %>'>
-                <%= render partial: sec.tpl_name+'_form', locals: {data: sec, rform: r}  %>
+                <%= render partial: sec.tpl_name+'_form', locals: {data: sec}  %>
             </div>
         <% end %>
     </div>

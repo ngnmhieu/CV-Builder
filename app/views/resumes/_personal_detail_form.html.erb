@@ -1,29 +1,28 @@
-
-<%= rform.fields_for :personal_detail, @resume.personal_detail do |pd| %>
+<%= fields_for 'resume[personal_detail_attributes]', data do |pd| %>
   <table border=1>
     <tr>
       <td><%= pd.label :name, 'Name' %></td>
-      <td><%= pd.text_field :name %></td>
+      <td><%= pd.text_field :name, class: 'form-control'%></td>
     </tr>
     <tr>
       <td><%= pd.label :phone, 'Phone' %></td>
-      <td><%= pd.text_field :phone %></td>
+      <td><%= pd.text_field :phone, class: 'form-control' %></td>
     </tr>
     <tr>
       <td><%= pd.label :fax, 'Fax' %></td>
-      <td><%= pd.text_field :fax %></td>
+      <td><%= pd.text_field :fax, class: 'form-control' %></td>
     </tr>
     <tr>
       <td><%= pd.label :address, 'Address' %></td>
-      <td><%= pd.text_field :address %></td>
+      <td><%= pd.text_field :address, class: 'form-control' %></td>
     </tr>
     <tr>
       <td><%= pd.label :email, 'Email' %></td>
-      <td><%= pd.text_field :email %></td>
+      <td><%= pd.text_field :email, class: 'form-control' %></td>
     </tr>
     <tr>
       <td><%= pd.label :website, 'Website' %></td>
-      <td><%= pd.text_field :website %></td>
+      <td><%= pd.text_field :website, class: 'form-control' %></td>
     </tr>
     <tr>
       <td><%= pd.label :sex, 'Sex' %></td>

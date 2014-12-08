@@ -4,13 +4,13 @@ ResumeEditor = (function() {
           this.timetosave = 3; // seconds to wait before executing save operation
           this.mainForm = $('#ResumeEditorForm');
           this.tabSections = $("#TabSections");
-          this.sections = $("#sections");
+          this.sections = $("#Sections");
 
           this.initTabs();
           this.initSections();
           this.initRichEditors();
           this.initEvents();
-          this.openTab(1); // open the first tab by default
+          this.openTab(0); // open the first tab by default
         },
 
         /*
@@ -20,17 +20,20 @@ ResumeEditor = (function() {
           var editor_obj = this; 
 
           this.tabSections.sortable({
+            items: "li:not(.ui-sort-disabled)",
             placeholder: {
               element: function(clone, ui) {
                 return $('<li class="ui-state-highlight">'+clone[0].innerHTML+'</li>');
               },
-              update: function() { return; }
+              update: function() { return; },
             },
             update: function() {
               editor_obj.refreshSectionPos.call(editor_obj);
               editor_obj.autoSave.call(editor_obj);
             }
           });
+
+          this.tabSections.disableSelection();
         },
 
         /**
@@ -78,16 +81,16 @@ ResumeEditor = (function() {
         initEvents: function() {
             var editor_obj = this; 
 
+            // open tab events
             this.tabSections.on('click', '.sec-tab', function() {
               var tabnum = $(this).attr('data-order');
               editor_obj.openTab(tabnum);
             });
 
-            // register auto-save events for all text input
-            $('input[type=text]').on('change', function() {
+            // register auto-save events for all text input (also for new created ones)
+            this.sections.on('change','input[type=text]',  function() {
               editor_obj.autoSave.call(editor_obj);
             });
-
 
             // register form submit with asynchronous save operation
             this.mainForm.submit(function(e) {
@@ -95,17 +98,8 @@ ResumeEditor = (function() {
               editor_obj.save.call(editor_obj);
             });
             
-            // delete events
-            $('#sections').on('click', '.delete_section', function(e) {
-              var url = $(this).attr('href');
-
-              editor_obj.deleteSection.call(editor_obj, url);
-
-              return false;
-            });
-
             // bind tab-name and section-name with the edit textbox
-            $('#sections').on('keyup', '.section_name_edit input[type=text]', function(e) {
+            this.sections.on('keyup', '.section_name_edit input[type=text]', function(e) {
               if (e.keyCode == 13) { // Enter key, hide the textbox
                 $(this).siblings('.name_save').trigger('click');
                 return false;
@@ -121,19 +115,19 @@ ResumeEditor = (function() {
             });
 
             // section name edit toggle
-            $('#sections').on('click', '.name_edit', function(e) {
+            this.sections.on('click', '.name_edit', function(e) {
               var section_name = $(this).parent('.section_name').hide();
               var edit_section = section_name.siblings('.section_name_edit').show();
               edit_section.find('input[type=text]').focus();
             });
 
-            $('#sections').on('click', '.name_save', function(e) {
+            this.sections.on('click', '.name_save', function(e) {
               var edit_form = $(this).parent('.section_name_edit').hide();
               edit_form.siblings('.section_name').show();
             });
             // end section name edit
 
-            // Add Section 
+            // ajax add section 
             $('#AddSectionModal .add_section').on('click', function(e) {
               var url = $(this).attr('href');
 
@@ -142,8 +136,8 @@ ResumeEditor = (function() {
               e.preventDefault();
             });
 
-            // Add Item
-            $('#sections').on('click', '.item_add', function(e) {
+            // ajax add item
+            this.sections.on('click', '.item_add', function(e) {
               var url = $(this).attr('href'),
                   list = $(this).parents('.sec').find('.list');
 
@@ -152,7 +146,18 @@ ResumeEditor = (function() {
               e.preventDefault();
             });
 
-            $('#sections').on('click', '.item_delete', function(e) {
+            // ajax delete section
+            this.sections.on('click', '.delete_section', function(e) {
+              var url = $(this).attr('href');
+
+              editor_obj.deleteSection.call(editor_obj, url);
+
+              return false;
+            });
+
+
+            // ajax delete item
+            this.sections.on('click', '.item_delete', function(e) {
               var url = $(this).attr('href');
                   item = $(this).parents('.item');
 
@@ -180,14 +185,12 @@ ResumeEditor = (function() {
         save: function() {
           clearTimeout(this.autosave_timer); // clear autosave
 
-          editor_obj = this;
-          var form = this.mainForm;
-
+          var editor_obj = this;
           $.ajax({
             type: 'post',
-            url: form.attr('action'),
+            url: this.mainForm.attr('action'),
             dataType: 'json',
-            data: form.serialize(),
+            data: this.mainForm.serialize(),
             success: function(response) {
               editor_obj.flashMessage(response.msg, response.status);
             },
@@ -243,7 +246,7 @@ ResumeEditor = (function() {
           sections = $.map(tabs.find('li'), function(tab, index) {
             var order = $(tab).attr('data-order'); // old tab order
             var section = $('.sec[data-order='+order+']'); // find the corresponding section
-            return [[$(tab),section,index+1]];
+            return [[$(tab),section,index]];
           });
 
           // set new order for sections and tabs
@@ -259,9 +262,6 @@ ResumeEditor = (function() {
 
         },
 
-        /**
-         * TODO: add new section
-         */
         addSection: function(url) {
           var editor_obj = this; 
           var tabs = this.tabSections;
@@ -277,10 +277,6 @@ ResumeEditor = (function() {
 
               sec.find('textarea').each(function() {
                 editor_obj.attachRichEditor($(this));
-              });
-              // register change event for next text fields ( should be made dynamically in initEvents, how?)
-              sec.find('input[type=text]').on('change', function() {
-                editor_obj.autoSave.call(editor_obj);
               });
 
               // add a new tab to DOME
@@ -305,15 +301,11 @@ ResumeEditor = (function() {
             dataType: 'json',
             success: function(response) {
               list.append(response.html);
-
               new_item = list.children(':last-child');
+
               // attach rich editors
               new_item.find('textarea').each(function() {
                 editor_obj.attachRichEditor($(this));
-              });
-              // register change event for next text fields
-              new_item.find('input[type=text]').on('change', function() {
-                editor_obj.autoSave.call(editor_obj);
               });
             },
             error: function(response) {
@@ -336,6 +328,7 @@ ResumeEditor = (function() {
               editor_obj.flashMessage(response.msg, "success");
             },
             error: function(response) {
+              editor_obj.flashMessage("Cannot delete item","error");
             }
           });
 
@@ -353,9 +346,9 @@ ResumeEditor = (function() {
               var order = response.section_order
               editor_obj.tabSections.find('.sec-tab[data-order='+order+']').remove();
               editor_obj.sections.find('.sec[data-order='+order+']').remove();
-              editor_obj.refreshSectionPos();
-              editor_obj.openTab(1);
 
+              editor_obj.refreshSectionPos();
+              editor_obj.openTab(0);
               editor_obj.flashMessage("Section deleted", "success");
               
             },
