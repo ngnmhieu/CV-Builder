@@ -4,8 +4,7 @@ class MultilineListItemsController < ApplicationController
     list = MultilineList.find(params[:multiline_list_id])
     if list != nil
       order = list.items.size + 1
-      item = MultilineListItem.new(order: order)
-      list.multiline_list_items << item
+      item = list.items.create(order: order)
 
       if list.save
         respond_to do |format|

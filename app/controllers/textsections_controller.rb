@@ -5,8 +5,7 @@ class TextsectionsController < ApplicationController
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
       order = @resume.items.size + 1
-      textsec = Textsection.new(order: order)
-      @resume.textsections << textsec
+      textsec = @resume.textsections.create(order: order)
 
       if @resume.save
         respond_to do |format|
@@ -27,13 +26,12 @@ class TextsectionsController < ApplicationController
   def destroy
     sec = Textsection.find(params[:id])
     resume = Resume.find(params[:resume_id])
-    section_order = sec.order
 
     if sec.destroy
       resume.refresh_ordering
       respond_to do |format|
         format.html { redirect_to edit_resume_path(params[:resume_id]) }
-        format.json { render json: {status: 'success', msg: 'Section deleted', section_order: section_order} }
+        format.json { render json: {status: 'success', msg: 'Section deleted', section_order: sec.order} }
       end
     end
   end

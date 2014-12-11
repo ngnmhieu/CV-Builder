@@ -8,9 +8,9 @@ class MultilineList < ActiveRecord::Base
   include HasOrderableItems
   include HasTemplate
 
-  after_initialize :default_values
+  after_initialize :default_attributes
 
-  def default_values
+  def default_attributes
     self.name ||= 'New Occupation List'
   end
 

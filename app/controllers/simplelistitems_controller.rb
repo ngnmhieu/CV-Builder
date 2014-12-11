@@ -4,8 +4,9 @@ class SimplelistitemsController < ApplicationController
     @resume = Resume.find(params[:resume_id])
     list = Simplelist.find(params[:simplelist_id])
     if list != nil
-      item = Simplelistitem.new
-      list.simplelistitems << item
+      order = list.items.size + 1
+      item = list.items.create(order: order)
+
       if list.save
         respond_to do |format|
           format.html { redirect_to edit_resume_path(params[:resume_id]) }

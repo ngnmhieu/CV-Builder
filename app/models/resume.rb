@@ -14,6 +14,8 @@ class Resume < ActiveRecord::Base
 
   include HasOrderableItems
 
+  # all items in one array except for personal_detail
+  # @return array
   def items
     return self.simplelists + self.multiline_lists + self.textsections
   end

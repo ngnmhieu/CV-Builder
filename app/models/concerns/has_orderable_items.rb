@@ -6,7 +6,7 @@ module HasOrderableItems
   # refresh the ordering of items after a deletion
   # require: `items` method and `order` method for each item
   def refresh_ordering
-    items.sort_by {|item| item.order }.each_with_index do |item, i|
+    items.sort_by {|item| item.order.nil? ? 0 : item.order }.each_with_index do |item, i|
       item.order = i + 1
       item.save
     end

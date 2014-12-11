@@ -5,8 +5,7 @@ class MultilineListsController < ApplicationController
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
       order = @resume.items.size + 1
-      list = MultilineList.new(order: order)
-      @resume.multiline_lists << list
+      list = @resume.multiline_lists.create(order: order)
 
       if @resume.save
         respond_to do |format|
@@ -20,6 +19,7 @@ class MultilineListsController < ApplicationController
             }
           end
         end
+
       end
     end
   end
@@ -27,13 +27,12 @@ class MultilineListsController < ApplicationController
   def destroy
     list = MultilineList.find(params[:id])
     resume = Resume.find(params[:resume_id])
-    list_order = list.order
 
     if list.destroy
       resume.refresh_ordering
       respond_to do |format|
         format.html { redirect_to edit_resume_path(params[:resume_id]) }
-        format.json { render json: {status: 'success', msg: 'Section deleted', section_order: list_order} }
+        format.json { render json: {status: 'success', msg: 'Section deleted', section_order: list.order} }
       end
     end
 

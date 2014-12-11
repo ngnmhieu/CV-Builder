@@ -5,18 +5,18 @@ class Simplelist < ActiveRecord::Base
   # for mass update
   accepts_nested_attributes_for :simplelistitems, update_only: true
 
-  after_initialize :default_values
+  after_initialize :default_attributes
 
   include HasOrderableItems
   include HasTemplate
 
-  def default_values
+  def default_attributes
     self.name ||= 'New Simple List'
   end
 
   # short hand for simplelist_items
   def items
-    return  self.simplelistitems
+    return self.simplelistitems
   end
 
 end
