@@ -1,7 +1,8 @@
 class Textsection < ActiveRecord::Base
   belongs_to :resume
-  include Orderable
   after_initialize :default_values
+
+  include HasTemplate
 
   def default_values
     self.name ||= 'New Text Section'
@@ -13,8 +14,4 @@ class Textsection < ActiveRecord::Base
     return self.class.name.underscore
   end
 
-  # return the data to be rendered
-  def data
-    return self
-  end
 end

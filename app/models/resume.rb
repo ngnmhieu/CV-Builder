@@ -6,26 +6,16 @@ class Resume < ActiveRecord::Base
   has_many :multiline_lists, dependent: :destroy
   has_many :textsections
 
+  # for mass update
   accepts_nested_attributes_for :personal_detail, update_only: true
-  accepts_nested_attributes_for :educations
-  accepts_nested_attributes_for :works
-  accepts_nested_attributes_for :simplelists
-  accepts_nested_attributes_for :multiline_lists
-  accepts_nested_attributes_for :textsections
+  accepts_nested_attributes_for :simplelists, update_only: true
+  accepts_nested_attributes_for :multiline_lists, update_only: true
+  accepts_nested_attributes_for :textsections, update_only: true
 
-
-  def num_items
-    return self.simplelists.size + self.multiline_lists.size + self.textsections.size
-  end
+  include HasOrderableItems
 
   def items
     return self.simplelists + self.multiline_lists + self.textsections
   end
 
-  def refresh_ordering
-    items.sort_by {|item| item.order }.each_with_index do |item, i|
-      item.order = i + 1
-      item.save
-    end
-  end
 end

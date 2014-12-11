@@ -4,7 +4,7 @@ class SimplelistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      order = @resume.num_items + 1
+      order = @resume.items.size + 1
       list = Simplelist.new(order: order)
       @resume.simplelists << list # add list to collection
 

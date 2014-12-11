@@ -4,7 +4,7 @@ class TextsectionsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      order = @resume.num_items + 1
+      order = @resume.items.size + 1
       textsec = Textsection.new(order: order)
       @resume.textsections << textsec
 

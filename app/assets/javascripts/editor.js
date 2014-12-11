@@ -364,7 +364,7 @@ ResumeEditor = (function() {
               editor_obj.sections.find('.sec[data-order='+order+']').remove();
 
               editor_obj.refreshSectionPos();
-              editor_obj.openTab(0);
+              editor_obj.openTab(order-1);
               editor_obj.flashMessage("Section deleted", "success");
               
             },

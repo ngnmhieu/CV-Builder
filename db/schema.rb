@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211175813) do
-
-  create_table "educations", force: true do |t|
-    t.string   "institution"
-    t.string   "degree"
-    t.text     "desc"
-    t.date     "start"
-    t.date     "end"
-    t.integer  "resume_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "educations", ["resume_id"], name: "index_educations_on_resume_id"
+ActiveRecord::Schema.define(version: 20141211222457) do
 
   create_table "multiline_list_items", force: true do |t|
     t.string   "line1"
@@ -106,18 +93,5 @@ ActiveRecord::Schema.define(version: 20141211175813) do
   end
 
   add_index "textsections", ["resume_id"], name: "index_textsections_on_resume_id"
-
-  create_table "works", force: true do |t|
-    t.string   "company"
-    t.string   "position"
-    t.text     "desc"
-    t.date     "start"
-    t.date     "end"
-    t.integer  "resume_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "works", ["resume_id"], name: "index_works_on_resume_id"
 
 end

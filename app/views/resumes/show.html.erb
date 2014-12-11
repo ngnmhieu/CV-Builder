@@ -1,6 +1,7 @@
 <div style="width: 800px; margin: 0 auto">
 
-  <%= render partial: 'templates/default/' + 'personal_detail', locals: {data: @resume.personal_detail} %>
+  <% pd = @resume.personal_detail %>
+  <%= render partial: 'templates/default/' + pd.tpl_name , locals: {data: pd} %>
 
   <% @sections.each do |sec| %>
     <%= render partial: 'templates/default/'+sec.tpl_name, locals: {data: sec}  %>

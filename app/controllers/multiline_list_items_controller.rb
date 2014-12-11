@@ -71,4 +71,5 @@ class MultilineListItemsController < ApplicationController
       redirect_to edit_resume_path(params[:resume_id])
     end
   end
+
 end
