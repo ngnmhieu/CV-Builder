@@ -46,7 +46,7 @@ class ResumesController < ApplicationController
     def resume_params
       params.require(:resume).permit(
         :name, 
-        personal_detail_attributes: [:name, :phone, :fax, :address, :email, :website, :sex, :dob, :id],
+        personal_detail_attributes: [:name, :phone, :fax, :address, :address1, :address2, :address3, :email, :website, :sex, :dob, :id],
         simplelists_attributes: [:name, :id, :order, simplelistitems_attributes: [:id, :content]],
         multiline_lists_attributes: [:name, :id, :order, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
         textsections_attributes: [:name, :id, :content, :order]

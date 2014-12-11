@@ -4,13 +4,13 @@
       <td align=center>
         <h1><%= person.name %></h1>
         <h4>
-          <%= person.address  %>
-          <%= ' | ' + person.phone if person.phone != '' %> 
-          <%= ' | ' + person.fax if person.fax != ''  %> 
+          <%= person.address1 %>, <%= person.address2 %>, <%= person.address3 %>
         </h4>
         <h4>
           <%= person.email %>
           <%= ' | ' + person.website if person.website != '' %> 
+          <%= ' | ' + person.phone if person.phone != '' %> 
+          <%= ' | ' + person.fax if person.fax != ''  %> 
         </h4>
       </td>
     </tr>

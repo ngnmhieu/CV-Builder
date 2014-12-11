@@ -101,8 +101,8 @@ ResumeEditor = (function() {
               editor_obj.openTab(tabnum);
             });
 
-            // register auto-save events for all text input (also for new created ones)
-            this.sections.on('change','input[type=text]',  function() {
+            // register auto-save events for all input (also for new created ones)
+            this.sections.on('change','input, select',  function() {
               editor_obj.autoSave.call(editor_obj);
             });
 

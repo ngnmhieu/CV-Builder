@@ -1,5 +1,4 @@
 <% list = data %>
-<%# <%= rform.fields_for :multiline_lists, list, child_index: list.id do |lf| %>
 <%= fields_for "resume[multiline_lists_attributes][#{list.id}]", list do |lf| %>
   <%= lf.hidden_field :id %>
   <div class="section_controls row">

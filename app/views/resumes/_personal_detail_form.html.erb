@@ -1,39 +1,92 @@
 <%= fields_for 'resume[personal_detail_attributes]', data do |pd| %>
-  <table border=1>
-    <tr>
-      <td><%= pd.label :name, 'Name' %></td>
-      <td><%= pd.text_field :name, class: 'form-control'%></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :phone, 'Phone' %></td>
-      <td><%= pd.text_field :phone, class: 'form-control' %></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :fax, 'Fax' %></td>
-      <td><%= pd.text_field :fax, class: 'form-control' %></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :address, 'Address' %></td>
-      <td><%= pd.text_field :address, class: 'form-control' %></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :email, 'Email' %></td>
-      <td><%= pd.text_field :email, class: 'form-control' %></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :website, 'Website' %></td>
-      <td><%= pd.text_field :website, class: 'form-control' %></td>
-    </tr>
-    <tr>
-      <td><%= pd.label :sex, 'Sex' %></td>
-      <td>
-        <%= pd.radio_button :sex, true %> <%= pd.label :sex_true, 'Male' %>
-        <%= pd.radio_button :sex, false %> <%= pd.label :sex_false, 'Female' %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= pd.label :dob, 'Date of Birth' %></td>
-      <td><%= pd.date_select :dob, {order: [:day, :month, :year]} %></td>
-    </tr>
-  </table>
+  <div class="section_controls row">
+    <div class="section_name">
+      <label>Personal Details</label>
+    </div>
+  </div>
+
+  <div id="PersonalDetail">
+    <table>
+      <tr class="line">
+        <td width="50%">
+          <%= pd.label :name, 'Name' %>
+          <%= pd.text_field :name, class: 'form-control'%>
+        </td>
+        <td>
+          <table class="nested">
+            <tr>
+              <td width="50%"><%= pd.label :sex, 'Sex' %></td>    
+              <td><%= pd.label :dob, 'Date of Birth' %></td>
+            </tr>
+            <tr>
+              <td>
+                <%= pd.radio_button :sex, true %> <%= pd.label :sex_true, 'Male' %>
+                &nbsp; 
+                <%= pd.radio_button :sex, false %> <%= pd.label :sex_false, 'Female' %>
+              </td>    
+              <td>
+                <%= pd.date_select :dob, {order: [:day, :month, :year]} %>
+              </td>
+            </tr>
+          </table>
+        </td>
+
+      </tr>
+      <tr class="line">
+        <td>
+          <%= pd.label :email, 'Email' %>
+          <%= pd.text_field :email, class: 'form-control' %>
+        </td>
+        <td>
+          <%= pd.label :website, 'Website' %>
+          <%= pd.text_field :website, class: 'form-control' %>
+        </td>
+      </tr>
+
+      <tr class="line">
+        <td>
+          <%= pd.label :address1, 'Address Line 1' %>
+          <%= pd.text_field :address1, class: 'form-control' %>
+        </td>
+
+        <td>
+          <table class="nested">
+            <tr>
+              <td><%= pd.label :phone, 'Phone' %></td>
+              <td><%= pd.label :fax, 'Fax' %></td>
+            </tr>
+            <tr>
+              <td><%= pd.text_field :phone, class: 'form-control' %></td>
+              <td><%= pd.text_field :fax, class: 'form-control' %></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr class="line">
+        <td>
+          <%= pd.label :address2, 'Address Line 2' %>
+          <%= pd.text_field :address2, class: 'form-control' %>
+        </td>
+        <td rowspan=2>
+        
+        </td>
+      </tr>
+      <tr class="line">
+        <td>
+          <%= pd.label :address3, 'Address Line 3' %>
+          <%= pd.text_field :address3, class: 'form-control' %>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+
+
+
+
+
+
+
+
 <% end %>
