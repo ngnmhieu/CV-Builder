@@ -4,8 +4,7 @@ class SimplelistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      order = @resume.items.size + 1
-      list = @resume.simplelists.create(order: order)
+      list = @resume.simplelists.create
 
       if @resume.save
         respond_to do |format|
@@ -15,7 +14,10 @@ class SimplelistsController < ApplicationController
               'status' => 'success',
               'section_name' => list.name,
               'section_order' => list.order,
-              'html'   => render_to_string(partial: 'resumes/simplelist_form.html.erb', locals: {data: list})
+              'html'   => render_to_string(
+                partial: 'resumes/simplelist_form.html.erb',
+                locals: { data: list }
+              )
             }
           end
         end

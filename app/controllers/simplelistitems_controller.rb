@@ -3,9 +3,9 @@ class SimplelistitemsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     list = Simplelist.find(params[:simplelist_id])
+
     if list != nil
-      order = list.items.size + 1
-      item = list.items.create(order: order)
+      item = list.items.create
 
       if list.save
         respond_to do |format|
@@ -13,12 +13,14 @@ class SimplelistitemsController < ApplicationController
           format.json do 
             render json: { 
               'status' => 'success',
-              'html'   => render_to_string(partial: 'resumes/simplelist_item_form.html.erb', layout: false, locals: {list: list, item: item})
+              'html'   => render_to_string(partial: 'resumes/simplelist_item_form.html.erb', 
+                                           layout: false, locals: {list: list, item: item})
             } 
           end
         end
       end
     end
+
   end
 
   def destroy
@@ -32,6 +34,7 @@ class SimplelistitemsController < ApplicationController
         format.json { render json: {status: 'success', msg: 'Item deleted'} }
       end
     end
+
   end
 
 end

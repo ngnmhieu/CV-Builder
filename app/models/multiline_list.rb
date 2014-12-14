@@ -12,6 +12,7 @@ class MultilineList < ActiveRecord::Base
 
   def default_attributes
     self.name ||= 'New Occupation List'
+    self.order ||= self.resume.items.size + 1
   end
 
   # short hand for multiline_list_items
