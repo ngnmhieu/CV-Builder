@@ -13,8 +13,10 @@ class SimplelistitemsController < ApplicationController
           format.json do 
             render json: { 
               'status' => 'success',
-              'html'   => render_to_string(partial: 'resumes/simplelist_item_form.html.erb', 
-                                           layout: false, locals: {list: list, item: item})
+              'html'   => render_to_string(
+                partial: 'resumes/simplelist_item_form.html.erb', 
+                layout: false, locals: {list: list, item: item}
+              )
             } 
           end
         end

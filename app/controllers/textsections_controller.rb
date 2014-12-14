@@ -1,5 +1,4 @@
 class TextsectionsController < ApplicationController
-  include OrderingMethods
 
   def create
     @resume = Resume.find(params[:resume_id])
@@ -15,7 +14,10 @@ class TextsectionsController < ApplicationController
               'status' => 'success',
               'section_name' => textsec.name,
               'section_order' => textsec.order,
-              'html'   => render_to_string(partial: 'resumes/textsection_form.html.erb', locals: {data: textsec})
+              'html'   => render_to_string(
+                partial: 'resumes/textsection_form.html.erb',
+                locals: {data: textsec}
+              )
             }
           end
         end
@@ -35,4 +37,5 @@ class TextsectionsController < ApplicationController
       end
     end
   end
+
 end
