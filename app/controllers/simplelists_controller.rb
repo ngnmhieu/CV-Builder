@@ -1,5 +1,4 @@
 class SimplelistsController < ApplicationController
-  include OrderingMethods
 
   def create
     @resume = Resume.find(params[:resume_id])
