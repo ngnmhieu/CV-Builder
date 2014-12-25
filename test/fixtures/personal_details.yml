@@ -5,7 +5,9 @@ one:
   name: MyString
   fax: MyString
   phone: MyString
-  address: MyString
+  address1: MyString
+  address2: MyString
+  address3: MyString
   picture: MyString
   email: MyString
   website: MyString
@@ -18,7 +20,9 @@ two:
   name: MyString
   fax: MyString
   phone: MyString
-  address: MyString
+  address1: MyString
+  address2: MyString
+  address3: MyString
   picture: MyString
   email: MyString
   website: MyString
