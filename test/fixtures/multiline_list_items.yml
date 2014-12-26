@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  line1: MyString
-  line2: MyString
-  desc: MyText
+  line1: Werkstudent PHP Developer
+  line2: rexx systems GmbH
+  desc: Description about work
   start: 2014-12-01
   end: 2014-12-01
-  multiline_list_id: 
+  multiline_list: two 
 
 two:
-  line1: MyString
-  line2: MyString
-  desc: MyText
+  line1: Computer Science B.Sc
+  line2: Harvard
+  desc: Description about school
   start: 2014-12-01
   end: 2014-12-01
-  multiline_list_id: 
+  multiline_list: one

@@ -1,9 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  content: MyString
-  simplelist_id: 
+one_list1:
+  content: Cooking
+  simplelist: one
 
-two:
-  content: MyString
-  simplelist_id: 
+two_list1:
+  content: Swimming
+  simplelist: one
+
+one_list2: 
+  content: EDV
+  simplelist: two
+
+two_list2:
+  content: Communication
+  simplelist: two

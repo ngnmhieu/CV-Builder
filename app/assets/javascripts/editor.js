@@ -23,8 +23,13 @@ ResumeEditor = (function() {
          */
         lastTab: function() {
           var order = parseInt(window.location.hash.substr(1));
+          var section_count = this.tabSections.find('li').length;
 
-          return isNaN(order) ? null : order;
+          // order must be a number and in range (0; section_count)
+          if (isNaN(order) || order < 0 || order >= section_count) 
+            order = null;
+
+          return order;
         },
 
         /*

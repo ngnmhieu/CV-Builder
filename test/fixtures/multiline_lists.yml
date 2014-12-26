@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  order: 
-  resume_id: 
+  name: Education
+  order: 3
+  resume: one
 
 two:
-  name: MyString
-  order: 
-  resume_id: 
+  name: Work
+  order: 2
+  resume: one

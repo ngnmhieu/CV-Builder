@@ -1,6 +1,4 @@
 class MultilineListsController < ApplicationController
-  include OrderingMethods
-
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
