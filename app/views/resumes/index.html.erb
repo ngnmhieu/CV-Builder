@@ -1,11 +1,11 @@
 
 <table border=1>
   <% @resumes.each do |r| %>
-    <tr>
+    <tr id="resume_<%= r.id %>"> 
       <td><%= link_to r.name, resume_path(r) %></td>
       <td><%= r.created_at %></td>
       <td><%= link_to 'Edit', edit_resume_path(r) %></td>
-      <td><%= link_to 'Delete', resume_path(r), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <td><%= link_to 'Delete', resume_path(r), method: :delete %></td>
     </tr>
   <% end %>
 </table>

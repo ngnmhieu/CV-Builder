@@ -32,6 +32,7 @@ gem 'bootstrap-wysihtml5-rails'
 
 group :development, :test do
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
 end
 

@@ -9,7 +9,7 @@ class ResumesController < ApplicationController
 
   def create
     @resume = Resume.new(resume_params)
-    @resume.personal_detail = PersonalDetail.new
+    @resume.personal_detail = PersonalDetail.create
     if @resume.save
       redirect_to resumes_path
     end
