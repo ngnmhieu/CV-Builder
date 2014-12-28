@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211222457) do
+ActiveRecord::Schema.define(version: 20141227114902) do
 
   create_table "multiline_list_items", force: true do |t|
     t.string   "line1"
@@ -93,5 +93,13 @@ ActiveRecord::Schema.define(version: 20141211222457) do
   end
 
   add_index "textsections", ["resume_id"], name: "index_textsections_on_resume_id"
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email",      null: false
+    t.string   "password",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -1,4 +1,8 @@
-
+<% if flash[:notice] %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <table border=1>
   <% @resumes.each do |r| %>
     <tr id="resume_<%= r.id %>"> 
@@ -11,3 +15,5 @@
 </table>
 
 <%= link_to 'Add New CV', new_resume_path %>
+<br />
+<%= link_to 'Register', register_path %>
