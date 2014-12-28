@@ -1,3 +1,11 @@
+<% if @user.errors.any? %>
+  <ul id="ErrorMessages">
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div id="UserForm">
   
   <%= form_for @user, url: { action: "create" } do |uf| %>
@@ -6,6 +14,8 @@
     <br />
     <%= uf.label :password, 'Password' %>
     <%= uf.password_field :password, class: "form-control" %>
+    <%= uf.label :password, 'Password Confirmation' %>
+    <%= uf.password_field :password_confirmation, class: "form-control" %>
     <br />
     <%= uf.submit "Register", class: "btn btn-primary" %>
   <% end %>

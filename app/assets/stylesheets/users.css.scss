@@ -2,7 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/**
+ * COLORs
+ * red error: #a94442
+ */
 #UserForm {
   margin: 0 auto;
   width: 400px;
+}
+
+#LoginForm {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.field_with_errors input {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }

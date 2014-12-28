@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141227114902) do
+ActiveRecord::Schema.define(version: 20141228215645) do
 
   create_table "multiline_list_items", force: true do |t|
     t.string   "line1"
@@ -96,10 +96,10 @@ ActiveRecord::Schema.define(version: 20141227114902) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email",      null: false
-    t.string   "password",   null: false
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
 end

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   get  'register' => 'users#register', as: 'register'
   post 'register' => 'users#create', as: 'create_user'
+  get  'login' => 'users#login', as: 'login'
+  post 'login' => 'users#authenticate', as: 'authenticate'
+  get  'logout' => 'users#logout', as: 'logout'
 
   # post 'resumes/:resume_id/simplelists/:simplelist_id/simplelistitems/:id/increase_order' => 'simplelistitems#increase_order', as: 'sl_item_incr_order'
 
