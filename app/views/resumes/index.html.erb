@@ -3,6 +3,11 @@
     <%= flash[:notice] %>
   </div>
 <% end %>
+
+<% if logged_in? %>
+  Hello, <%= current_user.email %>
+<% end %>
+
 <table border=1>
   <% @resumes.each do |r| %>
     <tr id="resume_<%= r.id %>"> 
@@ -18,6 +23,8 @@
 <br />
 <%= link_to 'Register', register_path %>
 <br />
-<%= link_to 'Login', login_path %>
-<br />
-<%= link_to 'Logout', logout_path %>
+<% if logged_in? %>
+  <%= link_to 'Logout', logout_path %>
+<% else %>
+  <%= link_to 'Login', login_path %>
+<% end %>

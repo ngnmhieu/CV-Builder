@@ -1,8 +1,9 @@
 class Resume < ActiveRecord::Base
-  has_one  :personal_detail, dependent: :destroy
-  has_many :simplelists,     dependent: :destroy
-  has_many :multiline_lists, dependent: :destroy
-  has_many :textsections,    dependent: :destroy
+  belongs_to :user
+  has_one    :personal_detail, dependent: :destroy
+  has_many   :simplelists,     dependent: :destroy
+  has_many   :multiline_lists, dependent: :destroy
+  has_many   :textsections,    dependent: :destroy
 
   # for mass update
   accepts_nested_attributes_for :personal_detail, update_only: true

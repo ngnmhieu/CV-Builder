@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'resumes#index'
+  get '/' => 'pages#index', as: 'root'
+  # root 'pages#index'
+
   resources :resumes do
     resources :simplelists do
       resources :simplelistitems

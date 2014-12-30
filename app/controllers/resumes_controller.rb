@@ -1,6 +1,15 @@
 class ResumesController < ApplicationController
   def index
-    @resumes = Resume.all
+    if logged_in?
+      @resumes = current_user.resumes
+    else
+      respond_to do |format|
+        format.html do 
+          flash[:notice] = "You have to be a user, in order to save your resumes."
+          redirect_to register_path 
+        end
+      end
+    end
   end
 
   def new

@@ -1,41 +1,38 @@
 class UsersController < ApplicationController
   def login
-    if session[:user_id]
+    if logged_in?
       respond_to do |format|
-        format.html { redirect_to resumes_path }
+        format.html { redirect_to root_path }
       end
-      return
     end
 
     @user = User.new
   end
 
+  def logout
+    do_logout
+
+    respond_to do |format|
+      format.html do 
+        flash[:notice] = "Successfully logged out."
+        redirect_to root_path 
+      end
+    end
+  end
+
   def authenticate
-    @user = User.find_by(email: login_params[:email])
-    if @user.try(:authenticate, login_params[:password])
-      session[:user_id] = @user.id
+    if @user = do_authenticate(login_params[:email], login_params[:password])
+      do_login(@user.id)
       flash[:notice] = "Welcome back, #{@user.name ? @user.name : @user.email }"
-      redirect_to resumes_path
-      return 
+      redirect_to root_path
     else
       respond_to do |format|
         format.html do
           flash[:notice] = "Login failed. You might have given the wrong email/password. Please try again"
           redirect_to login_path
-          return
         end
       end
-    end
-  end
-  
-  def logout
-    session[:user_id] = nil
-    respond_to do |format|
-      format.html do 
-        flash[:notice] = "Successfully logged out."
-        redirect_to resumes_path 
-        return
-      end
+
     end
   end
 
@@ -48,7 +45,7 @@ class UsersController < ApplicationController
 
     if @user.save 
       respond_to do |format|
-        format.html { redirect_to resumes_path }
+        format.html { redirect_to root_path }
       end
     else
       respond_to do |format|
@@ -58,11 +55,25 @@ class UsersController < ApplicationController
 
   end
 
-  def register_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
+  private
+    def do_logout
+      session[:user_id] = nil
+    end
 
-  def login_params
-    params.require(:user).permit(:email, :password)
-  end
+    def do_login(id)
+      session[:user_id] = id
+    end
+
+    def do_authenticate(email, password)
+      @user = User.find_by(email: email)
+      return @user.try(:authenticate, password) ? @user : false;
+    end
+
+    def register_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+
+    def login_params
+      params.require(:user).permit(:email, :password)
+    end
 end
