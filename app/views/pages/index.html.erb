@@ -1,21 +1,11 @@
-<% if flash[:notice] %>
-  <div class="notice">
-    <%= flash[:notice] %>
+<div id="HomeFirstRow" class="row">
+  <div class="col-xs-12">
+    <div id="Greeting">
+      <% if logged_in? %>
+        <%= render 'greeting_user' %>
+      <% else %>
+        <%= render 'greeting_non_user' %>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<% if logged_in? %>
-  Hello, <%= current_user.email %>
-<% end %>
-
-<% if logged_in? %>
-  <%= link_to "My Resumes", resumes_path %>
-<% end %>
-
-<% if logged_in? %>
-  <%= link_to 'Logout', logout_path %>
-<% else %>
-  <%= link_to 'Register', register_path %>
-  <br />
-  <%= link_to 'Login', login_path %>
-<% end %>
+</div>
