@@ -4,15 +4,32 @@
   </div>
 <% end %>
 
-<table border=1>
-  <% @resumes.each do |r| %>
-    <tr id="resume_<%= r.id %>"> 
-      <td><%= link_to r.name, resume_path(r) %></td>
-      <td><%= r.created_at %></td>
-      <td><%= link_to 'Edit', edit_resume_path(r) %></td>
-      <td><%= link_to 'Delete', resume_path(r), method: :delete %></td>
-    </tr>
-  <% end %>
-</table>
+<div  id="ResumesListing"> 
+  <table class="table table-striped">
+    <thead>
+      <th style="width: 300px">Name</th>
+      <th style="width: 150px" colspan='2'>Action</th>
+      <th>Created</th>
+    </thead>
+    <% @resumes.each do |r| %>
+      <tr id="resume_<%= r.id %>"> 
+        <td ><%= link_to r.name, resume_path(r) %></td>
+        <td>
+          <%= link_to edit_resume_path(r) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to resume_path(r), method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </td>
+        <td><%= r.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<%= link_to 'Add New Resume', new_resume_path %>
+  <%= link_to resumes_path, method: :post do %>
+    <button class="btn btn-success">Create New Resume</button>
+  <% end %>
+</div>

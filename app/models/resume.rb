@@ -13,6 +13,12 @@ class Resume < ActiveRecord::Base
 
   include HasOrderableItems
 
+  before_create :default_attributes
+
+  def default_attributes
+    self.name ||= "Unnamed Resume"
+  end
+
   # all items in one array except for personal_detail
   # @return array
   def items

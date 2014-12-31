@@ -1,15 +1,34 @@
-
 #ResumeTitle {
-  margin: 7px 20px;
+  width: 300px;
+  a {
+    padding: 15px 10px;
+    font-size: 1.5em;
+  }
+
+  span {
+    padding: 17px 0;
+  }
+
+  input[type=text] {
+    display: inline;
+    width: 200px;
+  }
+
+  .section_name_edit {
+
+    display: none;
+  }
+
+  .name_save {
+    color: #5cb85c;
+  }
 }
 
 #SystemMessage {
-  position: absolute;
-  left: 0;
+  position: fixed;
+  left: 50%;
   right: 0;
-  top: 40px;
-  margin-left: auto;
-  margin-right: auto;
+  z-index: 1;
 
   span {
     padding: 7px 30px;

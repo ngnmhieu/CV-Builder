@@ -5,6 +5,7 @@ ResumeEditor = (function() {
           this.mainForm = $('#ResumeEditorForm');
           this.tabSections = $("#TabSections");
           this.sections = $("#Sections");
+          this.page = $("#PageWrap");
 
           this.initTabs();
           this.initSections();
@@ -107,7 +108,7 @@ ResumeEditor = (function() {
             });
 
             // register auto-save events for all input (also for new created ones)
-            this.sections.on('change','input, select',  function() {
+            this.page.on('change','input, select',  function() {
               editor_obj.autoSave.call(editor_obj);
             });
 
@@ -117,34 +118,53 @@ ResumeEditor = (function() {
               editor_obj.save.call(editor_obj);
             });
             
-            // bind tab-name and section-name with the edit textbox
-            this.sections.on('keyup', '.section_name_edit input[type=text]', function(e) {
-              if (e.keyCode == 13) { // Enter key, hide the textbox
-                $(this).siblings('.name_save').trigger('click');
-                return false;
-              }
 
-              var value = $(this).val(),
+            /****************************
+             * section name edit toggle *
+             ****************************/
+                var name_edit_click_callback = function(e) {
+                  var section_name = $(this).parent('.section_name').hide();
+                  var edit_section = section_name.siblings('.section_name_edit').show();
+                  edit_section.find('input[type=text]').focus();
+                };
+
+                var name_save_click_callback = function(e) {
+                  var edit_form = $(this).parent('.section_name_edit').hide();
+                  edit_form.siblings('.section_name').show();
+                };
+
+                this.page.on('click', '.name_edit', name_edit_click_callback);
+                this.page.on('click', '.name_save', name_save_click_callback);
+
+                // bind tab-name and section-name with the edit textbox
+                this.sections.on('keyup', '.section_name_edit input[type=text]', function(e) {
+                  if (e.keyCode == 13) { // Enter key, hide the textbox
+                    $(this).siblings('.name_save').trigger('click');
+                    return false;
+                  }
+
+                  var value = $(this).val(),
                   section_order = $(this).parents('.sec').attr('data-order'),
                   tab = $('.sec-tab[data-order='+section_order+'] a');
                   section_name = $(this).parent().siblings('.section_name').find('label');
 
                   section_name.html(value);
                   tab.html(value);
-            });
+                });
 
-            // section name edit toggle
-            this.sections.on('click', '.name_edit', function(e) {
-              var section_name = $(this).parent('.section_name').hide();
-              var edit_section = section_name.siblings('.section_name_edit').show();
-              edit_section.find('input[type=text]').focus();
-            });
+                $("#ResumeTitle").on('keyup', '.section_name_edit input[type=text]', function(e) {
+                  if (e.keyCode == 13) { // Enter key, hide the textbox
+                    $(this).siblings('.name_save').trigger('click');
+                    return false;
+                  }
 
-            this.sections.on('click', '.name_save', function(e) {
-              var edit_form = $(this).parent('.section_name_edit').hide();
-              edit_form.siblings('.section_name').show();
-            });
-            // end section name edit
+                  var value = $(this).val(),
+                  section_name = $(this).parent().siblings('.section_name').find('a');
+                  section_name.html(value);
+                });
+            /*************************
+             * end section name edit *
+             *************************/
 
             // ajax add section 
             $('#AddSectionModal .add_section').on('click', function(e) {
@@ -230,10 +250,12 @@ ResumeEditor = (function() {
 
           // replace content and adjust width of the container according to message
           // TODO: still not correct
-          el.html(msg_el).width(msg_el.outerWidth()); 
 
           // blink!
           el.show(function() {
+            el.html(msg_el);
+            el.css('margin-left', -(msg_el.outerWidth() / 2)); 
+
             setTimeout(function() {
               el.fadeOut();
             }, 1000);

@@ -12,15 +12,12 @@ class ResumesController < ApplicationController
     end
   end
 
-  def new
-    @resume = Resume.new
-  end
-
   def create
-    @resume = Resume.new(resume_params)
+    @resume = Resume.new
+    current_user.resumes << @resume
     @resume.personal_detail = PersonalDetail.create
     if @resume.save
-      redirect_to resumes_path
+      redirect_to edit_resume_path(@resume)
     end
   end
 
@@ -32,6 +29,7 @@ class ResumesController < ApplicationController
   def edit
     @resume = Resume.find(params[:id])
     @sections = @resume.items.sort_by {|item| item.order }
+    render layout: 'editor'
   end
 
   def update
