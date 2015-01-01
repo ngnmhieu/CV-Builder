@@ -10,6 +10,7 @@
 <body>
 
 <div id="PageWrap">
+
   <div id="PageHeader">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -35,6 +36,12 @@
       </div><!-- /.container-fluid -->
     </nav>
   </div>
+
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
 
   <div id="PageBody">
     <%= yield %>

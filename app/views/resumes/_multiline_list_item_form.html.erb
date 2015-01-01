@@ -15,15 +15,6 @@
       </div>
 
       <div class="controls">
-        <% if item.order != 1 %>
-          <%= link_to '', mll_item_incr_order_path(@resume.id, list.id, item.id),
-            method: :post, class: 'glyphicon glyphicon-chevron-up clickable up' %>
-        <% end %>
-
-        <% if item.order != list.items.size %>
-          <%= link_to '', mll_item_decr_order_path(@resume.id, list.id, item.id), 
-            method: :post, class: 'glyphicon glyphicon-chevron-down clickable down' %>
-        <% end %>
         <span class="space"></span>
         <%= link_to '', resume_multiline_list_multiline_list_item_path(@resume.id, list.id, item.id),
           class: 'glyphicon glyphicon-trash clickable item_delete'%>

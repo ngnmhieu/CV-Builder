@@ -1,7 +1,3 @@
-<% content_for :head do %>
-  <%= javascript_include_tag "editor" %>
-<% end %>
-
 <%= render partial: 'add_section_modal' %>
 
 <%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
@@ -23,6 +19,19 @@
               <span class="glyphicon glyphicon-ok clickable name_save"></span>
             </div>
           </div>
+
+          <ul class="nav navbar-nav">
+            <li class="dropdown clickable" id="ShareMenu">
+              <a class="dropdown-toggle" type="button" id="ShareButton" data-toggle="dropdown" aria-expanded="true">
+                <span class="glyphicon glyphicon-globe"></span>
+                Share <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="ShareButton">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">As a PDF File</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">As a HTML Page</a></li>
+              </ul>
+            </li>
+          </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "ResumeSZ", root_path %></li>
@@ -50,10 +59,11 @@
     </div>
 
     <div id="RightControls" class="col-xs-4">
-    <%= link_to resume_path(@resume), class: 'btn btn-primary', target: '_blank' do %>
+    <%= link_to resume_path(@resume), class: 'btn btn-primary control', target: '_blank' do %>
       <span class="glyphicon glyphicon-th-list"></span> Preview
     <% end %>
-    <%= r.submit 'Save', class: 'btn btn-success' %>
+
+    <%= r.submit 'Save', class: 'btn btn-success control' %>
     </div>
   </div>
 

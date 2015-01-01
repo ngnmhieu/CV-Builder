@@ -1,5 +1,5 @@
 #ResumeTitle {
-  width: 300px;
+  margin-right: 20px;
   a {
     padding: 15px 10px;
     font-size: 1.5em;
@@ -28,6 +28,7 @@
   position: fixed;
   left: 50%;
   right: 0;
+  top: 20px;
   z-index: 1;
 
   span {
@@ -39,6 +40,9 @@
   }
 }
 
+#ShareMenu {
+  display: inline;
+}
 
 #TopControls {
   position: relative;
@@ -50,6 +54,9 @@
 
 #RightControls {
   text-align: right;
+  .control {
+    margin-left: 5px;
+  }
 }
 
 #Left {
