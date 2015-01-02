@@ -30,4 +30,8 @@ class Resume < ActiveRecord::Base
     return self.items.sort_by { |item| item.order }
   end
 
+  def tpl_name
+    return self.template.nil? || self.template == '' ? 'default' : self.template
+  end
+
 end

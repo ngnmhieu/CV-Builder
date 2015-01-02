@@ -22,10 +22,18 @@ class ResumesController < ApplicationController
   end
 
   def show
-    @resume = Resume.find(params[:id])
+    @resume   = Resume.find(params[:id])
     @sections = @resume.sorted_items
+    template  = "templates/#{@resume.tpl_name}/resume.html.erb"
     respond_to do |format|
-      format.html { render layout: 'html_resume' }
+      format.pdf do 
+        render pdf: "my_pdf_name.pdf", template: template, encoding: 'utf-8'
+      end
+
+      format.html do
+        render template: template, layout: nil
+      end
+
     end
   end
 
@@ -53,6 +61,7 @@ class ResumesController < ApplicationController
   end
 
   private
+    
     def resume_params
       params.require(:resume).permit(
         :name, 

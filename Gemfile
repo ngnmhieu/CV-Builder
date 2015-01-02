@@ -51,9 +51,6 @@ end
 
 # convert html view to pdf
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-
-
 
 # Use unicorn as the app server
 # gem 'unicorn'

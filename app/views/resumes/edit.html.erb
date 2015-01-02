@@ -27,8 +27,12 @@
                 Share <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="ShareButton">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">As a PDF File</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">As a HTML Page</a></li>
+                <li role="presentation">
+                  <%= link_to "As a PDF File", resume_path(@resume, :pdf), role: 'menuitem', tabindex: '-1' %>
+                </li>
+                <li role="presentation">
+                  <%= link_to "As a HTML Page", resume_path(@resume), role: 'menuitem', tabindex: '-1' %>
+                </li>
               </ul>
             </li>
           </ul>
