@@ -25,4 +25,9 @@ class Resume < ActiveRecord::Base
     return self.simplelists + self.multiline_lists + self.textsections
   end
 
+  # all items sorted by `order` 
+  def sorted_items
+    return self.items.sort_by { |item| item.order }
+  end
+
 end

@@ -11,6 +11,9 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -19,6 +22,7 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'jquery-turbolinks' # fix problem of javascript not reloading on new page
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -31,14 +35,25 @@ gem 'jquery-ui-rails'
 
 gem 'bootstrap-wysihtml5-rails'
 
+#####################
+###    Testing    ###
+#####################
+
 group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
 end
 
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+######################
+###    Utilities   ###
+######################
+
+# convert html view to pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+
 
 # Use unicorn as the app server
 # gem 'unicorn'

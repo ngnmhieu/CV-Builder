@@ -23,12 +23,15 @@ class ResumesController < ApplicationController
 
   def show
     @resume = Resume.find(params[:id])
-    @sections = @resume.items.sort_by {|item| item.order }
+    @sections = @resume.sorted_items
+    respond_to do |format|
+      format.html { render layout: 'html_resume' }
+    end
   end
 
   def edit
     @resume = Resume.find(params[:id])
-    @sections = @resume.items.sort_by {|item| item.order }
+    @sections = @resume.sorted_items
     render layout: 'editor'
   end
 
