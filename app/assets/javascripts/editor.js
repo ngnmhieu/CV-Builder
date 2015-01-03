@@ -130,7 +130,6 @@ ResumeEditor = (function() {
               e.preventDefault();
               editor_obj.save.call(editor_obj);
             });
-            
 
             /****************************
              * section name edit toggle *
@@ -179,44 +178,59 @@ ResumeEditor = (function() {
              * end section name edit *
              *************************/
 
-            // ajax add section 
-            $('#AddSectionModal .add_section').on('click', function(e) {
-              var url = $(this).attr('href');
+          /*****************************
+           * Add and Delete Components *
+           *****************************/
+              // ajax add section 
+              $('#AddSectionModal .add_section').on('click', function(e) {
+                var url = $(this).attr('href');
 
-              editor_obj.addSection.call(editor_obj, url);
+                editor_obj.addSection.call(editor_obj, url);
 
-              e.preventDefault();
-            });
+                e.preventDefault();
+              });
 
-            // ajax add item
-            this.sections.on('click', '.item_add', function(e) {
-              var url = $(this).attr('href'),
-                  list = $(this).parents('.sec').find('.list');
+              // ajax add item
+              this.sections.on('click', '.item_add', function(e) {
+                var url = $(this).attr('href'),
+                    list = $(this).parents('.sec').find('.list');
 
-              editor_obj.addItem.call(editor_obj, url, list);
+                editor_obj.addItem.call(editor_obj, url, list);
 
-              e.preventDefault();
-            });
+                e.preventDefault();
+              });
 
-            // ajax delete section
-            this.sections.on('click', '.delete_section', function(e) {
-              var url = $(this).attr('href');
+              // ajax delete section
+              this.sections.on('click', '.delete_section', function(e) {
+                var url = $(this).attr('href');
 
-              editor_obj.deleteSection.call(editor_obj, url);
+                editor_obj.deleteSection.call(editor_obj, url);
 
-              return false;
-            });
+                return false;
+              });
 
 
-            // ajax delete item
-            this.sections.on('click', '.item_delete', function(e) {
-              var url = $(this).attr('href');
-                  item = $(this).parents('.item');
+              // ajax delete item
+              this.sections.on('click', '.item_delete', function(e) {
+                var url = $(this).attr('href');
+                    item = $(this).parents('.item');
 
-              editor_obj.deleteItem.call(editor_obj, url, item);
+                editor_obj.deleteItem.call(editor_obj, url, item);
 
-              e.preventDefault();
-            });
+                e.preventDefault();
+              });
+          /*********************************
+           * END Add and Delete Components *
+           *********************************/
+
+              this.sections.on('change', '.ordered_list_toggle', function(e) {
+                var list = $(this).parents('.sec').find('.list'); // find the corresponding list
+                if (this.checked)
+                  list.removeClass('unordered').addClass('ordered');
+                else 
+                  list.removeClass('ordered').addClass('unordered');
+
+              });
 
         },
 

@@ -1,4 +1,4 @@
-<div class="simplelistitem item" data-order="<%= item.order %>">
+<li class="simplelistitem item" data-order="<%= item.order %>">
 <%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
     <%= itemf.hidden_field :id %>
     <%= itemf.hidden_field :order, class: 'item_order' %></span>
@@ -7,4 +7,4 @@
       <span class="glyphicon glyphicon-trash"></span>
     <% end %>
 <% end %>
-</div>
+</li>

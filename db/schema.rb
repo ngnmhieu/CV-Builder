@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102214022) do
+ActiveRecord::Schema.define(version: 20150103022238) do
 
   create_table "multiline_list_items", force: true do |t|
     t.string   "line1"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150102214022) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "order"
+    t.boolean  "ordered_list"
   end
 
   add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id"

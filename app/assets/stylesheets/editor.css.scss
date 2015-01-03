@@ -114,7 +114,7 @@
     display: inline;
   }
 
-  label {
+  .section_name label {
     margin-top: 5px;
     font-weight: bold;
     font-size: 1.5em;
@@ -201,12 +201,17 @@
 .simplelist {
   margin: 20px 5px;
   border: 1px solid #ccc;
+  padding: 0;
 
   .item {
     position: relative;
     width: 100%;
     padding: 12px 35px 12px 15px;
     border-left: 7px solid #dfdfdf;
+  }
+
+  input[type=text] {
+    display: inline-block;
   }
 
   .simplelistitem {
@@ -224,6 +229,14 @@
     top: 18px;
     right: 8px;
   }
+}
+
+.simplelist.ordered {
+  list-style-type: decimal;
+}
+
+.simplelist.unordered {
+  list-style-type: none;
 }
 
 .textsection {
