@@ -1,6 +1,7 @@
 class Simplelistitem < ActiveRecord::Base
   belongs_to :simplelist
   after_initialize :default_attributes
+  liquid_methods :content
 
   def default_attributes
     self.content ||= ''

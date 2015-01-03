@@ -1,0 +1,16 @@
+<h2>{{ section.name }}</h2>
+
+{% for item in section.items %}
+  <table width="100%">
+    <tr>
+      <td><b>{{ item.line1 }}</b></td>
+      <td align="right"><b>{{ item.start | date: "%b %Y" }} - {{ item.end | date: "%b %Y" }}</b></td>
+    </tr>
+    <tr>
+      <td colspan=2><i>{{ item.line2 }}</i></td>
+    </tr>
+    <tr>
+      <td colspan=2>{{ item.desc }}</td>
+    </tr>
+  </table>
+{% endfor %}

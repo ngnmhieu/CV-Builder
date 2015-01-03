@@ -64,16 +64,16 @@ ResumeEditor = (function() {
 
           $('.multilinelist').sortable({
             activate: function(event, ui) {
+              // $(ui.item[0]).css('height', '10px');
               $(this).find('.collapse').collapse('hide');
             },
             stop: function(event, ui) {
-              // $('.wysihtml5-sandbox').remove();
-              // $('textarea').css('display','block');
               // $('textarea').wysihtml5();
             }
           });
 
           $('.simplelist').sortable({
+            // cancel: '[contenteditable]', // reserved for contenteditable - later
             placeholder: {
               element: function(clone, ui) {
                 var value = $(clone[0]).find('input[type=text]').val();
@@ -335,7 +335,6 @@ ResumeEditor = (function() {
          */
         refreshItemPosition: function(list) {
           list.find('.item').each(function(index) {
-            $(this).attr('data-order', index+1);
             $(this).find('input.item_order').val(index+1);
           });
         },

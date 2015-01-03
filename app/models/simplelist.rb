@@ -1,6 +1,7 @@
 class Simplelist < ActiveRecord::Base
   belongs_to :resume
   has_many :simplelistitems, dependent: :destroy
+  liquid_methods  :template, :name, :items, :ordered_list
 
   # for mass update
   accepts_nested_attributes_for :simplelistitems, update_only: true
@@ -17,7 +18,6 @@ class Simplelist < ActiveRecord::Base
 
   # short hand for simplelist_items
   def items
-    return self.simplelistitems
+    return self.simplelistitems.sort_by { |item| item.order }
   end
-
 end

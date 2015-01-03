@@ -23,15 +23,22 @@ class ResumesController < ApplicationController
 
   def show
     @resume   = Resume.find(params[:id])
-    @sections = @resume.sorted_items
-    template  = "templates/#{@resume.tpl_name}/resume.html.erb"
+    @data     = {
+      'resume'   => @resume,
+      'sections' => @resume.items,
+      'personal_detail' => @resume.personal_detail
+    }
+    @template = template_content(@resume.template)
+    set_liquid_path(@resume.template)
+
     respond_to do |format|
       format.pdf do 
-        render pdf: @resume.name, template: template, encoding: 'utf-8'
+        render pdf: @resume.name, template: 'resumes/show.html.erb',
+               encoding: 'utf-8', layout: nil
       end
 
       format.html do
-        render template: template, layout: nil
+        render layout: nil
       end
 
     end
@@ -39,7 +46,7 @@ class ResumesController < ApplicationController
 
   def edit
     @resume = Resume.find(params[:id])
-    @sections = @resume.sorted_items
+    @sections = @resume.items
     render layout: 'editor'
   end
 
@@ -61,7 +68,21 @@ class ResumesController < ApplicationController
   end
 
   private
+
+    def set_liquid_path(tpl_name)
+      tpl_path = Rails.root.join('resume_templates', tpl_name)
+      Liquid::Template.file_system = Liquid::LocalFileSystem.new(tpl_path)
+    end
     
+    # TODO: should be placed in application configurations
+    # at least the resume templates directory and liquid layout name
+    def template_content(tpl_name)
+      template_path = Rails.root.join('resume_templates', tpl_name, 'resume.liquid')
+      file = File.open(template_path, "rb")
+
+      return file.read
+    end
+
     def resume_params
       params.require(:resume).permit(
         :name, 

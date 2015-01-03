@@ -1,0 +1,7 @@
+<div style="width: 800px; margin: 0 auto">
+  {% include personal_detail.template with personal_detail %}  
+
+  {% for section in sections %}
+    {% include section.template with section %}
+  {% endfor %}
+</div>

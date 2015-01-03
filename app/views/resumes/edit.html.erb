@@ -99,7 +99,7 @@
             </div>
         <% @sections.each do |sec| %>
             <div class="sec" data-order='<%= sec.order %>'>
-                <%= render partial: sec.tpl_name+'_form', locals: {data: sec}  %>
+                <%= render partial: sec.template+'_form', locals: {data: sec}  %>
             </div>
         <% end %>
     </div>

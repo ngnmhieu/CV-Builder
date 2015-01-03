@@ -11,8 +11,4 @@ module HasOrderableItems
       item.save
     end
   end
-
-  def sorted_items
-    return self.items.sort_by { |item| item.order }
-  end
 end

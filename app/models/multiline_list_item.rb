@@ -1,5 +1,6 @@
 class MultilineListItem < ActiveRecord::Base
   belongs_to :multiline_list
+  liquid_methods :line1, :line2, :desc, :start, :end
 
   after_initialize :default_attributes
 

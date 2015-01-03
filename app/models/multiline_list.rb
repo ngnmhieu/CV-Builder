@@ -1,6 +1,7 @@
 class MultilineList < ActiveRecord::Base
   belongs_to :resume
   has_many :multiline_list_items, dependent: :destroy
+  liquid_methods  :template, :name, :items
   
   # for mass update
   accepts_nested_attributes_for :multiline_list_items, update_only: true
@@ -17,7 +18,7 @@ class MultilineList < ActiveRecord::Base
 
   # short hand for multiline_list_items
   def items
-    return self.multiline_list_items
+    return self.multiline_list_items.sort_by { |item| item.order }
   end
 
 end

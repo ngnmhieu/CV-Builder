@@ -24,7 +24,7 @@
 
   <% if !list.items.empty?  %>
     <ul class="simplelist list <%= list.ordered_list ? 'ordered': 'unordered' %>">
-      <% list.sorted_items.each do |item| %>
+      <% list.items.each do |item| %>
         <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
       <% end %>
     </ul>

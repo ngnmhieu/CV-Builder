@@ -1,6 +1,7 @@
 <div class="row mll_item item">
   <%= fields_for "resume[multiline_lists_attributes][#{list.id}][multiline_list_items_attributes][#{item.id}]", item do |itemf| %>
   <%= itemf.hidden_field :id %>
+  <%= itemf.hidden_field :order, class: 'item_order' %></span>
 
     <div class="row" style="position: relative">
       <div class="col-xs-5">

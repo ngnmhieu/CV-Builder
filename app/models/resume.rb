@@ -16,17 +16,16 @@ class Resume < ActiveRecord::Base
   before_create :default_attributes
 
   def default_attributes
-    self.name ||= "Unnamed Resume"
+    self.name     ||= "Unnamed Resume"
+    self.template ||= "default"
   end
 
   # all items in one array except for personal_detail
   # @return array
   def items
-    return self.simplelists + self.multiline_lists + self.textsections
-  end
+    items = self.simplelists + self.multiline_lists + self.textsections
 
-  def tpl_name
-    return self.template.nil? || self.template == '' ? 'default' : self.template
+    return items.sort_by { |item| item.order }
   end
 
 end

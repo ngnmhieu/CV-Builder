@@ -1,10 +1,10 @@
-<div style="width: 800px; margin: 0 auto">
-
-  <% pd = @resume.personal_detail %>
-  <%= render partial: "templates/#{@resume.tpl_name}/" + pd.tpl_name , locals: {data: pd} %>
-
-  <% @sections.each do |sec| %>
-    <%= render partial: "templates/#{@resume.tpl_name}/"+sec.tpl_name, locals: {data: sec}  %>
-  <% end %>
-
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @resume.name %></title>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= liquidize(@template, @data).html_safe %>
+</body>
+</html>

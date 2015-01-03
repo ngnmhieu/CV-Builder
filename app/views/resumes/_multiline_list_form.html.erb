@@ -22,9 +22,8 @@
   </div>
 
 
-  <% ordered_list = list.items.sort_by {|item| item.order } %>
   <div class="multilinelist list">
-    <% ordered_list.each do |item| %>
+    <% list.items.each do |item| %>
       <%= render partial: 'multiline_list_item_form', locals: {form: lf, item: item, list: list} %>
     <% end %>
   </div>

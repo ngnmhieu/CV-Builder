@@ -19,6 +19,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'jquery-turbolinks' # fix problem of javascript not reloading on new page
@@ -30,8 +32,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-
-gem 'jquery-ui-rails'
 
 gem 'bootstrap-wysihtml5-rails'
 
@@ -51,6 +51,9 @@ end
 
 # convert html view to pdf
 gem 'wicked_pdf'
+
+# Liquid template engine
+gem 'liquid'
 
 # Use unicorn as the app server
 # gem 'unicorn'
