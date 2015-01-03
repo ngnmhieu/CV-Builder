@@ -48,7 +48,7 @@ ResumeEditor = (function() {
               update: function() { return; },
             },
             update: function() {
-              editor_obj.refreshSectionPos.call(editor_obj);
+              editor_obj.refreshSectionPosition.call(editor_obj);
               editor_obj.autoSave.call(editor_obj);
             }
           });
@@ -64,7 +64,7 @@ ResumeEditor = (function() {
 
           $('.multilinelist').sortable({
             activate: function(event, ui) {
-              // $(this).find('.collapse').collapse('hide');
+              $(this).find('.collapse').collapse('hide');
             },
             stop: function(event, ui) {
               // $('.wysihtml5-sandbox').remove();
@@ -72,12 +72,25 @@ ResumeEditor = (function() {
               // $('textarea').wysihtml5();
             }
           });
+
+          $('.simplelist').sortable({
+            placeholder: {
+              element: function(clone, ui) {
+                var value = $(clone[0]).find('input[type=text]').val();
+                return $('<div class="item ui-state-highlight">'+value+'</div>');
+              },
+              update: function() { return; },
+            },
+            update: function() {
+              editor_obj.refreshItemPosition.call(editor_obj, $(this));
+              editor_obj.autoSave.call(editor_obj);
+            }
+          });
         },
 
         initRichEditors: function() {
           this.attachRichEditor($('.textsection textarea'));
           this.attachRichEditor($('.multilinelist textarea'));
-          this.attachRichEditor($('.simplelist textarea'));
         },
 
         /**
@@ -248,9 +261,6 @@ ResumeEditor = (function() {
               css_class = type == 'error' ? 'danger': 'success',
               msg_el    = $('<span class="alert alert-'+css_class+'">'+msg+'</span>');
 
-          // replace content and adjust width of the container according to message
-          // TODO: still not correct
-
           // blink!
           el.show(function() {
             el.html(msg_el);
@@ -282,7 +292,7 @@ ResumeEditor = (function() {
         /**
          * reassign the correct order of tabs and sections
          */
-        refreshSectionPos: function() {
+        refreshSectionPosition: function() {
           var tabs = this.tabSections;
 
           // make and array of pairs [section, new_order]
@@ -303,6 +313,17 @@ ResumeEditor = (function() {
             sec.find('input.section_order').val(new_order);
           })
 
+        },
+
+        /**
+         * reassign the correct order of list items
+         * @param list | jQuery object
+         */
+        refreshItemPosition: function(list) {
+          list.find('.item').each(function(index) {
+            $(this).attr('data-order', index+1);
+            $(this).find('input.item_order').val(index+1);
+          });
         },
 
         addSection: function(url) {
@@ -390,7 +411,7 @@ ResumeEditor = (function() {
               editor_obj.tabSections.find('.sec-tab[data-order='+order+']').remove();
               editor_obj.sections.find('.sec[data-order='+order+']').remove();
 
-              editor_obj.refreshSectionPos();
+              editor_obj.refreshSectionPosition();
               editor_obj.openTab(order-1);
               editor_obj.flashMessage("Section deleted", "success");
               

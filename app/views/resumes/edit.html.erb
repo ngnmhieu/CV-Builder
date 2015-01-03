@@ -1,12 +1,12 @@
 <%= render partial: 'add_section_modal' %>
+<%= render partial: 'choose_template_modal' %>
 
 <%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
 
+  <!-- PageHeader -->
   <div id="PageHeader">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <div id="ResumeTitle" class="navbar-header navbar-left">
             <div class="section_name">
@@ -51,10 +51,13 @@
       </div><!-- /.container-fluid -->
     </nav>
   </div>
+  <!-- END PageHeader -->
 
+  <!-- SystemMessage: display flash message -->
   <div id="SystemMessage"></div>
+  <!-- END SystemMessage -->
 
-  <!-- Overall controls: save, preview, export, add ... -->
+  <!-- TopControls - overall controls: save, preview, export, add ... -->
   <div id="TopControls" class="row">
     <div id="LeftControls" class="col-xs-8">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSectionModal">
@@ -63,6 +66,10 @@
     </div>
 
     <div id="RightControls" class="col-xs-4">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseTemplateModal">
+        <span class="glyphicon glyphicon-tint"></span> Choose Template
+      </button>
+
     <%= link_to resume_path(@resume), class: 'btn btn-primary control', target: '_blank' do %>
       <span class="glyphicon glyphicon-th-list"></span> Preview
     <% end %>
@@ -70,8 +77,9 @@
     <%= r.submit 'Save', class: 'btn btn-success control' %>
     </div>
   </div>
+  <!-- END TopControls -->
 
-  <!-- Tab for choosing Sections -->
+  <!-- TabSections: tab for choosing sections -->
   <div id="Left" class="col-xs-3">
     <ul id="TabSections" class="nav nav-tabs tabs-left">
         <li class="sec-tab ui-sort-disabled" data-order='0'><a>Personal Detail</a></li>
@@ -81,8 +89,9 @@
     </ul>
     <div class="clear"></div>
   </div>
+  <!-- END TabSections -->
 
-  <!-- Textfields, Textareas forms section -->
+  <!-- Sections: Textfields, Textareas forms section -->
   <div id="Right" class="col-xs-9">
     <div id="Sections">
             <div class="sec" data-order='0'>
@@ -95,5 +104,6 @@
         <% end %>
     </div>
   </div>
+  <!-- END Sections -->
 
 <% end %>

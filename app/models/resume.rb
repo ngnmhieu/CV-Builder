@@ -25,11 +25,6 @@ class Resume < ActiveRecord::Base
     return self.simplelists + self.multiline_lists + self.textsections
   end
 
-  # all items sorted by `order` 
-  def sorted_items
-    return self.items.sort_by { |item| item.order }
-  end
-
   def tpl_name
     return self.template.nil? || self.template == '' ? 'default' : self.template
   end

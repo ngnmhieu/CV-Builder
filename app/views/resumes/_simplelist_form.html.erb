@@ -12,6 +12,7 @@
     <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
+
       <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), class: 'item_add' do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
@@ -19,9 +20,11 @@
     </div>
   </div>
 
-  <div class="simplelist list">
-    <% list.items.each do |item| %>
-      <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
-    <% end %>
-  </div>
+  <% if !list.items.empty?  %>
+    <div class="simplelist list">
+      <% list.sorted_items.each do |item| %>
+        <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

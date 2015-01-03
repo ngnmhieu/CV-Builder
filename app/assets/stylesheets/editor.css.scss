@@ -201,27 +201,28 @@
 .simplelist {
   margin: 20px 5px;
   border: 1px solid #ccc;
-  padding: 15px;
-
-  table td {
-    padding: 10px;
-  }
-
-  textarea {
-    height: 80px;
-  }
 
   .item {
     position: relative;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 12px 35px 12px 15px;
+    border-left: 7px solid #dfdfdf;
+  }
+
+  .simplelistitem {
+    background: white;
+  }
+
+  .item:not(:last-child) {
+    border-bottom: 1px solid #ccc;
   }
 
   .item_delete {
+    position: absolute;
     font-size: 1.3em;
     color: #d9534f;
-    top: 10px;
-    right: 2px;
-    position: absolute;
+    top: 18px;
+    right: 8px;
   }
 }
 

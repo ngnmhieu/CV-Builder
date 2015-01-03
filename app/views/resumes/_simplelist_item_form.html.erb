@@ -1,9 +1,10 @@
-<div class="simplistitem item">
-  <%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
+<div class="simplelistitem item" data-order="<%= item.order %>">
+<%= fields_for "resume[simplelists_attributes][#{list.id}][simplelistitems_attributes][#{item.id}]", item do |itemf| %>
     <%= itemf.hidden_field :id %>
-    <%= itemf.text_area :content, class: 'form-control' %></td>
+    <%= itemf.hidden_field :order, class: 'item_order' %></span>
+    <%= itemf.text_field :content, class: 'form-control' %></span>
     <%= link_to resume_simplelist_simplelistitem_path(@resume.id, list.id, item.id), class: 'item_delete' do %>
       <span class="glyphicon glyphicon-trash"></span>
     <% end %>
-  <% end %>
+<% end %>
 </div>
