@@ -1,0 +1,19 @@
+{% assign person = personal_detail %}
+
+<div id="hd">
+  <div class="yui-gc">
+    <div class="yui-u first">
+      <h1>{{ person.name }}</h1>
+    </div>
+
+    <div class="yui-u">
+      <div class="contact-info">
+        <h3><a href="mailto:{{ person.email }}">{{ person.email }}</a></h3>
+        <h3>{{ person.phone }}</h3>
+        <h3>{{ person.address1 }}</h3>
+        <h3>{{ person.address2 }} - {{ person.address3 }}</h3>
+      </div><!--// .contact-info -->
+    </div>
+  </div><!--// .yui-gc -->
+</div><!--// hd -->
+

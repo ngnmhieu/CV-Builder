@@ -21,10 +21,12 @@
           class: 'glyphicon glyphicon-trash clickable item_delete'%>
       </div>
       <div class="dates">
+        <% start_year = Date.today.year - 70%>
+        <% end_year   = Date.today.year + 10 %>
         <%= itemf.label :start, 'Start: ' %>
-        <%= itemf.date_select :start, discard_day: true, order: [:month, :year] %>
+        <%= itemf.date_select :start, discard_day: true, order: [:month, :year], start_year: start_year, end_year: end_year %>
         <%= itemf.label :end, 'End: ' %>
-        <%= itemf.date_select :end, discard_day: true, order: [:month, :year] %>
+        <%= itemf.date_select :end, discard_day: true, order: [:month, :year], start_year: start_year, end_year: end_year %>
       </div>
     </div>
 

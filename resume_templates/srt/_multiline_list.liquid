@@ -1,0 +1,19 @@
+<div class="yui-gf">
+
+  <div class="yui-u first">
+    <h2>{{ section.name }}</h2>
+  </div><!--// .yui-u -->
+
+  <div class="yui-u">
+
+  {% for item in section.items %}
+    <div class="job">
+      <h2>{{ item.line1 }}</h2>
+      <h3>{{ item.line2 }}</h3>
+      <h4>{{ item.start | date: "%b %Y" }} - {{ item.end | date: "%b %Y" }}</h4>
+      <p>{{ item.desc }}</p>
+    </div>
+  {% endfor %}
+
+  </div><!--// .yui-u -->
+</div><!--// .yui-gf -->

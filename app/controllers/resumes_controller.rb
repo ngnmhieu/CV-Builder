@@ -1,4 +1,5 @@
 class ResumesController < ApplicationController
+
   def index
     if logged_in?
       @resumes = current_user.resumes
@@ -31,16 +32,15 @@ class ResumesController < ApplicationController
     @template = template_content(@resume.template)
     set_liquid_path(@resume.template)
 
+      # config.assets.paths << Rails.root.join(ENV["APP.TEMPLATE_DIR"], @resume.template, 'assets')
+
     respond_to do |format|
       format.pdf do 
-        render pdf: @resume.name, template: 'resumes/show.html.erb',
-               encoding: 'utf-8', layout: nil
+        render pdf: @resume.name, encoding: 'utf-8',
+               template: 'resumes/show.html.erb', layout: nil
       end
 
-      format.html do
-        render layout: nil
-      end
-
+      format.html { render layout: nil }
     end
   end
 
@@ -69,27 +69,28 @@ class ResumesController < ApplicationController
 
   private
 
-    def set_liquid_path(tpl_name)
-      tpl_path = Rails.root.join('resume_templates', tpl_name)
-      Liquid::Template.file_system = Liquid::LocalFileSystem.new(tpl_path)
-    end
-    
-    # TODO: should be placed in application configurations
-    # at least the resume templates directory and liquid layout name
-    def template_content(tpl_name)
-      template_path = Rails.root.join('resume_templates', tpl_name, 'resume.liquid')
-      file = File.open(template_path, "rb")
+  # set the path for the specific resume's template (needed by `include` Tag in the template)
+  # @param String
+  def set_liquid_path(template_name)
+    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name)
+    Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
+  end
 
-      return file.read
-    end
+  # return the content of liquid template file
+  # @param String
+  def template_content(template_name)
+    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume.liquid')
+    return File.read(template_path)
+  end
 
-    def resume_params
-      params.require(:resume).permit(
-        :name, 
-        personal_detail_attributes: [:name, :phone, :fax, :address, :address1, :address2, :address3, :email, :website, :sex, :dob, :id],
-        simplelists_attributes: [:name, :id, :order, :ordered_list, simplelistitems_attributes: [:id, :content, :order]],
-        multiline_lists_attributes: [:name, :id, :order, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
-        textsections_attributes: [:name, :id, :content, :order]
-      )
-    end
+  def resume_params
+    params.require(:resume).permit(
+      :name, 
+      personal_detail_attributes: [:name, :phone, :fax, :address, :address1, :address2, :address3, :email, :website, :sex, :dob, :id],
+      simplelists_attributes: [:name, :id, :order, :ordered_list, simplelistitems_attributes: [:id, :content, :order]],
+      multiline_lists_attributes: [:name, :id, :order, multiline_list_items_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
+      textsections_attributes: [:name, :id, :content, :order]
+    )
+  end
+
 end

@@ -1,0 +1,18 @@
+{% if section.ordered_list %}
+  {% assign list_type = 'ordered'   %}
+{% else %}
+  {% assign list_type = 'unordered' %}
+{% endif %}
+
+<div class="yui-gf">
+  <div class="yui-u first">
+    <h2>{{ section.name }}</h2>
+  </div>
+  <div class="yui-u">
+    <ul class="{{ list_type }}">
+      {% for item in section.items %}
+        <li>{{ item.content }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div><!--// .yui-gf-->

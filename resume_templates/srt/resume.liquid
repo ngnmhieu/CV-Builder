@@ -1,0 +1,19 @@
+<div id="doc2" class="yui-t7">
+  <div id="inner">
+
+    {% include personal_detail.template with personal_detail %}  
+
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+
+          {% for section in sections %}
+            {% include section.template with section %}
+          {% endfor %}
+
+        </div><!--// .yui-b -->
+      </div><!--// yui-main -->
+    </div><!--// bd -->
+
+  </div><!-- // inner -->
+</div><!--// doc -->

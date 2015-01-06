@@ -1,8 +1,0 @@
-<% list = data %>
-
-<h2><%= list.name %></h2>
-<ul class="<%= list.ordered_list ? 'ordered' : 'unordered' %>">
-  <% list.sorted_items.each do |item| %>
-    <li><%= item.content.html_safe %></li>
-  <% end %>
-</ul>
