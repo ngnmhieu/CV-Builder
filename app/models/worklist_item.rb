@@ -1,5 +1,5 @@
-class MultilineListItem < ActiveRecord::Base
-  belongs_to :multiline_list
+class WorklistItem < ActiveRecord::Base
+  belongs_to :worklist
   liquid_methods :line1, :line2, :desc, :start, :end
 
   after_initialize :default_attributes
@@ -10,6 +10,6 @@ class MultilineListItem < ActiveRecord::Base
     self.desc  ||= ''
     self.start ||= DateTime.now 
     self.end   ||= DateTime.now 
-    self.order ||= self.multiline_list.items.size + 1
+    self.order ||= self.worklist.items.size + 1
   end
 end

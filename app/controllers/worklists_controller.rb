@@ -1,8 +1,8 @@
-class MultilineListsController < ApplicationController
+class WorklistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      list = @resume.multiline_lists.create
+      list = @resume.worklists.create
 
       if @resume.save
         respond_to do |format|
@@ -13,7 +13,7 @@ class MultilineListsController < ApplicationController
               'section_name' => list.name,
               'section_order' => list.order,
               'html'   => render_to_string(
-                partial: 'resumes/multiline_list_form.html.erb',
+                partial: 'resumes/worklist_form.html.erb',
                 locals: {data: list}
               )
             }
@@ -25,7 +25,7 @@ class MultilineListsController < ApplicationController
   end
 
   def destroy
-    list = MultilineList.find(params[:id])
+    list = Worklist.find(params[:id])
     resume = Resume.find(params[:resume_id])
 
     if list.destroy

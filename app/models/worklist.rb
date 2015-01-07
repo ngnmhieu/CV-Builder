@@ -1,10 +1,10 @@
-class MultilineList < ActiveRecord::Base
+class Worklist < ActiveRecord::Base
   belongs_to :resume
-  has_many :multiline_list_items, dependent: :destroy
+  has_many :worklist_items, dependent: :destroy
   liquid_methods  :template, :name, :items
   
   # for mass update
-  accepts_nested_attributes_for :multiline_list_items, update_only: true
+  accepts_nested_attributes_for :worklist_items, update_only: true
 
   include HasOrderableItems
   include HasTemplate
@@ -16,9 +16,9 @@ class MultilineList < ActiveRecord::Base
     self.order ||= self.resume.items.size + 1
   end
 
-  # shorthand for multiline_list_items
+  # shorthand for worklist_items
   def items
-    return self.multiline_list_items.order(:order)
+    return self.worklist_items.order(:order)
   end
 
 end

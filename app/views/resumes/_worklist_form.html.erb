@@ -1,5 +1,5 @@
 <% list = data %>
-<%= fields_for "resume[multiline_lists_attributes][#{list.id}]", list do |lf| %>
+<%= fields_for "resume[worklists_attributes][#{list.id}]", list do |lf| %>
   <%= lf.hidden_field :id %>
   <div class="section_controls row">
     <div class="section_name">
@@ -13,10 +13,10 @@
     <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
-      <%= link_to resume_multiline_list_multiline_list_items_path(@resume.id, list.id), class: 'item_add' do %>
+      <%= link_to resume_worklist_worklist_items_path(@resume.id, list.id), class: 'item_add' do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
-      <%= link_to '', resume_multiline_list_path(@resume.id, list.id), 
+      <%= link_to '', resume_worklist_path(@resume.id, list.id), 
         method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger delete_section' %>
     </div>
   </div>
@@ -24,7 +24,7 @@
 
   <div class="multilinelist list">
     <% list.items.each do |item| %>
-      <%= render partial: 'multiline_list_item_form', locals: {form: lf, item: item, list: list} %>
+      <%= render partial: 'worklist_item_form', locals: {form: lf, item: item, list: list} %>
     <% end %>
   </div>
 

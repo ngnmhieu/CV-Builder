@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       resources :simplelistitems, only: [:create, :destroy]
     end
 
-    resources :multiline_lists, only: [:create, :destroy] do
-      resources :multiline_list_items, only: [:create, :destroy]
+    resources :worklists, only: [:create, :destroy] do
+      resources :worklist_items, only: [:create, :destroy]
     end
 
     resources :textsections, only: [:create, :destroy]

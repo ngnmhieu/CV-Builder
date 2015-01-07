@@ -11,31 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103022238) do
-
-  create_table "multiline_list_items", force: true do |t|
-    t.string   "line1"
-    t.string   "line2"
-    t.text     "desc"
-    t.date     "start"
-    t.date     "end"
-    t.integer  "multiline_list_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "order"
-  end
-
-  add_index "multiline_list_items", ["multiline_list_id"], name: "index_multiline_list_items_on_multiline_list_id"
-
-  create_table "multiline_lists", force: true do |t|
-    t.string   "name"
-    t.integer  "order"
-    t.integer  "resume_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "multiline_lists", ["resume_id"], name: "index_multiline_lists_on_resume_id"
+ActiveRecord::Schema.define(version: 20150107220329) do
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -104,5 +80,29 @@ ActiveRecord::Schema.define(version: 20150103022238) do
     t.datetime "updated_at"
     t.string   "password_digest"
   end
+
+  create_table "worklist_items", force: true do |t|
+    t.string   "line1"
+    t.string   "line2"
+    t.text     "desc"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "worklist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order"
+  end
+
+  add_index "worklist_items", ["worklist_id"], name: "index_worklist_items_on_worklist_id"
+
+  create_table "worklists", force: true do |t|
+    t.string   "name"
+    t.integer  "order"
+    t.integer  "resume_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "worklists", ["resume_id"], name: "index_worklists_on_resume_id"
 
 end
