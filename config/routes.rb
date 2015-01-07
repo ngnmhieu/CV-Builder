@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :resumes, except: [:new] do
     resources :simplelists, only: [:create, :destroy] do
-      resources :simplelistitems, only: [:create, :destroy]
+      resources :simpleitems, only: [:create, :destroy]
     end
 
     resources :worklists, only: [:create, :destroy] do

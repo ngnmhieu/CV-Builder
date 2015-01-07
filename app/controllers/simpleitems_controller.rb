@@ -1,4 +1,4 @@
-class SimplelistitemsController < ApplicationController
+class SimpleitemsController < ApplicationController
 
   def create
     @resume = Resume.find(params[:resume_id])
@@ -27,7 +27,7 @@ class SimplelistitemsController < ApplicationController
 
   def destroy
     list = Simplelist.find(params[:simplelist_id])
-    item = Simplelistitem.find(params[:id])
+    item = Simpleitem.find(params[:id])
 
     if item.destroy
       list.refresh_ordering

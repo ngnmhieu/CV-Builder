@@ -1,4 +1,4 @@
-class Simplelistitem < ActiveRecord::Base
+class Simpleitem < ActiveRecord::Base
   belongs_to :simplelist
   after_initialize :default_attributes
   liquid_methods :content

@@ -15,7 +15,7 @@
 
       <label class="btn btn-default"><%= lf.check_box :ordered_list, class: 'ordered_list_toggle' %> Ordered List</label>
 
-      <%=link_to resume_simplelist_simplelistitems_path(@resume.id, list.id), class: 'item_add' do %>
+      <%=link_to resume_simplelist_simpleitems_path(@resume.id, list.id), class: 'item_add' do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
       <%= link_to '', resume_simplelist_path(@resume.id, list.id), method: :delete, class: 'glyphicon glyphicon-trash clickable btn btn-danger delete_section' %>
@@ -25,7 +25,7 @@
   <% if !list.items.empty?  %>
     <ul class="simplelist list <%= list.ordered_list ? 'ordered': 'unordered' %>">
       <% list.items.each do |item| %>
-        <%= render partial: 'simplelist_item_form', locals: {form: lf, item: item, list: list} %>
+        <%= render partial: 'simpleitem_form', locals: {form: lf, item: item, list: list} %>
       <% end %>
     </ul>
   <% end %>

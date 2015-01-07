@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107220806) do
+ActiveRecord::Schema.define(version: 20150107221300) do
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150107220806) do
     t.string   "template"
   end
 
-  create_table "simplelistitems", force: true do |t|
+  create_table "simpleitems", force: true do |t|
     t.string   "content"
     t.integer  "simplelist_id"
     t.datetime "created_at"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150107220806) do
     t.integer  "order"
   end
 
-  add_index "simplelistitems", ["simplelist_id"], name: "index_simplelistitems_on_simplelist_id"
+  add_index "simpleitems", ["simplelist_id"], name: "index_simpleitems_on_simplelist_id"
 
   create_table "simplelists", force: true do |t|
     t.string   "name"
