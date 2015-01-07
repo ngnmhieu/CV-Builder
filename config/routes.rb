@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
   get '/' => 'pages#index', as: 'root'
 
-  resources :resumes do
-    resources :simplelists do
-      resources :simplelistitems
+  resources :resumes, except: [:new] do
+    resources :simplelists, only: [:create, :destroy] do
+      resources :simplelistitems, only: [:create, :destroy]
     end
-    resources :multiline_lists do
-      resources :multiline_list_items
+
+    resources :multiline_lists, only: [:create, :destroy] do
+      resources :multiline_list_items, only: [:create, :destroy]
     end
-    resources :textsections
+
+    resources :textsections, only: [:create, :destroy]
   end
 
   get  'register' => 'users#register', as: 'register'
@@ -16,4 +18,6 @@ Rails.application.routes.draw do
   get  'login' => 'users#login', as: 'login'
   post 'login' => 'users#authenticate', as: 'authenticate'
   get  'logout' => 'users#logout', as: 'logout'
+
+
 end

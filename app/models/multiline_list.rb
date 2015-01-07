@@ -16,9 +16,9 @@ class MultilineList < ActiveRecord::Base
     self.order ||= self.resume.items.size + 1
   end
 
-  # short hand for multiline_list_items
+  # shorthand for multiline_list_items
   def items
-    return self.multiline_list_items.sort_by { |item| item.order }
+    return self.multiline_list_items.order(:order)
   end
 
 end

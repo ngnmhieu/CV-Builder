@@ -32,8 +32,6 @@ class ResumesController < ApplicationController
     @template = template_content(@resume.template)
     set_liquid_path(@resume.template)
 
-      # config.assets.paths << Rails.root.join(ENV["APP.TEMPLATE_DIR"], @resume.template, 'assets')
-
     respond_to do |format|
       format.pdf do 
         render pdf: @resume.name, encoding: 'utf-8',

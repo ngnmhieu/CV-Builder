@@ -16,8 +16,8 @@ class Simplelist < ActiveRecord::Base
     self.order ||= self.resume.items.size + 1
   end
 
-  # short hand for simplelist_items
+  # shorthand for simplelist_items
   def items
-    return self.simplelistitems.sort_by { |item| item.order }
+    return self.simplelistitems.order(:order)
   end
 end
