@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107220329) do
+ActiveRecord::Schema.define(version: 20150107220806) do
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20150107220329) do
     t.string   "password_digest"
   end
 
-  create_table "worklist_items", force: true do |t|
+  create_table "workitems", force: true do |t|
     t.string   "line1"
     t.string   "line2"
     t.text     "desc"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150107220329) do
     t.integer  "order"
   end
 
-  add_index "worklist_items", ["worklist_id"], name: "index_worklist_items_on_worklist_id"
+  add_index "workitems", ["worklist_id"], name: "index_workitems_on_worklist_id"
 
   create_table "worklists", force: true do |t|
     t.string   "name"

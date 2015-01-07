@@ -1,10 +1,10 @@
 class Worklist < ActiveRecord::Base
   belongs_to :resume
-  has_many :worklist_items, dependent: :destroy
+  has_many :workitems, dependent: :destroy
   liquid_methods  :template, :name, :items
   
   # for mass update
-  accepts_nested_attributes_for :worklist_items, update_only: true
+  accepts_nested_attributes_for :workitems, update_only: true
 
   include HasOrderableItems
   include HasTemplate
@@ -16,9 +16,9 @@ class Worklist < ActiveRecord::Base
     self.order ||= self.resume.items.size + 1
   end
 
-  # shorthand for worklist_items
+  # shorthand for workitems
   def items
-    return self.worklist_items.order(:order)
+    return self.workitems.order(:order)
   end
 
 end

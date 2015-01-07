@@ -1,5 +1,5 @@
 <div class="row mll_item item">
-  <%= fields_for "resume[worklists_attributes][#{list.id}][worklist_items_attributes][#{item.id}]", item do |itemf| %>
+  <%= fields_for "resume[worklists_attributes][#{list.id}][workitems_attributes][#{item.id}]", item do |itemf| %>
   <%= itemf.hidden_field :id %>
   <%= itemf.hidden_field :order, class: 'item_order' %></span>
 
@@ -17,7 +17,7 @@
 
       <div class="controls">
         <span class="space"></span>
-        <%= link_to '', resume_worklist_worklist_item_path(@resume.id, list.id, item.id),
+        <%= link_to '', resume_worklist_workitem_path(@resume.id, list.id, item.id),
           class: 'glyphicon glyphicon-trash clickable item_delete'%>
       </div>
       <div class="dates">

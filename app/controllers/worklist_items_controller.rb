@@ -1,4 +1,4 @@
-class WorklistItemsController < ApplicationController
+class WorkitemsController < ApplicationController
 
   def create
     @resume = Resume.find(params[:resume_id])
@@ -13,7 +13,7 @@ class WorklistItemsController < ApplicationController
             render json: { 
               'status' => 'success',
               'html'   => render_to_string(
-                partial: 'resumes/worklist_item_form.html.erb',
+                partial: 'resumes/workitem_form.html.erb',
                 layout: false, locals: {list: list, item: item}
               )
             } 
@@ -25,7 +25,7 @@ class WorklistItemsController < ApplicationController
 
   def destroy
     list = Worklist.find(params[:worklist_id])
-    item = WorklistItem.find(params[:id])
+    item = Workitem.find(params[:id])
     if item.destroy
       list.refresh_ordering
       respond_to do |format|

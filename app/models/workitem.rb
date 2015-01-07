@@ -1,4 +1,4 @@
-class WorklistItem < ActiveRecord::Base
+class Workitem < ActiveRecord::Base
   belongs_to :worklist
   liquid_methods :line1, :line2, :desc, :start, :end
 

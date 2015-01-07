@@ -13,7 +13,7 @@
     <%= lf.hidden_field :order, class: 'section_order' %>
 
     <div class="controls">
-      <%= link_to resume_worklist_worklist_items_path(@resume.id, list.id), class: 'item_add' do %>
+      <%= link_to resume_worklist_workitems_path(@resume.id, list.id), class: 'item_add' do %>
         <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Item </button>
       <% end %>
       <%= link_to '', resume_worklist_path(@resume.id, list.id), 
@@ -24,7 +24,7 @@
 
   <div class="multilinelist list">
     <% list.items.each do |item| %>
-      <%= render partial: 'worklist_item_form', locals: {form: lf, item: item, list: list} %>
+      <%= render partial: 'workitem_form', locals: {form: lf, item: item, list: list} %>
     <% end %>
   </div>
 

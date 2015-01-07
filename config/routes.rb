@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
 
     resources :worklists, only: [:create, :destroy] do
-      resources :worklist_items, only: [:create, :destroy]
+      resources :workitems, only: [:create, :destroy]
     end
 
     resources :textsections, only: [:create, :destroy]
