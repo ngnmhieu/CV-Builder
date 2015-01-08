@@ -24,12 +24,17 @@ class ResumesController < ApplicationController
 
   def show
     @resume   = Resume.find(params[:id])
+
+    # variables that are available in the templates
     @data     = {
       'resume'   => @resume,
+      'template' => @resume.template,
       'sections' => @resume.items,
       'personal_detail' => @resume.personal_detail
     }
-    @template = template_content(@resume.template)
+
+    # Hash containing Liquid-template file content 
+    @template = template_contents(@resume.template)
     set_liquid_path(@resume.template)
 
     respond_to do |format|
@@ -76,9 +81,15 @@ class ResumesController < ApplicationController
 
   # return the content of liquid template file
   # @param String
-  def template_content(template_name)
-    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume.liquid')
-    return File.read(template_path)
+  def template_contents(template_name)
+    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name)
+    head_tpl_file = template_path.join('resume_head.liquid')
+    body_tpl_file = template_path.join('resume_body.liquid')
+
+    # head_tpl_file = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume_head.liquid')
+    # body_tpl_file = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume_body.liquid')
+
+    return { head: File.read(head_tpl_file), body: File.read(body_tpl_file) }
   end
 
   def resume_params
