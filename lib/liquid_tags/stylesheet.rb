@@ -22,4 +22,3 @@ class LiquidTags::Stylesheet < Liquid::Tag
     "<link rel='stylesheet' type='text/css' href='#{stylesheet_path}' media='all' />"
   end
 end
-

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    if @user = do_authenticate(login_params[:email], login_params[:password])
+    if @user = User.authenticate(login_params[:email], login_params[:password])
       do_login(@user.id)
       flash[:notice] = "Welcome back, #{@user.name ? @user.name : @user.email }"
       redirect_to root_path
@@ -62,11 +62,6 @@ class UsersController < ApplicationController
 
     def do_login(id)
       session[:user_id] = id
-    end
-
-    def do_authenticate(email, password)
-      @user = User.find_by(email: email)
-      return @user.try(:authenticate, password) ? @user : false;
     end
 
     def register_params

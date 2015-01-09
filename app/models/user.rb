@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.authenticate(email, password)
+    @user = User.find_by(email: email)
+    return @user.try(:authenticate, password) ? @user : false;
+  end 
 end
