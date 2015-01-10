@@ -35,9 +35,6 @@ describe UsersController, :type => :controller do
   end
 
   describe "User Logout" do
-    it "should actually logs user out" do
-    end
-
     it "should return to hompage after logging out" do
       post :logout
 
