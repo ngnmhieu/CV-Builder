@@ -11,9 +11,14 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+
+######################
+#     Javascript     #
+######################
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -27,26 +32,36 @@ gem 'jquery-turbolinks' # fix problem of javascript not reloading on new page
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+
+gem 'bootstrap-wysihtml5-rails'
+
+######################
+#   END Javascript   # 
+######################
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-gem 'bootstrap-wysihtml5-rails'
-
-#####################
-###    Testing    ###
-#####################
+######################
+#      Testing       #
+######################
 
 group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
 end
 
 ######################
-###    Utilities   ###
+#    END Testing     #
+######################
+
+######################
+#      Utilities     #
 ######################
 
 # convert html view to pdf
@@ -54,6 +69,10 @@ gem 'wicked_pdf'
 
 # Liquid template engine
 gem 'liquid'
+
+######################
+#    END Utilities   #
+######################
 
 # Use unicorn as the app server
 # gem 'unicorn'

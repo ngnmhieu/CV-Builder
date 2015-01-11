@@ -23,7 +23,13 @@ module ResumeBuilder
     # enable/disable Asset Pipeline
     # config.assets.enabled = true
 
+    # Loads files in lib/ directory
     config.autoload_paths << Rails.root.join('lib')
+
+    # Use Rspec as app's test framework 
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end
 
