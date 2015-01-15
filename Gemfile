@@ -54,6 +54,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'simplecov', require: false
 end
 
 ######################

@@ -20,3 +20,5 @@
 *.swn
 *.swo
 tags
+
+/coverage

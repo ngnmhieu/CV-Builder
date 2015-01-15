@@ -36,6 +36,9 @@ describe User, :type => :model do
       expect(existing_user).not_to be_valid
     end
 
+  end
+
+  describe "Default Attributes" do
     it "should have a default name if attribute name is not provided" do
       user = create(:user, email: 'my_buddy@gmail.com')
       expect(user.name).to eq 'My_buddy'
@@ -45,12 +48,17 @@ describe User, :type => :model do
       user = create(:user, name: "Hieu", email: 'my_buddy@gmail.com')
       expect(user.name).to eq 'Hieu'
     end
+  end
 
-    it "authenticate user correctly" do
-      user = create(:user)
+  describe "Authentiation" do
+    let(:user) { create(:user) }
+
+    it "allow authenticated user in" do
       expect(User.authenticate(user.email, user.password)).not_to be false
-      expect(User.authenticate(user.email, "wrong passord")).to be false
     end
 
+    it "don't allow not authentiated user in " do
+      expect(User.authenticate(user.email, "wrong passord")).to be false
+    end
   end
 end
