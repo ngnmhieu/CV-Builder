@@ -6,9 +6,9 @@ describe User, :type => :model do
   end
 
   describe "Validation" do
-    it "is not valid without email address" do
+    it "User is valid without email address" do
       user_without_email = build(:user, email: nil)
-      expect(user_without_email).not_to be_valid
+      expect(user_without_email).to be_valid
     end
 
     it "should have email address with valid format" do

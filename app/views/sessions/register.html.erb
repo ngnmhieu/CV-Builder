@@ -27,14 +27,22 @@
       <br />
       <%= f.submit "Register", class: "btn btn-default" %>
 
-      <div id="OAuthButtons">
-        
+    <div id="OAuthButtons">
+      <%= link_to oauth_path(:linkedin), class: 'auth_btn' do %>
         <button type="button" class="btn btn-primary">Login with LinkedIn</button>
+      <% end %>
+      <%= link_to oauth_path(:googleplus), class: 'auth_btn' do %>
         <button type="button" class="btn btn-danger">Login with Google+</button>
+      <% end %>
+      <%= link_to oauth_path(:twitter), class: 'auth_btn' do %>
         <button type="button" class="btn btn-info">Login with Twitter</button>
+      <% end %>
+      <%= link_to oauth_path(:facebook), class: 'auth_btn' do %>
         <button type="button" class="btn btn-primary">Login with Facebook</button>
+      <% end %>
+    </div>
 
-      </div>
+  <% end %>
     <% end %>
 
   </div>

@@ -74,6 +74,7 @@ gem 'liquid'
 # OpenID Authentication
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 ######################
 #    END Utilities   #

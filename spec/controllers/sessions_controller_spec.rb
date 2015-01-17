@@ -140,7 +140,7 @@ describe SessionsController, type: :controller do
       it "should create new user with name and email" do
         allow(OauthIdentity).to receive(:authenticate) { nil }
         new_user = build(:user)
-        expect(User).to receive(:new).with(auth_info) { new_user }
+        expect(User).to receive(:new).with({ name: auth_info[:name] }) { new_user }
 
         get :auth_openid, provider: :default
       end

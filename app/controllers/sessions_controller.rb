@@ -7,15 +7,27 @@ class SessionsController < ApplicationController
 
     if found_identity
       user = found_identity.user
+      result = !user.nil? # does user exists?
     else
-      user = User.new(name: auth[:info][:name], email: auth[:info][:email])
+      user = User.new(name: auth[:info][:name])
+      user.email = auth[:info][:email] if auth[:info][:email]
       identity = user.oauth_identities.build(uid: auth[:uid], provider: auth[:provider])
-      user.save && identity.save
+      result = user.save && identity.save
     end
 
-    respond_to do |format|
-      do_login(user.id)
-      format.html { redirect_to root_path }
+    if result
+      respond_to do |format|
+        do_login(user.id)
+        format.html { redirect_to root_path }
+      end
+    else
+      raise user.errors.to_yaml
+      respond_to do |format|
+        format.html do
+          flash[:warning] = "Sorry, we couldn't log you in at the moment, please try login with another provider or try again later."
+          redirect_to login_path 
+        end
+      end
     end
   end
 
