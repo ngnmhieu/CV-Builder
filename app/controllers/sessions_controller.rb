@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 
+  # authenticate user with OpenID 
   def auth_openid
     auth = request.env['omniauth.auth']
     found_identity = OauthIdentity.authenticate(auth[:uid], auth[:provider])
@@ -7,7 +8,7 @@ class SessionsController < ApplicationController
     if found_identity
       user = found_identity.user
     else
-      user = User.new
+      user = User.new(name: auth[:info][:name], email: auth[:info][:email])
       identity = user.oauth_identities.build(uid: auth[:uid], provider: auth[:provider])
       user.save && identity.save
     end
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def auth_cancel
+  def auth_openid_cancel
   end
 
   # display registration page

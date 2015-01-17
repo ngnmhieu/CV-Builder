@@ -85,11 +85,16 @@ describe SessionsController, type: :controller do
     let(:default_auth) { { provider: 'default', uid: '123456789' } }
     let(:facebook_auth) { { provider: 'facebook', uid: '123456789' } }
     let(:twitter_auth) { { provider: 'twitter', uid: '123456789' } }
+    let(:auth_info) { { name: "Awesome User", email: "awesome@email.org" } }
 
     before(:all) do
-      default_auth = { provider: 'default', uid: '123456789' }
-      facebook_auth = { provider: 'facebook', uid: '123456789' }
-      twitter_auth = { provider: 'twitter', uid: '123456789' }
+      auth_info = {
+        name: "Awesome User",
+        email: "awesome@email.org"
+      }
+      default_auth = { provider: 'default', uid: '123456789', info: auth_info }
+      facebook_auth = { provider: 'facebook', uid: '123456789', info: auth_info }
+      twitter_auth = { provider: 'twitter', uid: '123456789', info: auth_info }
 
       OmniAuth.config.test_mode = true
       OmniAuth.config.add_mock(:default, default_auth)
@@ -131,7 +136,16 @@ describe SessionsController, type: :controller do
 
         get :auth_openid, provider: :default
       end
+
+      it "should create new user with name and email" do
+        allow(OauthIdentity).to receive(:authenticate) { nil }
+        new_user = build(:user)
+        expect(User).to receive(:new).with(auth_info) { new_user }
+
+        get :auth_openid, provider: :default
+      end
     end
 
+    # describe "User Login Cancel GET #auth_openid_cancel"
   end
 end
