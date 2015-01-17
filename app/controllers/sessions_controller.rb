@@ -1,5 +1,26 @@
 class SessionsController < ApplicationController
 
+  def auth_openid
+    auth = request.env['omniauth.auth']
+    found_identity = OauthIdentity.authenticate(auth[:uid], auth[:provider])
+
+    if found_identity
+      user = found_identity.user
+    else
+      user = User.new
+      identity = user.oauth_identities.build(uid: auth[:uid], provider: auth[:provider])
+      user.save && identity.save
+    end
+
+    respond_to do |format|
+      do_login(user.id)
+      format.html { redirect_to root_path }
+    end
+  end
+
+  def auth_cancel
+  end
+
   # display registration page
   def register
     @identity = DefaultIdentity.new

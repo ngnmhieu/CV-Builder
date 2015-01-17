@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117012358) do
+ActiveRecord::Schema.define(version: 20150117150258) do
 
   create_table "default_identities", force: true do |t|
     t.string   "email"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20150117012358) do
   end
 
   add_index "default_identities", ["user_id"], name: "index_default_identities_on_user_id"
+
+  create_table "oauth_identities", force: true do |t|
+    t.string   "uid"
+    t.string   "provider"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "oauth_identities", ["user_id"], name: "index_oauth_identities_on_user_id"
 
   create_table "personal_details", force: true do |t|
     t.string   "name"

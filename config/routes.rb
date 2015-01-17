@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   get  'logout'    => 'sessions#destroy', as: 'logout'
   
 
-  get '/auth/:provider/callback' => 'sessions#oauth_create'
+  get '/auth/:provider/callback' => 'sessions#auth_openid', as: 'oauth'
 
 end

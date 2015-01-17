@@ -35,7 +35,7 @@ describe User, :type => :model do
 
   describe "Default Attributes" do
     it "should have a default name if attribute name is not provided" do
-      user = create(:user, email: 'my_buddy@gmail.com')
+      user = create(:user, name: nil, email: 'my_buddy@gmail.com')
       expect(user.name).to eq 'My_buddy'
     end
 

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :resumes, dependent: :destroy
   has_one  :default_identity, dependent: :destroy
+  has_many :oauth_identities, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 },
                     format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
