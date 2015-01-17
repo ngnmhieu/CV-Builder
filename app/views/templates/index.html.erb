@@ -1,0 +1,29 @@
+<div style="width: 600px; margin: 0 auto">
+  <table class="table table-striped">
+    <thead>
+      <th style="width: 300px">Name</th>
+      <th style="width: 200px">Codename</th>
+      <th style="width: 100px" colspan='2'>Action</th>
+    </thead>
+    <% @templates.each do |tpl| %>
+      <tr id="template_<%= tpl.id %>"> 
+        <td ><%= tpl.name %></td>
+        <td ><%= tpl.codename %></td>
+        <td>
+          <%= link_to edit_template_path(tpl) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to template_path(tpl), method: :delete do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to new_template_path do %>
+    <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Template</button>
+  <% end %>
+</div>

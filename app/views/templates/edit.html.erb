@@ -1,0 +1,25 @@
+<div style="width: 400px; margin: 0 auto">
+  
+<h3>Edit Template</h3>
+
+<% if @template.errors.any? %>
+  <ul id="ErrorMessages" class="alert alert-warning">
+    <% @template.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @template do |f| %>
+  <%= f.label :name, 'Name: ' %>
+  <%= f.text_field :name, class: 'form-control' %>
+  <%= f.label :codename, 'Codename: ' %>
+  <%= f.text_field :codename, class: 'form-control' %>
+  <br />
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+  <%= link_to templates_path do %>
+    <button type="button" class="btn btn-default">Cancel</button>
+  <% end %>
+<% end %>
+
+</div>

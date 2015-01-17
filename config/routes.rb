@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :textsections, only: [:create, :destroy]
   end
 
+  resources :templates, except: [:show]
+
   get  'register'  => 'sessions#register', as: 'register'
   post 'register'  => 'sessions#create', as: 'create_user'
   get  'login'     => 'sessions#login', as: 'login'

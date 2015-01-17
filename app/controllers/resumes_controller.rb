@@ -20,6 +20,7 @@ class ResumesController < ApplicationController
 
   def create
     @resume = Resume.new
+    @resume.template = Template.default
     current_user.resumes << @resume
     @resume.personal_detail = PersonalDetail.create
     if @resume.save
@@ -29,18 +30,19 @@ class ResumesController < ApplicationController
 
   def show
     @resume   = Resume.find(params[:id])
+    template = @resume.template || Template.default
 
     # variables that are available in the templates
     @data     = {
       'resume'   => @resume,
-      'template' => @resume.template,
+      'template' => template.codename,
       'sections' => @resume.items,
       'personal_detail' => @resume.personal_detail
     }
 
     # Hash containing Liquid-template file content 
-    @template = template_contents(@resume.template)
-    set_liquid_path(@resume.template)
+    @template_content = template_contents(template.codename)
+    set_liquid_path(template.codename)
 
     respond_to do |format|
       format.pdf do 

@@ -1,5 +1,6 @@
 class Resume < ActiveRecord::Base
   belongs_to :user
+  belongs_to :template
   has_one    :personal_detail, dependent: :destroy
   has_many   :simplelists,     dependent: :destroy
   has_many   :worklists, dependent: :destroy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117150258) do
+ActiveRecord::Schema.define(version: 20150117220838) do
 
   create_table "default_identities", force: true do |t|
     t.string   "email"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150117150258) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "template_id"
     t.string   "template"
   end
 
@@ -81,6 +82,13 @@ ActiveRecord::Schema.define(version: 20150117150258) do
   end
 
   add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id"
+
+  create_table "templates", force: true do |t|
+    t.string   "name"
+    t.string   "codename"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "textsections", force: true do |t|
     t.string   "name"

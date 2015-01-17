@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<div  id="ResumesListing"> 
+<div id="ResumesListing"> 
   <table class="table table-striped">
     <thead>
       <th style="width: 300px">Name</th>
@@ -32,4 +32,9 @@
   <%= link_to resumes_path, method: :post do %>
     <button class="btn btn-success">Create New Resume</button>
   <% end %>
+
+  <%= link_to templates_path do %>
+    <button class="btn btn-primary">Templates</button>
+  <% end %>
+  
 </div>
