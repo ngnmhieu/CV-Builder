@@ -1,7 +1,8 @@
 <%= render partial: 'add_section_modal' %>
-<%= render partial: 'choose_template_modal' %>
 
 <%= form_for @resume, html: {id: 'ResumeEditorForm'} do |r| %>
+
+  <%= render partial: 'choose_template_modal', locals: { form: r } %>
 
   <!-- PageHeader -->
   <div id="PageHeader">

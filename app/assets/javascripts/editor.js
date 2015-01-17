@@ -131,6 +131,13 @@ ResumeEditor = (function() {
               editor_obj.save.call(editor_obj);
             });
 
+            // Choose template
+            $("#ChooseTemplateButton").on('click', function() {
+              editor_obj.mainForm.submit();
+              $("#ChooseTemplateModal").modal('hide');
+            });
+            // End Choose template
+
             /****************************
              * section name edit toggle *
              ****************************/

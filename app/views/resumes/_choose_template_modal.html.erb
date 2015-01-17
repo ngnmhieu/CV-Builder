@@ -6,9 +6,15 @@
         <h4 class="modal-title" id="ChooseTemplateModalTitle">Choose a template for your resume</h4>
       </div>
       <div class="modal-body">
-
-        In Progress
-
+        <% @templates.each do |tpl| %>
+          <%= form.radio_button :template_id, tpl.id %>
+          <%= form.label "template_id_#{tpl.id}", tpl.name %>
+          <br />
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="ChooseTemplateButton" class="btn btn-primary">Choose Template</button>
       </div>
     </div>
   </div>

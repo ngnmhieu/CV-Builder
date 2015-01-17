@@ -57,6 +57,8 @@ class ResumesController < ApplicationController
   def edit
     @resume = Resume.find(params[:id])
     @sections = @resume.items
+    @templates = Template.all
+
     render layout: 'editor'
   end
 
@@ -98,7 +100,7 @@ class ResumesController < ApplicationController
 
   def resume_params
     params.require(:resume).permit(
-      :name, 
+      :name, :template_id,
       personal_detail_attributes: [:name, :phone, :fax, :address, :address1, :address2, :address3, :email, :website, :sex, :dob, :id],
       simplelists_attributes: [:name, :id, :order, :ordered_list, simpleitems_attributes: [:id, :content, :order]],
       worklists_attributes: [:name, :id, :order, workitems_attributes: [:id, :line1, :line2, :desc, :start, :end, :order]],
