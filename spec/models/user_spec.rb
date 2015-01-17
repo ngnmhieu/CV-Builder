@@ -1,19 +1,14 @@
 require 'rails_helper'
 
 describe User, :type => :model do
-  describe "Validation" do
-    it "be a valid factory object" do
-      expect(build(:user)).to be_valid
-    end
+  it "be a valid factory object" do
+    expect(build(:user)).to be_valid
+  end
 
+  describe "Validation" do
     it "is not valid without email address" do
       user_without_email = build(:user, email: nil)
       expect(user_without_email).not_to be_valid
-    end
-
-    it "is not valid without password" do
-      user_without_pass = build(:user, password: nil)
-      expect(user_without_pass).not_to be_valid
     end
 
     it "should have email address with valid format" do
@@ -30,10 +25,10 @@ describe User, :type => :model do
     end
 
     it "should have an unique email address" do
-      create(:user)
-      existing_user = build(:user)
+      user = create(:user)
+      new_user = build(:user, email: user.email)
 
-      expect(existing_user).not_to be_valid
+      expect(new_user).not_to be_valid
     end
 
   end
@@ -47,18 +42,6 @@ describe User, :type => :model do
     it "should not set default name if it's provided" do
       user = create(:user, name: "Hieu", email: 'my_buddy@gmail.com')
       expect(user.name).to eq 'Hieu'
-    end
-  end
-
-  describe "Authentiation" do
-    let(:user) { create(:user) }
-
-    it "allow authenticated user in" do
-      expect(User.authenticate(user.email, user.password)).not_to be false
-    end
-
-    it "don't allow not authentiated user in " do
-      expect(User.authenticate(user.email, "wrong passord")).to be false
     end
   end
 end

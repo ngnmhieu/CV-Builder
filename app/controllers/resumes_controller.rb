@@ -3,11 +3,16 @@ class ResumesController < ApplicationController
   def index
     if logged_in?
       @resumes = current_user.resumes
+      respond_to do |format|
+        format.html
+        # format.json 
+      end
     else
       respond_to do |format|
         format.html do 
           flash[:notice] = "You have to be a user, in order to save your resumes."
           redirect_to register_path 
+          return
         end
       end
     end
@@ -85,9 +90,6 @@ class ResumesController < ApplicationController
     template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name)
     head_tpl_file = template_path.join('resume_head.liquid')
     body_tpl_file = template_path.join('resume_body.liquid')
-
-    # head_tpl_file = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume_head.liquid')
-    # body_tpl_file = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name, 'resume_body.liquid')
 
     return { head: File.read(head_tpl_file), body: File.read(body_tpl_file) }
   end

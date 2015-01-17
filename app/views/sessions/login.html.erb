@@ -1,0 +1,17 @@
+<section id="Login">
+  <% if flash[:warning] %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
+
+  <%= form_for :default_identity, url: authenticate_path, html: {id: "LoginForm"} do |f| %>
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email, class: "form-control" %>
+    <br />
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password, class: "form-control" %>
+    <br />
+    <%= f.submit "Login", class: "btn btn-primary" %>
+  <% end %>
+</section>

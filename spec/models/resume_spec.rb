@@ -10,4 +10,8 @@ describe Resume, type: :model do
       expect(resume.template).to eq "default"
     end
   end
+  
+  describe "items" do
+    it "should return correctly ordererd items"
+  end
 end

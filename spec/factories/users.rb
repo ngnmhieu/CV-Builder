@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do 
     email "test@eat.chocolate"
-    password "123456789"
+    association :default_identity, strategy: :build
   end
 end

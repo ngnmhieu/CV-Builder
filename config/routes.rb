@@ -13,11 +13,13 @@ Rails.application.routes.draw do
     resources :textsections, only: [:create, :destroy]
   end
 
-  get  'register' => 'users#register', as: 'register'
-  post 'register' => 'users#create', as: 'create_user'
-  get  'login' => 'users#login', as: 'login'
-  post 'login' => 'users#authenticate', as: 'authenticate'
-  get  'logout' => 'users#logout', as: 'logout'
+  get  'register'  => 'sessions#register', as: 'register'
+  post 'register'  => 'sessions#create', as: 'create_user'
+  get  'login'     => 'sessions#login', as: 'login'
+  post 'login'     => 'sessions#auth_default_identity', as: 'authenticate'
+  get  'logout'    => 'sessions#destroy', as: 'logout'
+  
 
+  get '/auth/:provider/callback' => 'sessions#oauth_create'
 
 end

@@ -71,6 +71,10 @@ gem 'wicked_pdf'
 # Liquid template engine
 gem 'liquid'
 
+# OpenID Authentication
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 ######################
 #    END Utilities   #
 ######################

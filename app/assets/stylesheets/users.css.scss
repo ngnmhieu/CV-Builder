@@ -6,12 +6,36 @@
  * COLORs
  * red error: #a94442
  */
-#UserForm {
+
+#Register {
   margin: 0 auto;
   width: 400px;
+  
+  #ErrorMessages {
+    list-style-type: square;
+    padding-left: 40px;
+  }
 }
 
-#LoginForm {
+
+#RegisterForm {
+  label {
+    margin-top: 10px;
+  }
+}
+
+#OAuthButtons {
+  button {
+   width: 185px;
+   margin-top: 10px;
+  }
+
+  button:nth-child(2n+1) {
+    margin-right: 20px;
+  }
+}
+
+#Login {
   margin: 0 auto;
   width: 400px;
 }

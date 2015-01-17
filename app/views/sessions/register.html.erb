@@ -1,0 +1,42 @@
+<section id="Register">
+
+  <% if flash[:warning] %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
+ 
+  <% if @identity.errors.any? %>
+    <ul id="ErrorMessages" class="alert alert-warning">
+      <% @identity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div id="RegisterForm">
+    
+  <%# <%= form_for :default_identity, url: authenticate_path, html: {id: "LoginForm"} do |f| %>
+    <%= form_for :default_identity, url: create_user_path do |f| %>
+      <%= f.label :email, 'Email' %>
+      <%= f.text_field :email, class: "form-control" %>
+      <%= f.label :password, 'Password' %>
+      <%= f.password_field :password, class: "form-control" %>
+      <%= f.label :password, 'Password Confirmation' %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+      <br />
+      <%= f.submit "Register", class: "btn btn-default" %>
+
+      <div id="OAuthButtons">
+        
+        <button type="button" class="btn btn-primary">Login with LinkedIn</button>
+        <button type="button" class="btn btn-danger">Login with Google+</button>
+        <button type="button" class="btn btn-info">Login with Twitter</button>
+        <button type="button" class="btn btn-primary">Login with Facebook</button>
+
+      </div>
+    <% end %>
+
+  </div>
+
+</section>

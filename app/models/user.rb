@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :resumes, dependent: :destroy
+  has_one  :default_identity, dependent: :destroy
 
-  has_secure_password
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 },
                     format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
@@ -14,8 +14,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.authenticate(email, password)
-    @user = User.find_by(email: email)
-    return @user.try(:authenticate, password) ? @user : false;
-  end 
 end
