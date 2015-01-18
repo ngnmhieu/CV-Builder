@@ -75,6 +75,8 @@ gem 'liquid'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-google-oauth2'
 
 ######################
 #    END Utilities   #

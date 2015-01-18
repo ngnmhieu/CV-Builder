@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  # TODO: authenticate OpenID error
+  # TODO: merge account
+
   # authenticate user with OpenID 
   def auth_openid
     auth = request.env['omniauth.auth']
@@ -21,7 +24,6 @@ class SessionsController < ApplicationController
         format.html { redirect_to root_path }
       end
     else
-      raise user.errors.to_yaml
       respond_to do |format|
         format.html do
           flash[:warning] = "Sorry, we couldn't log you in at the moment, please try login with another provider or try again later."
