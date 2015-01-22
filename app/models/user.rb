@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_one  :default_identity, dependent: :destroy
   has_many :oauth_identities, dependent: :destroy
 
-  validates :email, allow_blank: true, uniqueness: true, length: { maximum: 255 },
+  validates :email, allow_blank: true, length: { maximum: 255 },
                     format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
 

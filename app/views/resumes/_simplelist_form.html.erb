@@ -22,11 +22,9 @@
     </div>
   </div>
 
-  <% if !list.items.empty?  %>
-    <ul class="simplelist list <%= list.ordered_list ? 'ordered': 'unordered' %>">
-      <% list.items.each do |item| %>
-        <%= render partial: 'simpleitem_form', locals: {form: lf, item: item, list: list} %>
-      <% end %>
-    </ul>
-  <% end %>
+  <ul class="simplelist list <%= list.ordered_list ? 'ordered': 'unordered' %>">
+    <% list.items.each do |item| %>
+      <%= render partial: 'simpleitem_form', locals: {form: lf, item: item, list: list} %>
+    <% end %>
+  </ul>
 <% end %>

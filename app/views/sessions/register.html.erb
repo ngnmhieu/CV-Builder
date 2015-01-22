@@ -15,8 +15,6 @@
   <% end %>
 
   <div id="RegisterForm">
-    
-  <%# <%= form_for :default_identity, url: authenticate_path, html: {id: "LoginForm"} do |f| %>
     <%= form_for :default_identity, url: create_user_path do |f| %>
       <%= f.label :email, 'Email' %>
       <%= f.text_field :email, class: "form-control" %>
@@ -43,8 +41,6 @@
     </div>
 
   <% end %>
-    <% end %>
-
   </div>
 
 </section>

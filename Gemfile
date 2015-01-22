@@ -15,6 +15,10 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+group :development do
+  gem 'pry-rails'
+end
+
 
 ######################
 #     Javascript     #

@@ -46,11 +46,16 @@ class ResumesController < ApplicationController
 
     respond_to do |format|
       format.pdf do 
+        @data['format'] = :pdf
         render pdf: @resume.name, encoding: 'utf-8',
+               page_size: 'A4', margin: {left: 0, right: 0, top: 0, bottom: 0},
                template: 'resumes/show.html.erb', layout: nil
       end
 
-      format.html { render layout: nil }
+      format.html do
+        @data['format'] = :html
+        render layout: nil
+      end
     end
   end
 

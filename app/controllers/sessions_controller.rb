@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
 
-  # TODO: authenticate OpenID error
   # TODO: merge account
 
   # authenticate user with OpenID 
@@ -15,7 +14,11 @@ class SessionsController < ApplicationController
       user = User.new(name: auth[:info][:name])
       user.email = auth[:info][:email] if auth[:info][:email]
       identity = user.oauth_identities.build(uid: auth[:uid], provider: auth[:provider])
-      result = user.save && identity.save
+      if user.valid? && identity.valid? 
+        result = user.save && identity.save
+      else
+        result = false
+      end
     end
 
     if result
@@ -34,6 +37,12 @@ class SessionsController < ApplicationController
   end
 
   def auth_openid_cancel
+    respond_to do |format|
+      format.html do
+        flash[:warning] = "Sorry, we couldn't log you in at the moment, please login eith another provider or try again later."
+        redirect_to login_path
+      end
+    end
   end
 
   # display registration page

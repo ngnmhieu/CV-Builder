@@ -2,10 +2,10 @@
 <html>
 <head>
   <title><%= @resume.name %></title>
-  <%= liquidize(@template_content[:head], @data).html_safe %>
+  <%= liquidize(@template_content[:head], @data, @format).html_safe %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= liquidize(@template_content[:body], @data).html_safe %>
+  <%= liquidize(@template_content[:body], @data, @format).html_safe %>
 </body>
 </html>
