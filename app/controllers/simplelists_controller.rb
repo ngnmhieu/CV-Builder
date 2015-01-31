@@ -3,7 +3,7 @@ class SimplelistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      list = @resume.simplelists.create
+      list = @resume.add_item(Simplelist.new)
 
       if @resume.save
         respond_to do |format|

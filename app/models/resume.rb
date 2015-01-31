@@ -29,4 +29,12 @@ class Resume < ActiveRecord::Base
     return items.sort_by { |item| item.order }
   end
 
+  def add_item(item)
+    return nil unless item.respond_to?(:resume=) && item.respond_to?(:order=)
+
+    item.resume = self 
+    item.order = self.items.size + 1
+
+    return item.save ? item : nil
+  end
 end

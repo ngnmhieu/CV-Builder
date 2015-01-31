@@ -2,7 +2,7 @@ class WorklistsController < ApplicationController
   def create
     @resume = Resume.find(params[:resume_id])
     if @resume != nil
-      list = @resume.worklists.create
+      list = @resume.add_item(Worklist.new)
 
       if @resume.save
         respond_to do |format|

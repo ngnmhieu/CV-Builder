@@ -13,7 +13,6 @@ class Simplelist < ActiveRecord::Base
 
   def default_attributes
     self.name ||= 'New Simple List'
-    self.order ||= self.resume.items.size + 1
   end
 
   # shorthand for simpleitems

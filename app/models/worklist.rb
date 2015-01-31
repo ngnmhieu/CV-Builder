@@ -12,8 +12,7 @@ class Worklist < ActiveRecord::Base
   after_initialize :default_attributes
 
   def default_attributes
-    self.name ||= 'New Occupation List'
-    self.order ||= self.resume.items.size + 1
+    self.name ||= 'New Work List'
   end
 
   # shorthand for workitems
