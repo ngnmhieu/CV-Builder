@@ -2,10 +2,18 @@
 <html>
 <head>
   <title><%= @resume.name %></title>
-  <%= liquidize(@template_content[:head], @data, @format).html_safe %>
+  <%= liquidize(@template.content[:head], @data).html_safe %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= liquidize(@template_content[:body], @data, @format).html_safe %>
+  <% body_content = liquidize(@template.content[:body], @data).html_safe %>
+
+  <% if @data['format'] == :html %>
+    <div style="width: 800px; margin: 0 auto">
+      <%= body_content %>  
+    </div>
+  <% else %>
+    <%= body_content %>
+  <% end %>
 </body>
 </html>

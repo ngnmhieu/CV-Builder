@@ -1,0 +1,15 @@
+{% assign person = personal_detail %}
+
+<div id="contact-info" class="vcard">
+
+  <!-- Microformats! -->
+
+  <h1 class="fn">{{ person.name }}</h1>
+
+  <p>
+  Phone: <span class="tel">{{ person.phone }}</span><br />
+  Email: <a class="email" href="mailto:{{ person.email }}">{{ person.email }}</a><br />
+  {{ person.address1 }} <br>
+  {{ person.address2 }}, {{ person.address3 }}
+  </p>
+</div>

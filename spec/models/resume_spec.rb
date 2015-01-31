@@ -7,7 +7,7 @@ describe Resume, type: :model do
 
     it "should have default template" do
       resume = create(:resume, template: nil)
-      expect(resume.template).to eq "default"
+      expect(resume.template).to eq Template.default
     end
   end
   

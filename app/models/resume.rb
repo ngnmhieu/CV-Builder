@@ -18,7 +18,7 @@ class Resume < ActiveRecord::Base
 
   def default_attributes
     self.name     ||= "Unnamed Resume"
-    self.template ||= "default"
+    self.template ||= Template.default
   end
 
   # all items in one array except for personal_detail

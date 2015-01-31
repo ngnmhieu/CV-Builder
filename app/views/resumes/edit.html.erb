@@ -21,23 +21,6 @@
             </div>
           </div>
 
-          <ul class="nav navbar-nav">
-            <li class="dropdown clickable" id="ShareMenu">
-              <a class="dropdown-toggle" type="button" id="ShareButton" data-toggle="dropdown" aria-expanded="true">
-                <span class="glyphicon glyphicon-globe"></span>
-                Share <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="ShareButton">
-                <li role="presentation">
-                  <%= link_to "As a PDF File", resume_path(@resume, :pdf), role: 'menuitem', tabindex: '-1' %>
-                </li>
-                <li role="presentation">
-                  <%= link_to "As a HTML Page", resume_path(@resume), role: 'menuitem', tabindex: '-1' %>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "ResumeSZ", root_path %></li>
             <% if logged_in? %>
@@ -67,15 +50,34 @@
     </div>
 
     <div id="RightControls" class="col-xs-4">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseTemplateModal">
+      <!-- Share Button--> 
+      <div class="dropdown control" style="display: inline-block">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span class="glyphicon glyphicon-link"></span> Share
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation">
+          <%= link_to "PDF", resume_path(@resume, :pdf), role: 'menuitem', tabindex: '-1', target: '_blank'  %>
+          </li>
+          <li role="presentation">
+          <%= link_to "HTML", resume_path(@resume), role: 'menuitem', tabindex: '-1,', target: '_blank' %>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Template Button -->
+      <button type="button" class="btn btn-primary control" data-toggle="modal" data-target="#ChooseTemplateModal">
         <span class="glyphicon glyphicon-tint"></span> Choose Template
       </button>
 
-    <%= link_to resume_path(@resume), class: 'btn btn-primary control', target: '_blank' do %>
-      <span class="glyphicon glyphicon-th-list"></span> Preview
-    <% end %>
+      <!-- Preview Button--> 
+      <%= link_to resume_path(@resume), class: 'btn btn-primary control', target: '_blank' do %>
+        <span class="glyphicon glyphicon-th-list"></span> Preview
+      <% end %>
 
-    <%= r.submit 'Save', class: 'btn btn-success control' %>
+      <!-- Save Button--> 
+      <%= r.submit 'Save', class: 'btn btn-success control' %>
     </div>
   </div>
   <!-- END TopControls -->

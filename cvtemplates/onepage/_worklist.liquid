@@ -1,0 +1,12 @@
+<dt>{{ section.name }}</dt>
+
+<dd class="worklist">
+{% for item in section.items %}
+  <h2>{{item.line1}} <span>{{ item.start | date: "%b %Y" }} - {{ item.end | date: "%b %Y" }}</span></h2>
+  <span class="line2">{{item.line2}}</span>
+  <div class="desc">
+    {{ item.desc }}
+  </div>
+{% endfor %}
+</dd>
+

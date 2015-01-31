@@ -30,26 +30,23 @@ class ResumesController < ApplicationController
 
   def show
     @resume   = Resume.find(params[:id])
-    template = @resume.template || Template.default
+    @template = @resume.template || Template.default
 
     # variables that are available in the templates
     @data     = {
       'resume'   => @resume,
-      'template' => template.codename,
+      'template' => @template.codename,
       'sections' => @resume.items,
       'personal_detail' => @resume.personal_detail
     }
 
-    # Hash containing Liquid-template file content 
-    @template_content = template_contents(template.codename)
-    set_liquid_path(template.codename)
+    setup_liquid(@template)
 
     respond_to do |format|
       format.pdf do 
         @data['format'] = :pdf
         render pdf: @resume.name, encoding: 'utf-8',
-               page_size: 'A4', margin: {left: 0, right: 0, top: 0, bottom: 0},
-               template: 'resumes/show.html.erb', layout: nil
+               page_size: 'A4', template: 'resumes/show.html.erb', layout: nil
       end
 
       format.html do
@@ -87,21 +84,12 @@ class ResumesController < ApplicationController
   private
 
   # set the path for the specific resume's template (needed by `include` Tag in the template)
-  # @param String
-  def set_liquid_path(template_name)
-    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name)
+  # @param Template
+  def setup_liquid(template)
+    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template.codename)
     Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
   end
 
-  # return the content of liquid template file
-  # @param String
-  def template_contents(template_name)
-    template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template_name)
-    head_tpl_file = template_path.join('resume_head.liquid')
-    body_tpl_file = template_path.join('resume_body.liquid')
-
-    return { head: File.read(head_tpl_file), body: File.read(body_tpl_file) }
-  end
 
   def resume_params
     params.require(:resume).permit(

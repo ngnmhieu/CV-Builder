@@ -24,13 +24,6 @@ describe User, :type => :model do
 
     end
 
-    it "should have an unique email address" do
-      user = create(:user)
-      new_user = build(:user, email: user.email)
-
-      expect(new_user).not_to be_valid
-    end
-
   end
 
   describe "Default Attributes" do

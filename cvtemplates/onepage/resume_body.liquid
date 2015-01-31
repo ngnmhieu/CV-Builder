@@ -1,0 +1,14 @@
+<div id="page-wrap">
+
+  {% include personal_detail.template with personal_detail %}  
+  <!-- <div id="objective"> <p></p> </div> -->
+
+  <div class="clear"></div>
+  <dl>
+    {% for section in sections %}
+      <dd class="clear"></dd>
+      {% include section.template with section %}
+    {% endfor %}
+  </dl>
+
+</div>

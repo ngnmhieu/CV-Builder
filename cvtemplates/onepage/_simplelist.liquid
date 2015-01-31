@@ -1,0 +1,10 @@
+<dt>{{ section.name }}</dt>
+
+<dd>
+  <ul>
+  {% for item in section.items %}
+    <li>{{item.content}}</li>
+  {% endfor %}
+  </ul>
+</dd>
+
