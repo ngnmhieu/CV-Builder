@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
   def auth_openid_cancel
     respond_to do |format|
       format.html do
-        flash[:warning] = "Sorry, we couldn't log you in at the moment, please login eith another provider or try again later."
+        flash[:warning] = "Sorry, we couldn't log you in at the moment, please try login with another provider or try again later."
         redirect_to login_path
       end
     end

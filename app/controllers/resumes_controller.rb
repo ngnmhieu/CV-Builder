@@ -5,14 +5,12 @@ class ResumesController < ApplicationController
       @resumes = current_user.resumes
       respond_to do |format|
         format.html
-        # format.json 
       end
     else
       respond_to do |format|
         format.html do 
           flash[:notice] = "You have to be a user, in order to save your resumes."
           redirect_to register_path 
-          return
         end
       end
     end
