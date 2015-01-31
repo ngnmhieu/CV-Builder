@@ -12,8 +12,8 @@ var ResumeEditor = (function() {
           this.initRichEditors();
           this.initEvents();
 
-          if ((last_tab = this.lastTab()) !== null) {
-            this.openTab(last_tab);
+          if (this.lastTab() !== null) {
+            this.openTab(this.lastTab());
           } else {
             this.openTab(0); // open the first tab by default
           }
@@ -173,7 +173,7 @@ var ResumeEditor = (function() {
                 });
 
                 $("#ResumeTitle").on('keyup', '.section_name_edit input[type=text]', function(e) {
-                  if (e.keyCode == 13) { // Enter key, hide the textbox
+                  if (e.keyCode === 13) { // Enter key, hide the textbox
                     $(this).siblings('.name_save').trigger('click');
                     return false;
                   }
@@ -247,7 +247,7 @@ var ResumeEditor = (function() {
          * trigger timeout [int] seconds before executing save
          */
         autoSave: function() {
-          editor_obj = this;
+          var editor_obj = this;
           clearTimeout(this.autosave_timer);
           this.autosave_timer = setTimeout( function() {
             editor_obj.save.call(editor_obj); 
@@ -334,7 +334,7 @@ var ResumeEditor = (function() {
             tab.attr('data-order', new_order);
             sec.attr('data-order', new_order);
             sec.find('input.section_order').val(new_order);
-          })
+          });
 
         },
 
@@ -350,7 +350,6 @@ var ResumeEditor = (function() {
 
         addSection: function(url) {
           var editor_obj = this; 
-          var tabs = this.tabSections;
 
           $.ajax({
             type: "POST",
