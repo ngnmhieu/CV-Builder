@@ -59,6 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'metric_fu'
 end
 
 ######################

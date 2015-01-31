@@ -1,4 +1,4 @@
-ResumeEditor = (function() {
+var ResumeEditor = (function() {
     return {
         init: function() {
           this.timetosave = 3; // seconds to wait before executing save operation
@@ -12,7 +12,7 @@ ResumeEditor = (function() {
           this.initRichEditors();
           this.initEvents();
 
-          if ((last_tab = this.lastTab()) != null) {
+          if ((last_tab = this.lastTab()) !== null) {
             this.openTab(last_tab);
           } else {
             this.openTab(0); // open the first tab by default
@@ -27,8 +27,9 @@ ResumeEditor = (function() {
           var section_count = this.tabSections.find('li').length;
 
           // order must be a number and in range (0; section_count)
-          if (isNaN(order) || order < 0 || order >= section_count) 
+          if (isNaN(order) || order < 0 || order >= section_count) {
             order = null;
+          }
 
           return order;
         },
@@ -60,7 +61,7 @@ ResumeEditor = (function() {
          * TODO: initialize Drag-and-Drop behavior for list items
          */
         initSections: function() {
-          editor_obj = this;
+          var editor_obj = this;
 
           $('.multilinelist').sortable({
             activate: function(event, ui) {
@@ -141,7 +142,7 @@ ResumeEditor = (function() {
             /****************************
              * section name edit toggle *
              ****************************/
-                var name_edit_click_callback = function(e) {
+                var name_edit_click_callback = function() {
                   var section_name = $(this).parent('.section_name').hide();
                   var edit_section = section_name.siblings('.section_name_edit').show();
                   edit_section.find('input[type=text]').focus();
@@ -157,15 +158,15 @@ ResumeEditor = (function() {
 
                 // bind tab-name and section-name with the edit textbox
                 this.sections.on('keyup', '.section_name_edit input[type=text]', function(e) {
-                  if (e.keyCode == 13) { // Enter key, hide the textbox
+                  if (e.keyCode === 13) { // Enter key, hide the textbox
                     $(this).siblings('.name_save').trigger('click');
                     return false;
                   }
 
                   var value = $(this).val(),
-                  section_order = $(this).parents('.sec').attr('data-order'),
-                  tab = $('.sec-tab[data-order='+section_order+'] a');
-                  section_name = $(this).parent().siblings('.section_name').find('label');
+                      section_order = $(this).parents('.sec').attr('data-order'),
+                      tab = $('.sec-tab[data-order='+section_order+'] a'),
+                      section_name = $(this).parent().siblings('.section_name').find('label');
 
                   section_name.html(value);
                   tab.html(value);
@@ -219,7 +220,7 @@ ResumeEditor = (function() {
 
               // ajax delete item
               this.sections.on('click', '.item_delete', function(e) {
-                var url = $(this).attr('href');
+                var url = $(this).attr('href'),
                     item = $(this).parents('.item');
 
                 editor_obj.deleteItem.call(editor_obj, url, item);
@@ -230,12 +231,13 @@ ResumeEditor = (function() {
            * END Add and Delete Components *
            *********************************/
 
-              this.sections.on('change', '.ordered_list_toggle', function(e) {
+              this.sections.on('change', '.ordered_list_toggle', function() {
                 var list = $(this).parents('.sec').find('.list'); // find the corresponding list
-                if (this.checked)
+                if (this.checked) {
                   list.removeClass('unordered').addClass('ordered');
-                else 
+                } else {
                   list.removeClass('ordered').addClass('unordered');
+                }
 
               });
 
@@ -279,7 +281,7 @@ ResumeEditor = (function() {
          */
         flashMessage: function(msg, type) {
           var el        = $("#SystemMessage"),
-              css_class = type == 'error' ? 'danger': 'success',
+              css_class = type === 'error' ? 'danger': 'success',
               msg_el    = $('<span class="alert alert-'+css_class+'">'+msg+'</span>');
 
           // blink!
@@ -317,7 +319,7 @@ ResumeEditor = (function() {
           var tabs = this.tabSections;
 
           // make and array of pairs [section, new_order]
-          sections = $.map(tabs.find('li'), function(tab, index) {
+          var sections = $.map(tabs.find('li'), function(tab, index) {
             var order = $(tab).attr('data-order'); // old tab order
             var section = $('.sec[data-order='+order+']'); // find the corresponding section
             return [[$(tab),section,index]];
@@ -325,7 +327,7 @@ ResumeEditor = (function() {
 
           // set new order for sections and tabs
           $.each(sections, function(i,data) {
-            var tab = data[0]
+            var tab = data[0];
             var sec = data[1];
             var new_order = data[2];
             
@@ -356,8 +358,8 @@ ResumeEditor = (function() {
             dataType: 'json',
             success: function(response) {
               // add new section to DOM
-              sec =  $('<div class="sec" data-order="'+response.section_order+'"></div>').html(response.html)
-                     .appendTo(editor_obj.sections);
+              var sec = $('<div class="sec" data-order="'+response.section_order+'"></div>').html(response.html)
+                        .appendTo(editor_obj.sections);
 
               sec.find('textarea').each(function() {
                 editor_obj.attachRichEditor($(this));
@@ -385,7 +387,7 @@ ResumeEditor = (function() {
             dataType: 'json',
             success: function(response) {
               list.append(response.html);
-              new_item = list.children(':last-child');
+              var new_item = list.children(':last-child');
 
               // attach rich editors
               new_item.find('textarea').each(function() {
@@ -427,7 +429,7 @@ ResumeEditor = (function() {
             dataType: 'json',
             data: {"_method":"delete"},
             success: function(response) {
-              var order = response.section_order
+              var order = response.section_order;
               editor_obj.tabSections.find('.sec-tab[data-order='+order+']').remove();
               editor_obj.sections.find('.sec[data-order='+order+']').remove();
 
@@ -441,7 +443,7 @@ ResumeEditor = (function() {
             }
           });
         }
-    }
+    };
 })();
 
 (function($) {
