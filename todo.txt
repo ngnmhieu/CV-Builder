@@ -1,0 +1,2 @@
+[ ] Delete `template` column in `resumes` table
+[ ] private and public visibility in classes

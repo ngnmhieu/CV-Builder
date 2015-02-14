@@ -15,5 +15,5 @@
 //= require jquery-ui
 //= require jquery.turbolinks
 //= require turbolinks
-//= require components/bootstrap.js
+//= require bootstrap.js
 //= require bootstrap-wysihtml5

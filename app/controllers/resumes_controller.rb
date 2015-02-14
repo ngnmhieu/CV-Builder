@@ -59,7 +59,10 @@ class ResumesController < ApplicationController
     @sections = @resume.items
     @templates = Template.all
 
-    render layout: 'editor'
+    respond_to do |format|
+      format.html { render layout: 'editor' }
+      format.json { render :partial => 'resumes/json/edit.json' } 
+    end
   end
 
   def update

@@ -1,0 +1,12 @@
+{
+  "id": <%= @resume.id %>,
+  "name": "<%= @resume.name %>",
+  "user_id": <%= @resume.user_id %>,
+  "template_id": <%= @resume.template_id %>,
+  "sections": [
+    <% @sections.each_with_index do |section, i| %>
+      <%= render partial: "resumes/json/#{section.template}.json", locals: {data: section}  %>
+      <%= ',' if i != @sections.size - 1 %>
+    <% end %>
+  ]
+}

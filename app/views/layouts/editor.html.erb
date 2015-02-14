@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ResumeApp">
 <head>
   <title>CV Builder</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'editor', 'data-turbolinks-track' => true %>
   <%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
+<body ng-controller="EditorController as editor">
 <div id="PageWrap">
   <div id="PageBody">
     <%= yield %>
