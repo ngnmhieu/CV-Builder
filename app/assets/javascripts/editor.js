@@ -17,9 +17,6 @@
 //= require turbolinks
 //= require bootstrap.js
 //= require bootstrap-wysihtml5
-//= require angular
-//= require angular-resource
-//= require_tree ./editor
 
 var ResumeEditor = (function() {
     return {
@@ -470,6 +467,6 @@ var ResumeEditor = (function() {
 
 (function($) {
     $(document).ready(function(){
-        // ResumeEditor.init();
+        ResumeEditor.init();
     });
 })(jQuery);

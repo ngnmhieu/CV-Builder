@@ -95,12 +95,3 @@ gem 'omniauth-google-oauth2'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-
-######################
-#     Front-End      #
-######################
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular'
-  gem 'rails-assets-angular-resource'
-end

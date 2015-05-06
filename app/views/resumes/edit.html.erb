@@ -4,8 +4,6 @@
 
   <%= render partial: 'choose_template_modal', locals: { form: r } %>
 
-  <input type="text" ng-model="resume.name" />
-
   <!-- PageHeader -->
   <div id="PageHeader">
     <nav class="navbar navbar-default">
@@ -45,13 +43,13 @@
 
   <!-- TopControls - overall controls: save, preview, export, add ... -->
   <div id="TopControls" class="row">
-    <div id="LeftControls" class="col-xs-8">
+    <div id="LeftControls" class="col-xs-7">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddSectionModal">
         <span class="glyphicon glyphicon-plus"></span> Add Section
       </button>
     </div>
 
-    <div id="RightControls" class="col-xs-4">
+    <div id="RightControls" class="col-xs-5">
       <!-- Share Button--> 
       <div class="dropdown control" style="display: inline-block">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
