@@ -85,14 +85,14 @@ describe ResumesController, type: :controller do
 
     context "HTML Request" do
       it "should redirect to the editor if success" do
-        allow_any_instance_of(Resume).to receive(:update) { true }
+        allow_any_instance_of(Resume).to receive(:update_resume) { true }
         post :update, {id: @resume.id, resume: { name: @resume.name }  }
 
         expect(response).to redirect_to(edit_resume_path(@resume))
       end
 
       it "should update the resume" do
-        allow_any_instance_of(Resume).to receive(:update) { true }
+        allow_any_instance_of(Resume).to receive(:update_resume) { true }
         post :update, {id: @resume.id, resume: { name: @resume.name }  }
 
         expect(response).to redirect_to(edit_resume_path(@resume))
@@ -103,7 +103,7 @@ describe ResumesController, type: :controller do
 
     context "JSON Request" do
       it "should return json message" do
-        allow_any_instance_of(Resume).to receive(:update) { true }
+        allow_any_instance_of(Resume).to receive(:update_resume) { true }
 
         post :update, { format: 'json', id: @resume.id, resume: { name: @resume.name }  }
 

@@ -9,4 +9,12 @@ class Textsection < ActiveRecord::Base
     self.name ||= 'New Text Section'
     self.content ||= ''
   end
+
+  def self.find_and_save(id, params)
+    textsection = self.find(id)
+    textsection.name = params[:name]
+    textsection.order = params[:order]
+    textsection.content = params[:content]
+    textsection.save
+  end
 end

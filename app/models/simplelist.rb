@@ -19,4 +19,14 @@ class Simplelist < ActiveRecord::Base
   def items
     return self.simpleitems.order(:order)
   end
+
+  def self.find_and_save(id, params)
+    list = self.find(id)
+
+    list.name = params[:name]
+    list.order = params[:order]
+    list.ordered_list = params[:ordered_list]
+
+    list.save
+  end
 end

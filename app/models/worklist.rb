@@ -20,4 +20,11 @@ class Worklist < ActiveRecord::Base
     return self.workitems.order(:order)
   end
 
+  def self.find_and_save(id, params)
+    list = self.find(id)
+    list.name = params[:name]
+    list.order = params[:order]
+    list.save
+  end
+
 end

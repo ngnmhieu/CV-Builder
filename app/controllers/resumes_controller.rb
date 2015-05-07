@@ -68,6 +68,17 @@ class ResumesController < ApplicationController
   def update
     @resume = Resume.find(params[:id])
 
+    if @resume.update_resume(params)
+      respond_to do |format|
+        format.html { redirect_to edit_resume_path(@resume) }
+        format.json { render json: {msg: 'Saved', status: 'success'} }
+      end
+    end
+  end
+
+  def update_old
+    @resume = Resume.find(params[:id])
+
     if @resume.update(resume_params)
       respond_to do |format|
         format.html { redirect_to edit_resume_path(@resume) }

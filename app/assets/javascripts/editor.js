@@ -18,6 +18,7 @@
 //= require bootstrap.js
 //= require bootstrap-wysihtml5
 
+// _TODO: when tabs are reordered, last tab is not changed
 var ResumeEditor = (function() {
     return {
         init: function() {
