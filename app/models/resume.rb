@@ -41,39 +41,39 @@ class Resume < ActiveRecord::Base
   def update_resume(params)
 
     # attributes of resume
-    resume = params[:resume]
+    resume = params
     self.name = resume[:name]
     self.template = Template.find(resume[:template_id]) 
 
     self.save
 
     # attributes for personal detail
-    self.personal_detail.save_attributes(params[:resume][:personal_detail_attributes])
+    self.personal_detail.save_attributes(params[:personal_detail_attributes])
 
     # save the worklists
-    worklists = params[:resume][:worklists_attributes]
+    worklists = params[:worklists_attributes] || []
     worklists.each do |list_id, worklist|
       Worklist.find_and_save(list_id, worklist)
 
-      workitems = worklist[:workitems_attributes]
+      workitems = worklist[:workitems_attributes] || []
       workitems.each do |item_id, workitem|
         Workitem.find_and_save(item_id, workitem)
       end
     end
     
     # save the simplelists
-    simplelists = params[:resume][:simplelists_attributes]
+    simplelists = params[:simplelists_attributes] || []
     simplelists.each do |list_id, simplelist|
       Simplelist.find_and_save(list_id, simplelist)
 
-      simpleitems = simplelist[:simpleitems_attributes]
+      simpleitems = simplelist[:simpleitems_attributes] || []
       simpleitems.each do |item_id, simpleitem|
         Simpleitem.find_and_save(item_id, simpleitem)
       end
     end
 
     # save textsection
-    textsections = params[:resume][:textsections_attributes]
+    textsections = params[:textsections_attributes] || []
     textsections.each do |sec_id, textsection|
       Textsection.find_and_save(sec_id, textsection)
     end
