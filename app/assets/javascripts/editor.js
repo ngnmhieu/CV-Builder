@@ -401,6 +401,8 @@ var ResumeEditor = (function() {
 
         addItem: function(url, list) {
 
+          var editor_obj = this;
+
           $.ajax({
             type: "POST",
             url: url,
