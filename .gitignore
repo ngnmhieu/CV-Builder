@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # configuration files contain important keys and secrets
-/config/configuration.yml
+/config/oauthkeys.yml
 
 # Ignore bundler config.
 /.bundle
