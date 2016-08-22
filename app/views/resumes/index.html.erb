@@ -5,36 +5,34 @@
 <% end %>
 
 <div id="ResumesListing"> 
+
   <table class="table table-striped">
     <thead>
       <th style="width: 300px">Name</th>
-      <th style="width: 150px" colspan='2'>Action</th>
-      <th>Created</th>
+      <th style="text-align: center">Created</th>
+      <th style="width: 50px">Action</th>
     </thead>
     <% @resumes.each do |r| %>
       <tr id="resume_<%= r.id %>"> 
-        <td ><%= link_to r.name, resume_path(r) %></td>
-        <td>
-          <%= link_to edit_resume_path(r) do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-        </td>
-        <td>
+        <td ><%= link_to r.name, edit_resume_path(r) %></td>
+        <td style="text-align: center"><%= r.created_at.strftime('%d %b %Y %H:%M') %></td>
+        <td style="text-align: center">
           <%= link_to resume_path(r), method: :delete do %>
             <span class="glyphicon glyphicon-trash"></span>
           <% end %>
         </td>
-        <td><%= r.created_at %></td>
       </tr>
     <% end %>
   </table>
 
   <%= link_to resumes_path, method: :post do %>
-    <button class="btn btn-success">Create New Resume</button>
+      <button class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> New Resume</button>
   <% end %>
 
-  <%= link_to templates_path do %>
-    <button class="btn btn-primary">Templates</button>
-  <% end %>
+  <div class="clearfix"></div>
+
+  <%# <%= link_to templates_path do %>
+  <%#   <button class="btn btn-primary">Templates</button>
+  <%# <% end %>
   
 </div>
