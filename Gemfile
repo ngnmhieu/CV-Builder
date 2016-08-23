@@ -17,14 +17,17 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Debugger
 group :development do
   gem 'pry-rails'
 end
 
+# postgres db
 group :development, :production do
   gem 'pg', '~> 0.18.4'
 end
 
+# fix logging on heroku
 group :production do
   gem 'rails_12factor'
 end
@@ -81,6 +84,9 @@ end
 
 # convert html view to pdf
 gem 'wicked_pdf'
+
+# install wkhtmltopdf for different os
+gem 'wkhtmltopdf-binary'
 
 # Liquid template engine
 gem 'liquid'
