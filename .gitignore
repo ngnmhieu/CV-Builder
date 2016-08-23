@@ -25,3 +25,5 @@
 tags
 
 /coverage
+
+/public/assets/**/*

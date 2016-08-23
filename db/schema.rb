@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150117220838) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "default_identities", force: true do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.datetime "updated_at"
   end
 
-  add_index "default_identities", ["user_id"], name: "index_default_identities_on_user_id"
+  add_index "default_identities", ["user_id"], name: "index_default_identities_on_user_id", using: :btree
 
   create_table "oauth_identities", force: true do |t|
     t.string   "uid"
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.datetime "updated_at"
   end
 
-  add_index "oauth_identities", ["user_id"], name: "index_oauth_identities_on_user_id"
+  add_index "oauth_identities", ["user_id"], name: "index_oauth_identities_on_user_id", using: :btree
 
   create_table "personal_details", force: true do |t|
     t.string   "name"
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.string   "address3"
   end
 
-  add_index "personal_details", ["resume_id"], name: "index_personal_details_on_resume_id"
+  add_index "personal_details", ["resume_id"], name: "index_personal_details_on_resume_id", using: :btree
 
   create_table "resumes", force: true do |t|
     t.string   "name"
@@ -70,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.integer  "order"
   end
 
-  add_index "simpleitems", ["simplelist_id"], name: "index_simpleitems_on_simplelist_id"
+  add_index "simpleitems", ["simplelist_id"], name: "index_simpleitems_on_simplelist_id", using: :btree
 
   create_table "simplelists", force: true do |t|
     t.string   "name"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.boolean  "ordered_list"
   end
 
-  add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id"
+  add_index "simplelists", ["resume_id"], name: "index_simplelists_on_resume_id", using: :btree
 
   create_table "templates", force: true do |t|
     t.string   "name"
@@ -99,7 +102,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.integer  "order"
   end
 
-  add_index "textsections", ["resume_id"], name: "index_textsections_on_resume_id"
+  add_index "textsections", ["resume_id"], name: "index_textsections_on_resume_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -120,7 +123,7 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.integer  "order"
   end
 
-  add_index "workitems", ["worklist_id"], name: "index_workitems_on_worklist_id"
+  add_index "workitems", ["worklist_id"], name: "index_workitems_on_worklist_id", using: :btree
 
   create_table "worklists", force: true do |t|
     t.string   "name"
@@ -130,6 +133,6 @@ ActiveRecord::Schema.define(version: 20150117220838) do
     t.datetime "updated_at"
   end
 
-  add_index "worklists", ["resume_id"], name: "index_worklists_on_resume_id"
+  add_index "worklists", ["resume_id"], name: "index_worklists_on_resume_id", using: :btree
 
 end
