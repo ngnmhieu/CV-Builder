@@ -23,22 +23,23 @@
       <%= f.label :password, 'Password Confirmation' %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
       <br />
-      <%= f.submit "Register", class: "btn btn-default" %>
+      <%= f.submit "Register", class: "btn btn-primary pull-right" %>
+      <div class="clearfix"></div>
 
-    <div id="OAuthButtons">
-      <%= link_to oauth_path(:linkedin), class: 'auth_btn' do %>
-        <button type="button" class="btn btn-primary">Login with LinkedIn</button>
-      <% end %>
-      <%= link_to oauth_path(:google_oauth2), class: 'auth_btn' do %>
-        <button type="button" class="btn btn-danger">Login with Google+</button>
-      <% end %>
-      <%= link_to oauth_path(:twitter), class: 'auth_btn' do %>
-        <button type="button" class="btn btn-info">Login with Twitter</button>
-      <% end %>
-      <%= link_to oauth_path(:facebook), class: 'auth_btn' do %>
-        <button type="button" class="btn btn-primary">Login with Facebook</button>
-      <% end %>
-    </div>
+    <!-- <div id="OAuthButtons"> -->
+    <!--   <%= link_to oauth_path(:linkedin), class: 'auth_btn' do %> -->
+    <!--     <button type="button" class="btn btn&#45;primary">Login with LinkedIn</button> -->
+    <!--   <% end %> -->
+    <!--   <%= link_to oauth_path(:google_oauth2), class: 'auth_btn' do %> -->
+    <!--     <button type="button" class="btn btn&#45;danger">Login with Google+</button> -->
+    <!--   <% end %> -->
+    <!--   <%= link_to oauth_path(:twitter), class: 'auth_btn' do %> -->
+    <!--     <button type="button" class="btn btn&#45;info">Login with Twitter</button> -->
+    <!--   <% end %> -->
+    <!--   <%= link_to oauth_path(:facebook), class: 'auth_btn' do %> -->
+    <!--     <button type="button" class="btn btn&#45;primary">Login with Facebook</button> -->
+    <!--   <% end %> -->
+    <!-- </div> -->
 
   <% end %>
   </div>
