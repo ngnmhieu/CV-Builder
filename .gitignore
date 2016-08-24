@@ -27,3 +27,5 @@ tags
 /coverage
 
 /public/assets/**/*
+
+vendor/**/*
