@@ -26,6 +26,7 @@ tags
 
 /coverage
 
-/public/assets/**/*
+/public/assets/*
+!/public/assets/resumes
 
 vendor/**/*
