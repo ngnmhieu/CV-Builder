@@ -10,15 +10,20 @@
     <thead>
       <th style="width: 300px">Name</th>
       <th style="text-align: center">Created</th>
-      <th style="width: 50px">Action</th>
+      <th style="width: 140px; text-align: center">Action</th>
     </thead>
     <% @resumes.each do |r| %>
       <tr id="resume_<%= r.id %>"> 
         <td ><%= link_to r.name, edit_resume_path(r) %></td>
         <td style="text-align: center"><%= r.created_at.strftime('%d %b %Y %H:%M') %></td>
-        <td style="text-align: center">
-          <%= link_to resume_path(r), method: :delete do %>
-            <span class="glyphicon glyphicon-trash"></span>
+        <td style="text-align: center;">
+          <%= link_to clone_resume_path(r), method: :post, class: 'action_button' do %>
+            <span class="glyphicon glyphicon-file"></span>
+            <span>Clone</span>
+          <% end %>
+          <%= link_to resume_path(r), method: :delete, class: 'action_button' do %>
+            <span style="color: red" class="glyphicon glyphicon-trash"></span>
+            <span>Delete</span>
           <% end %>
         </td>
       </tr>

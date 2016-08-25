@@ -93,6 +93,24 @@ class ResumesController < ApplicationController
     redirect_to resumes_path
   end
 
+  def clone_resume
+    @cloned_resume = Resume.find(params[:id])
+
+    if @cloned_resume == nil
+        redirect_to resumes_path
+        return
+    end
+
+    @resume = @cloned_resume.deep_dup
+
+    current_user.resumes << @resume
+    if @resume.save
+      redirect_to edit_resume_path(@resume)
+    end
+  end
+
+
+
   private
 
   # set the path for the specific resume's template (needed by `include` Tag in the template)
@@ -101,7 +119,6 @@ class ResumesController < ApplicationController
     template_path = Rails.root.join(ENV["APP.TEMPLATE_DIR"], template.codename)
     Liquid::Template.file_system = Liquid::LocalFileSystem.new(template_path)
   end
-
 
   def resume_params
     params.require(:resume).permit(

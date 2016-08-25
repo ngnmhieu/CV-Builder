@@ -17,4 +17,8 @@ class Textsection < ActiveRecord::Base
     textsection.content = params[:content]
     textsection.save
   end
+
+  def deep_dup
+    self.dup
+  end
 end

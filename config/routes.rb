@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'login'     => 'sessions#auth_default_identity', as: 'authenticate'
   get  'logout'    => 'sessions#destroy', as: 'logout'
   
+  post '/resumes/:id/clone' => 'resumes#clone_resume', as: 'clone_resume'
 
   get '/auth/:provider/callback' => 'sessions#auth_openid', as: 'oauth_callback'
 

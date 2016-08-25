@@ -19,4 +19,13 @@
   .right {
     text-align: right;
   }
+
+  .action_button {
+      display: block;
+      float: left;
+      margin: 0 10px;
+      span {
+        display: block;
+      }
+  }
 }

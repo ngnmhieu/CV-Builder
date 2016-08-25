@@ -29,4 +29,13 @@ class Simplelist < ActiveRecord::Base
 
     list.save
   end
+
+  def deep_dup
+    @cloned = self.dup
+    self.simpleitems.each do |item|
+      @cloned.simpleitems << item.dup
+    end
+
+    @cloned
+  end
 end

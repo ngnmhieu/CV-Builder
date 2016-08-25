@@ -27,4 +27,13 @@ class Worklist < ActiveRecord::Base
     list.save
   end
 
+  def deep_dup
+    @cloned = self.dup
+    self.workitems.each do |item|
+      @cloned.workitems << item.dup
+    end
+
+    @cloned
+  end
+
 end

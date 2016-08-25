@@ -79,4 +79,20 @@ class Resume < ActiveRecord::Base
     end
 
   end
+
+  def deep_dup
+    @cloned = self.dup
+    @cloned.personal_detail = self.personal_detail.dup
+    self.simplelists.each do |list|
+        @cloned.simplelists << list.deep_dup
+    end
+    self.worklists.each do |list|
+        @cloned.worklists << list.deep_dup
+    end
+    self.textsections.each do |section|
+        @cloned.textsections << section.deep_dup
+    end
+
+    return @cloned
+  end
 end
